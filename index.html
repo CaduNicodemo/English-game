@@ -62,7 +62,7 @@
         // Load the external JSON file
         async function loadAndStart() {
             try {
-                let response = await fetch('questions.json');
+                let response = await fetch('./questions.json');
                 fullQuestionData = await response.json();
                 initGame();
             } catch (e) {
