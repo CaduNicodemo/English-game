@@ -7,122 +7,188 @@
     <style>
         body { font-family: sans-serif; text-align: center; padding: 20px; }
         .hidden { display: none; }
-        .team-box { display: inline-block; border: 2px solid #333; padding: 10px; margin: 5px; width: 100px; }
-        button { padding: 15px; margin: 10px; cursor: pointer; display: block; width: 80%; margin: 10px auto; font-size: 18px; }
+        .team-box { display: inline-block; border: 2px solid #333; padding: 10px; margin: 5px; width: 120px; }
+        button { padding: 15px; margin: 10px; cursor: pointer; width: 80%; font-size: 18px; }
         .correct { background-color: #90EE90 !important; }
         .wrong { background-color: #FF7F7F !important; }
-        select { padding: 10px; font-size: 16px; margin: 10px; width: 80%; }
+        #timer-display { font-size: 30px; font-weight: bold; color: blue; margin: 15px; }
     </style>
 </head>
 <body>
-    <div id="setup-screen">
-        <h1>English Learning Quiz</h1>
-        <button onclick="showConfig()">Start Game</button>
-    </div>
 
-    <div id="config-screen" class="hidden">
-        <h1>Settings</h1>
+    <div id="setup-screen">
+        <h1>Quiz Settings</h1>
         <select id="modeSelect" onchange="toggleTeamDropdown()">
             <option value="solo">Single Player</option>
             <option value="teams">Multi-Team (Classroom)</option>
         </select>
         <div id="team-dropdown-area" class="hidden">
-            <select id="teamCountSelect">
-                <option value="2">2 Teams</option><option value="3">3 Teams</option><option value="4">4 Teams</option>
-            </select>
+            <select id="teamCountSelect"><option value="2">2 Teams</option><option value="3">3 Teams</option><option value="4">4 Teams</option></select>
         </div>
-        <select id="moduleSelect">
-            <option value="TA">TA</option><option value="T1">T1</option>
-            <option value="T2">T2</option><option value="T3">T3</option>
-            <option value="T4">T4</option><option value="T5">T5</option>
-            <option value="T6">T6</option>
-        </select>
-        <select id="testSelect">
-            <option value="Test 1">Test 1</option><option value="Test 2">Test 2</option>
-            <option value="Test 3">Test 3</option><option value="Test 4">Test 4</option>
-        </select>
-        <button onclick="loadAndStart()">Start Quiz</button>
+        <select id="moduleSelect"><option value="TA">TA</option><option value="T1">T1</option></select>
+        <select id="testSelect"><option value="Test 1">Test 1</option></select>
+        <button onclick="loadAndStart()">Start Game</button>
     </div>
 
-    <div id="game-screen" class="hidden">
-        <h2 id="display-info"></h2>
+<div id="game-screen" class="hidden">
+        <div id="timer-display"></div>
+        <h2 id="q-text"></h2>
         <div id="scoreboard"></div>
-        <div id="question-area">
-            <h3 id="q-text"></h3>
-            <div id="options-area"></div>
-        </div>
-        <button onclick="location.reload()">Back to Menu</button>
+        <div id="options-area"></div>
+        <div id="final-results" class="hidden"></div> <button onclick="location.reload()">Back to Menu</button>
     </div>
 
     <script>
-        let fullQuestionData = {};
-        let currentQuestions = [];
-        let currentIndex = 0;
+        let fullData = {}, currentQ = [], index = 0, mode = 'solo', score = 0;
 
-        // Load the external JSON file
         async function loadAndStart() {
-            try {
-                let response = await fetch('./questions.json');
-                fullQuestionData = await response.json();
-                initGame();
-            } catch (e) {
-                alert("Could not load questions.json. Ensure it's in the same folder.");
-            }
-        }
-
-        function initGame() {
+            let res = await fetch('./questions.json');
+            fullData = await res.json();
             let mod = document.getElementById('moduleSelect').value;
             let test = document.getElementById('testSelect').value;
-            currentQuestions = fullQuestionData[mod]?.[test] || [];
+            mode = document.getElementById('modeSelect').value;
             
-            document.getElementById('config-screen').classList.add('hidden');
+            currentQ = [...fullData[mod][test]].sort(() => Math.random() - 0.5);
+            document.getElementById('setup-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
             
-            if (document.getElementById('modeSelect').value === 'teams') {
-                let num = document.getElementById('teamCountSelect').value;
-                for(let i = 1; i <= num; i++) {
-                    document.getElementById('scoreboard').innerHTML += `<div class="team-box">T${i}: <span id="s${i}">0</span><br><button onclick="addPoint(${i})" style="width:100%">+1</button></div>`;
-                }
+            if (mode === 'teams') setupTeams();
+            showQuestion();
+        }
+
+        function showQuestion() {
+            let optArea = document.getElementById('options-area');
+            let timerEl = document.getElementById('timer-display');
+            let qArea = document.getElementById('q-text');
+            
+            if (index >= currentQ.length) {
+                qArea.innerText = "Quiz Complete!";
+                optArea.innerHTML = "";
+                timerEl.innerText = "";
+                document.getElementById('scoreboard').classList.add('hidden');
+                showFinalResults();
+                return;
+            }
+            let q = currentQ[index];
+            document.getElementById('q-text').innerText = q.q;
+
+            if (mode === 'solo') {
+                renderOptions(q);
             } else {
-                loadSoloQuestion();
+                // Multiplayer: Start 3-second countdown BEFORE showing buttons
+                let count = 3;
+                timerEl.innerText = "Prepare... " + count;
+                let interval = setInterval(() => {
+                    count--;
+                    timerEl.innerText = count > 0 ? "Prepare... " + count : "GO!";
+                    if(count <= 0) { 
+                        clearInterval(interval); 
+                        timerEl.innerText = "";
+                        renderOptions(q); 
+                    }
+                }, 1000);
             }
         }
 
-        // Logic for loading/checking questions remains same as before...
-        function loadSoloQuestion() {
-            if (currentIndex >= currentQuestions.length) { 
-                document.getElementById('q-text').innerText = "Quiz Complete!"; 
-                document.getElementById('options-area').innerHTML = "";
-                return; 
-            }
-            let q = currentQuestions[currentIndex];
-            document.getElementById('q-text').innerText = q.q;
-            let area = document.getElementById('options-area');
-            area.innerHTML = "";
-            q.options.forEach(opt => {
+        function renderOptions(q) {
+            let optArea = document.getElementById('options-area');
+            optArea.innerHTML = "";
+            let opts = [...q.options].sort(() => Math.random() - 0.5);
+            opts.forEach(o => {
                 let btn = document.createElement('button');
-                btn.innerText = opt;
-                btn.onclick = (e) => checkAnswer(e.target, opt, q.answer);
-                area.appendChild(btn);
+                btn.innerText = o;
+                btn.onclick = (e) => (mode === 'solo') ? checkSolo(e.target, o, q.answer) : null;
+                optArea.appendChild(btn);
             });
         }
 
-        function checkAnswer(btn, selected, correct) {
-            if (selected === correct) {
+        function checkSolo(btn, sel, corr) {
+            let buttons = document.querySelectorAll('#options-area button');
+            buttons.forEach(b => b.disabled = true);
+            if (sel === corr) {
                 btn.classList.add('correct');
-                setTimeout(() => { currentIndex++; loadSoloQuestion(); }, 1000);
+                score += 10;
+                setTimeout(() => { index++; showQuestion(); }, 1000);
             } else {
                 btn.classList.add('wrong');
+                setTimeout(() => { btn.classList.remove('wrong'); buttons.forEach(b => b.disabled = false); }, 1000);
             }
         }
 
-        function addPoint(teamNum) {
-            let scoreEl = document.getElementById('s'+teamNum);
-            scoreEl.innerText = parseInt(scoreEl.innerText) + 1;
+        function setupTeams() {
+            let num = document.getElementById('teamCountSelect').value;
+            let scoreboard = document.getElementById('scoreboard');
+            scoreboard.innerHTML = "";
+            for(let i = 1; i <= num; i++) {
+                scoreboard.innerHTML += `<div class="team-box">T${i}: <span id="s${i}">0</span><br><button onclick="teamPoint(${i})">+ Point</button></div>`;
+            }
         }
 
-        function showConfig() { document.getElementById('setup-screen').classList.add('hidden'); document.getElementById('config-screen').classList.remove('hidden'); }
-        function toggleTeamDropdown() { document.getElementById('team-dropdown-area').style.display = (document.getElementById('modeSelect').value === 'teams') ? 'block' : 'none'; }
+        function teamPoint(i) {
+            document.getElementById('s'+i).innerText = parseInt(document.getElementById('s'+i).innerText) + 1;
+            let timerEl = document.getElementById('timer-display');
+            timerEl.innerText = "";
+    
+            index++;
+            showQuestion();
+        }
+        
+        function toggleTeamDropdown() { document.getElementById('team-dropdown-area').style.display = (document.getElementById('modeSelect').value === 'teams') ? 'block' : 'none'; 
+        }
+
+        function showFinalResults() {
+    let resArea = document.getElementById('final-results');
+    resArea.classList.remove('hidden');
+    
+    if (mode === 'solo') {
+        resArea.innerHTML = `<h3>Your Final Score: ${score}</h3>`;
+    } else {
+        let teamScores = [];
+        let numTeams = document.getElementById('teamCountSelect').value;
+        for(let i = 1; i <= numTeams; i++) {
+            teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s'+i).innerText) });
+        }
+        teamScores.sort((a, b) => b.points - a.points);
+
+        // Check for tie between 1st and 2nd place
+        let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
+
+        let podium = `<h3>Results:</h3>`;
+        teamScores.forEach((t, i) => {
+            podium += `<p><strong>${i + 1}st Place:</strong> ${t.name} with ${t.points} points</p>`;
+        });
+        
+        resArea.innerHTML = podium;
+
+        if (isTie) {
+            let btn = document.createElement('button');
+            btn.innerText = "Sudden Death Tie-Breaker!";
+            btn.style.backgroundColor = "orange";
+            btn.onclick = startSuddenDeath;
+            resArea.appendChild(btn);
+        }
+    }
+}
+
+function startSuddenDeath() {
+    // Reset index to a new single question
+    index = 0;
+    // Just keep the first question from the current list or pick a random one
+    currentQ = [currentQ[Math.floor(Math.random() * currentQ.length)]];
+    
+    // Reset scores for all teams
+    let numTeams = document.getElementById('teamCountSelect').value;
+    for(let i = 1; i <= numTeams; i++) {
+        document.getElementById('s'+i).innerText = "0";
+    }
+    
+    // Hide results and restart game
+    document.getElementById('final-results').classList.add('hidden');
+    document.getElementById('scoreboard').classList.remove('hidden');
+    showQuestion();
+}
+        
+    
     </script>
 </body>
 </html>
