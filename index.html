@@ -7,7 +7,7 @@
     <style>
         body { font-family: sans-serif; text-align: center; padding: 20px; }
         .hidden { display: none; }
-        .team-box { display: inline-block; border: 2px solid #333; padding: 10px; margin: 5px; width: 80px; }
+        .team-box { display: inline-block; border: 2px solid #333; padding: 10px; margin: 5px; width: 100px; }
         button { padding: 15px; margin: 10px; cursor: pointer; display: block; width: 80%; margin: 10px auto; font-size: 18px; }
         .correct { background-color: #90EE90 !important; }
         .wrong { background-color: #FF7F7F !important; }
@@ -15,9 +15,8 @@
     </style>
 </head>
 <body>
-
     <div id="setup-screen">
-        <h1>Welcome!</h1>
+        <h1>English Learning Quiz</h1>
         <button onclick="showConfig()">Start Game</button>
     </div>
 
@@ -32,9 +31,17 @@
                 <option value="2">2 Teams</option><option value="3">3 Teams</option><option value="4">4 Teams</option>
             </select>
         </div>
-        <select id="moduleSelect"><option value="TA">TA</option><option value="T1">T1</option><option value="T2">T2</option></select>
-        <select id="testSelect"><option value="Test 1">Test 1</option><option value="Test 2">Test 2</option></select>
-        <button onclick="initGame()">Start Quiz</button>
+        <select id="moduleSelect">
+            <option value="TA">TA</option><option value="T1">T1</option>
+            <option value="T2">T2</option><option value="T3">T3</option>
+            <option value="T4">T4</option><option value="T5">T5</option>
+            <option value="T6">T6</option>
+        </select>
+        <select id="testSelect">
+            <option value="Test 1">Test 1</option><option value="Test 2">Test 2</option>
+            <option value="Test 3">Test 3</option><option value="Test 4">Test 4</option>
+        </select>
+        <button onclick="loadAndStart()">Start Quiz</button>
     </div>
 
     <div id="game-screen" class="hidden">
@@ -48,20 +55,32 @@
     </div>
 
     <script>
-        // Dummy data structure
-        const questionBank = { q: "Nationality of Japan?", options: ["Japanese", "Japonese", "Japans"], answer: "Japanese" };
+        let fullQuestionData = {};
+        let currentQuestions = [];
+        let currentIndex = 0;
 
-        function showConfig() { document.getElementById('setup-screen').classList.add('hidden'); document.getElementById('config-screen').classList.remove('hidden'); }
-        function toggleTeamDropdown() { document.getElementById('team-dropdown-area').style.display = (document.getElementById('modeSelect').value === 'teams') ? 'block' : 'none'; }
+        // Load the external JSON file
+        async function loadAndStart() {
+            try {
+                let response = await fetch('questions.json');
+                fullQuestionData = await response.json();
+                initGame();
+            } catch (e) {
+                alert("Could not load questions.json. Ensure it's in the same folder.");
+            }
+        }
 
         function initGame() {
+            let mod = document.getElementById('moduleSelect').value;
+            let test = document.getElementById('testSelect').value;
+            currentQuestions = fullQuestionData[mod]?.[test] || [];
+            
             document.getElementById('config-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
-            let mode = document.getElementById('modeSelect').value;
             
-            if (mode === 'teams') {
-                let numTeams = document.getElementById('teamCountSelect').value;
-                for(let i = 1; i <= numTeams; i++) {
+            if (document.getElementById('modeSelect').value === 'teams') {
+                let num = document.getElementById('teamCountSelect').value;
+                for(let i = 1; i <= num; i++) {
                     document.getElementById('scoreboard').innerHTML += `<div class="team-box">T${i}: <span id="s${i}">0</span><br><button onclick="addPoint(${i})" style="width:100%">+1</button></div>`;
                 }
             } else {
@@ -69,31 +88,41 @@
             }
         }
 
+        // Logic for loading/checking questions remains same as before...
         function loadSoloQuestion() {
+            if (currentIndex >= currentQuestions.length) { 
+                document.getElementById('q-text').innerText = "Quiz Complete!"; 
+                document.getElementById('options-area').innerHTML = "";
+                return; 
+            }
+            let q = currentQuestions[currentIndex];
+            document.getElementById('q-text').innerText = q.q;
             let area = document.getElementById('options-area');
             area.innerHTML = "";
-            document.getElementById('q-text').innerText = questionBank.q;
-            questionBank.options.forEach(opt => {
+            q.options.forEach(opt => {
                 let btn = document.createElement('button');
                 btn.innerText = opt;
-                btn.onclick = (e) => checkAnswer(e.target, opt);
+                btn.onclick = (e) => checkAnswer(e.target, opt, q.answer);
                 area.appendChild(btn);
             });
         }
 
-        function checkAnswer(btn, selected) {
-            if (selected === questionBank.answer) {
+        function checkAnswer(btn, selected, correct) {
+            if (selected === correct) {
                 btn.classList.add('correct');
-                setTimeout(loadSoloQuestion, 1000);
+                setTimeout(() => { currentIndex++; loadSoloQuestion(); }, 1000);
             } else {
                 btn.classList.add('wrong');
             }
         }
 
         function addPoint(teamNum) {
-            let scoreEl = document.getElementById('s' + teamNum);
+            let scoreEl = document.getElementById('s'+teamNum);
             scoreEl.innerText = parseInt(scoreEl.innerText) + 1;
         }
+
+        function showConfig() { document.getElementById('setup-screen').classList.add('hidden'); document.getElementById('config-screen').classList.remove('hidden'); }
+        function toggleTeamDropdown() { document.getElementById('team-dropdown-area').style.display = (document.getElementById('modeSelect').value === 'teams') ? 'block' : 'none'; }
     </script>
 </body>
 </html>
