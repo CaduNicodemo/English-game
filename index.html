@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Quiz</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .hidden { display: none; }
+        .team-box { display: inline-block; border: 2px solid #333; padding: 10px; margin: 5px; width: 80px; }
+        button { padding: 15px; margin: 10px; cursor: pointer; display: block; width: 80%; margin: 10px auto; font-size: 18px; }
+        .correct { background-color: #90EE90 !important; }
+        .wrong { background-color: #FF7F7F !important; }
+        select { padding: 10px; font-size: 16px; margin: 10px; width: 80%; }
+    </style>
+</head>
+<body>
+
+    <div id="setup-screen">
+        <h1>Welcome!</h1>
+        <button onclick="showConfig()">Start Game</button>
+    </div>
+
+    <div id="config-screen" class="hidden">
+        <h1>Settings</h1>
+        <select id="modeSelect" onchange="toggleTeamDropdown()">
+            <option value="solo">Single Player</option>
+            <option value="teams">Multi-Team (Classroom)</option>
+        </select>
+        <div id="team-dropdown-area" class="hidden">
+            <select id="teamCountSelect">
+                <option value="2">2 Teams</option><option value="3">3 Teams</option><option value="4">4 Teams</option>
+            </select>
+        </div>
+        <select id="moduleSelect"><option value="TA">TA</option><option value="T1">T1</option><option value="T2">T2</option></select>
+        <select id="testSelect"><option value="Test 1">Test 1</option><option value="Test 2">Test 2</option></select>
+        <button onclick="initGame()">Start Quiz</button>
+    </div>
+
+    <div id="game-screen" class="hidden">
+        <h2 id="display-info"></h2>
+        <div id="scoreboard"></div>
+        <div id="question-area">
+            <h3 id="q-text"></h3>
+            <div id="options-area"></div>
+        </div>
+        <button onclick="location.reload()">Back to Menu</button>
+    </div>
+
+    <script>
+        // Dummy data structure
+        const questionBank = { q: "Nationality of Japan?", options: ["Japanese", "Japonese", "Japans"], answer: "Japanese" };
+
+        function showConfig() { document.getElementById('setup-screen').classList.add('hidden'); document.getElementById('config-screen').classList.remove('hidden'); }
+        function toggleTeamDropdown() { document.getElementById('team-dropdown-area').style.display = (document.getElementById('modeSelect').value === 'teams') ? 'block' : 'none'; }
+
+        function initGame() {
+            document.getElementById('config-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            let mode = document.getElementById('modeSelect').value;
+            
+            if (mode === 'teams') {
+                let numTeams = document.getElementById('teamCountSelect').value;
+                for(let i = 1; i <= numTeams; i++) {
+                    document.getElementById('scoreboard').innerHTML += `<div class="team-box">T${i}: <span id="s${i}">0</span><br><button onclick="addPoint(${i})" style="width:100%">+1</button></div>`;
+                }
+            } else {
+                loadSoloQuestion();
+            }
+        }
+
+        function loadSoloQuestion() {
+            let area = document.getElementById('options-area');
+            area.innerHTML = "";
+            document.getElementById('q-text').innerText = questionBank.q;
+            questionBank.options.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = (e) => checkAnswer(e.target, opt);
+                area.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(btn, selected) {
+            if (selected === questionBank.answer) {
+                btn.classList.add('correct');
+                setTimeout(loadSoloQuestion, 1000);
+            } else {
+                btn.classList.add('wrong');
+            }
+        }
+
+        function addPoint(teamNum) {
+            let scoreEl = document.getElementById('s' + teamNum);
+            scoreEl.innerText = parseInt(scoreEl.innerText) + 1;
+        }
+    </script>
+</body>
+</html>
