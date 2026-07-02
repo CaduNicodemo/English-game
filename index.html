@@ -44,8 +44,7 @@
         let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
 
         async function loadAndStart() {
-            let res = await fetch('./questions.json');
-            fullData = await res.json();
+let res = await fetch('./questions.json?t=' + new Date().getTime());
             let mod = document.getElementById('moduleSelect').value;
             let test = document.getElementById('testSelect').value;
             mode = document.getElementById('modeSelect').value;
@@ -84,9 +83,9 @@
             mediaArea.innerHTML = "";
 
             if (q.type === 'image') {;
-                mediaArea.innerHTML = '<img src="assets/${q.media}" style="max-width:300px;">';
+                mediaArea.innerHTML = `<img src="assets/${q.media}" style="max-width:300px;">`;
             } else if (q.type === 'audio') {
-                mediaArea.innerHTML = '<audio controls source src="assets/${q.media}" type="audio/mpeg"></audio>';
+                mediaArea.innerHTML = `<audio controls source src="assets/${q.media}" </audio>`;
             }
             qArea.innerText = q.q;
 
