@@ -36,7 +36,13 @@
         <div id="scoreboard"></div>
         <div id="media-container"></div>
         <div id="options-area"></div>
-        <div id="final-results"></div>
+        <div id="final-results" class="hidden">
+            <h3>Quiz Complete!</h3>
+            <input type="text" id="playerName" placeholder="Enter your name">
+            <button onclick="saveScoreToSheet()">Save Score</button>
+            <hr>
+            <h4>Global Leaderboard</h4>
+            <div id="leaderboard-container">Loading scores...</div>
         <button id="menu-btn" style="display:none;" onclick="location.reload()">Back to Menu</button>
     </div>
 
@@ -223,6 +229,7 @@
             }
             }
             document.getElementById('menu-btn').style.display = 'block'; // Hide the menu button during tie-breaker  
+            displayLeaderboard(); // Load and display the leaderboard
         }
 
     function startSuddenDeath() {
@@ -242,6 +249,60 @@
         document.getElementById('scoreboard').classList.remove('hidden');
         showQuestion();
     }
+
+    async function saveScoreToSheet() {
+    let name = document.getElementById('playerName').value;
+    let mod = document.getElementById('moduleSelect').value;
+    let WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxIVy-uzyzVeCco6TgSdIOoAr95NYaTv6AW2i1cM3E4Dip3yN6pm41VaVijunAQF_-WvA/exec";
+
+    if (!name) return alert("Please enter a name!");
+
+    let payload = { name: name, score: score, module: mod };
+
+    try {
+        await fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Essential for Google Apps Script
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        alert("Score saved to global leaderboard!");
+    } catch (e) {
+        console.error("Error saving score:", e);
+    }
+}
+
+async function displayLeaderboard() {
+    let container = document.getElementById('leaderboard-container');
+    let GET_URL = "https://script.google.com/macros/s/AKfycbxIVy-uzyzVeCco6TgSdIOoAr95NYaTv6AW2i1cM3E4Dip3yN6pm41VaVijunAQF_-WvA/exec"; // Use the same URL, it works for both POST and GET
+
+    try {
+        let res = await fetch(GET_URL);
+        let data = await res.json();
+        
+        // Data format: [["Name", "Score", "Module"], ["Alice", 50, "TA"], ...]
+        // We slice(1) to skip the header row
+        let rows = data.slice(1); 
+        
+        // Sort by score (column index 1)
+        rows.sort((a, b) => b[1] - a[1]);
+        
+        let html = `<table border="1" style="width:100%; border-collapse: collapse;">
+            <tr><th>Name</th><th>Score</th><th>Module</th></tr>`;
+        
+        rows.slice(0, 10).forEach(row => {
+            html += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`;
+        });
+        
+        html += `</table>`;
+        container.innerHTML = html;
+    } catch (e) {
+        container.innerHTML = "Could not load leaderboard.";
+    }
+}
+
+    
+
     </script>
 </body>
 </html>
