@@ -3,8 +3,8 @@
     "Test 1": [
       {
         "q": "What is the nationality from Brazil?",
-        "type": NaN,
-        "media": NaN,
+        "type": "text",
+        "media": "none",
         "options": [
           "Brazilian",
           "Brasilian",
@@ -15,8 +15,8 @@
       },
       {
         "q": "Só um teste",
-        "type": NaN,
-        "media": NaN,
+        "type": "text",
+        "media": "none",
         "options": [
           "nessa",
           "na outra",
@@ -27,8 +27,8 @@
       },
       {
         "q": "AAAA",
-        "type": NaN,
-        "media": NaN,
+        "type": "text",
+        "media": "none",
         "options": [
           "a",
           "Brasilian",
@@ -39,8 +39,8 @@
       },
       {
         "q": "sfcadf",
-        "type": NaN,
-        "media": NaN,
+        "type": "text",
+        "media": "none",
         "options": [
           "Brazilian",
           "Brasilian",
@@ -51,8 +51,8 @@
       },
       {
         "q": "sadasc",
-        "type": NaN,
-        "media": NaN,
+        "type": "text",
+        "media": "none",
         "options": [
           "nessa",
           "na outra",
@@ -63,8 +63,8 @@
       },
       {
         "q": "cscc",
-        "type": NaN,
-        "media": NaN,
+        "type": "text",
+        "media": "none",
         "options": [
           "a",
           "Brasilian",
