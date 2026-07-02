@@ -32,12 +32,12 @@
 
 <div id="game-screen" class="hidden">
         <div id="timer-display"></div>
-<div id="score-display" style="font-weight:bold; font-size:20px;">Score: 0</div>        <h2 id="q-text"></h2>
+        <div id="score-display" style="font-weight:bold; font-size:20px;">Score: 0</div>        <h2 id="q-text"></h2>
         <div id="scoreboard"></div>
+        <div id="media-container"></div>
         <div id="options-area"></div>
-        <div id="final-results" class="hidden">
-            <button id="menu-btn" onclick="location.reload()" class="hidden">Back to Menu</button>
-        </div>
+        <div id="final-results"></div>
+        <button id="menu-btn" style="display:none;" onclick="location.reload()">Back to Menu</button>
     </div>
 
     <script>
@@ -80,22 +80,30 @@
                 return;
             }
             let q = currentQ[index];
-            document.getElementById('q-text').innerText = q.q;
+            let mediaArea = document.getElementById('media-container');
+            mediaArea.innerHTML = "";
 
+            if (q.type === 'image') {;
+                mediaArea.innerHTML = '<img src="assets/${q.media}" style="max-width:300px;">';
+            } else if (q.type === 'audio') {
+                mediaArea.innerHTML = '<audio controls source src="assets/${q.media}" type="audio/mpeg"></audio>';
+            }
+            qArea.innerText = q.q;
+
+            
             if (mode === 'solo') {
                 startTime = Date.now();
                 renderOptions(q);
             } else {
                 // Multiplayer: Start 3-second countdown BEFORE showing buttons
                 let count = 3;
-                timerEl.innerText = "Prepare... " + count;
+                timerEl.innerText = "Get ready... " + count;
                 let interval = setInterval(() => {
                     count--;
-                    timerEl.innerText = count > 0 ? "Prepare... " + count : "GO!";
+                    timerEl.innerText = count > 0 ? "Get ready... " + count : "GO!";
                     if(count <= 0) { 
                         clearInterval(interval); 
                         timerEl.innerText = "";
-                        renderOptions(q); 
                     }
                 }, 1000);
             }
@@ -112,43 +120,44 @@
                 optArea.appendChild(btn);
             });
         }
-function checkSolo(btn, sel, corr) {
-    let buttons = document.querySelectorAll('#options-area button');
-    
-    if (sel === corr) {
-        // Calculate points
-        let timeTaken = (Date.now() - startTime) / 1000;
-        let earned = Math.max(10, Math.round(100 - (timeTaken * 10)));
-        score += earned;
         
-        // Update UI
-        btn.classList.add('correct');
-        buttons.forEach(b => b.disabled = true);
-        document.getElementById('score-display').innerText = "Score: " + score; // Update the UI
+        function checkSolo(btn, sel, corr) {
+            let buttons = document.querySelectorAll('#options-area button');
         
-        // Move to next question after delay
-        setTimeout(() => { 
-            index++; 
-            showQuestion(); 
-        }, 1000);
-    } else {
-        // Penalty for wrong answer
-        score = Math.max(0, score - 5);
-        document.getElementById('score-display').innerText = "Score: " + score; // Update the UI
+            if (sel === corr) {
+            // Calculate points
+            let timeTaken = (Date.now() - startTime) / 1000;
+            let earned = Math.max(10, Math.round(100 - (timeTaken * 10)));
+            score += earned;
         
-        btn.classList.add('wrong');
-        btn.disabled = true; // Block only this button
+            // Update UI
+            btn.classList.add('correct');
+            buttons.forEach(b => b.disabled = true);
+            document.getElementById('score-display').innerText = "Score: " + score; // Update the UI
         
-        let originalText = btn.innerText;
-        btn.innerText = "-5 Penalty!";
+            // Move to next question after delay
+            setTimeout(() => { 
+                index++; 
+                showQuestion(); 
+            }, 1000);
+            } else {
+            // Penalty for wrong answer
+            score = Math.max(0, score - 5);
+            document.getElementById('score-display').innerText = "Score: " + score; // Update the UI
         
-        setTimeout(() => { 
-            btn.classList.remove('wrong'); 
-            btn.innerText = originalText;
-            btn.disabled = false; // Make it clickable again
-        }, 1000);
-    }
-}
+            btn.classList.add('wrong');
+            btn.disabled = true; // Block only this button
+        
+            let originalText = btn.innerText;
+            btn.innerText = "-5 Penalty!";
+        
+            setTimeout(() => { 
+                btn.classList.remove('wrong'); 
+                btn.innerText = originalText;
+                btn.disabled = false; // Make it clickable again
+            }, 1000);
+            }
+        }
 
         function setupTeams() {
             let num = document.getElementById('teamCountSelect').value;
@@ -172,59 +181,57 @@ function checkSolo(btn, sel, corr) {
         }
 
         function showFinalResults() {
-    let resArea = document.getElementById('final-results');
-    resArea.classList.remove('hidden');
+            let resArea = document.getElementById('final-results');
+            resArea.classList.remove('hidden');
     
-    if (mode === 'solo') {
-        resArea.innerHTML = `<h3>Your Final Score: ${score}</h3>`;
-    } else {
-        let teamScores = [];
+            if (mode === 'solo') {
+                resArea.innerHTML = `<h3>Your Final Score: ${score}</h3>`;
+            } else {
+                let teamScores = [];
+                let numTeams = document.getElementById('teamCountSelect').value;
+                for(let i = 1; i <= numTeams; i++) {
+                teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s'+i).innerText) });
+                }
+                teamScores.sort((a, b) => b.points - a.points);
+
+            // Check for tie between 1st and 2nd place
+            let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
+
+            let podium = `<h3>Results:</h3>`;
+            teamScores.forEach((t, i) => {
+                podium += `<p><strong>${i + 1}st Place:</strong> ${t.name} with ${t.points} points</p>`;
+            });
+        
+            resArea.innerHTML = podium;
+
+            if (isTie) {
+                let btn = document.createElement('button');
+                btn.innerText = "Sudden Death Tie-Breaker!";
+                btn.style.backgroundColor = "orange";
+                btn.onclick = startSuddenDeath;
+                resArea.appendChild(btn);
+            }
+            }
+            document.getElementById('menu-btn').style.display = 'block'; // Hide the menu button during tie-breaker  
+        }
+
+    function startSuddenDeath() {
+        // Reset index to a new single question
+        index = 0;
+        // Just keep the first question from the current list or pick a random one
+        currentQ = [currentQ[Math.floor(Math.random() * currentQ.length)]];
+    
+        // Reset scores for all teams
         let numTeams = document.getElementById('teamCountSelect').value;
         for(let i = 1; i <= numTeams; i++) {
-            teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s'+i).innerText) });
+            document.getElementById('s'+i).innerText = "0";
         }
-        teamScores.sort((a, b) => b.points - a.points);
-
-        // Check for tie between 1st and 2nd place
-        let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
-
-        let podium = `<h3>Results:</h3>`;
-        teamScores.forEach((t, i) => {
-            podium += `<p><strong>${i + 1}st Place:</strong> ${t.name} with ${t.points} points</p>`;
-        });
-        
-        resArea.innerHTML = podium;
-
-        if (isTie) {
-            let btn = document.createElement('button');
-            btn.innerText = "Sudden Death Tie-Breaker!";
-            btn.style.backgroundColor = "orange";
-            btn.onclick = startSuddenDeath;
-            resArea.appendChild(btn);
-        }
-        document.getElementById('menu-btn').classList.remove('hidden'); // Show "Back to Menu" button 
+    
+        // Hide results and restart game
+        document.getElementById('final-results').classList.add('hidden');
+        document.getElementById('scoreboard').classList.remove('hidden');
+        showQuestion();
     }
-}
-
-function startSuddenDeath() {
-    // Reset index to a new single question
-    index = 0;
-    // Just keep the first question from the current list or pick a random one
-    currentQ = [currentQ[Math.floor(Math.random() * currentQ.length)]];
-    
-    // Reset scores for all teams
-    let numTeams = document.getElementById('teamCountSelect').value;
-    for(let i = 1; i <= numTeams; i++) {
-        document.getElementById('s'+i).innerText = "0";
-    }
-    
-    // Hide results and restart game
-    document.getElementById('final-results').classList.add('hidden');
-    document.getElementById('scoreboard').classList.remove('hidden');
-    showQuestion();
-}
-        
-    
     </script>
 </body>
 </html>
