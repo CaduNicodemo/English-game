@@ -31,20 +31,23 @@
     </div>
 
 <div id="game-screen" class="hidden">
-        <div id="timer-display"></div>
-        <div id="score-display" style="font-weight:bold; font-size:20px;">Score: 0</div>        <h2 id="q-text"></h2>
-        <div id="scoreboard"></div>
-        <div id="media-container"></div>
-        <div id="options-area"></div>
-        <div id="final-results" class="hidden">
-            <h3>Quiz Complete!</h3>
-            <input type="text" id="playerName" placeholder="Enter your name">
-            <button onclick="saveScoreToSheet()">Save Score</button>
-            <hr>
-            <h4>Global Leaderboard</h4>
-            <div id="leaderboard-container">Loading scores...</div>
+    <div id="timer-display"></div>
+    <div id="score-display" style="font-weight:bold; font-size:20px;">Score: 0</div>
+    <h2 id="q-text"></h2>
+    <div id="scoreboard"></div>
+    <div id="media-container"></div>
+    <div id="options-area"></div>
+
+    <div id="final-results" class="hidden">
+        <h3>Quiz Complete!</h3>
+        <input type="text" id="playerName" placeholder="Enter your name">
+        <button onclick="saveScoreToSheet()">Save Score</button>
+        <hr>
+        <h4>Global Leaderboard</h4>
+        <div id="leaderboard-container">Loading scores...</div>
         <button id="menu-btn" style="display:none;" onclick="location.reload()">Back to Menu</button>
     </div>
+</div>
 
     <script>
         let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
@@ -228,7 +231,12 @@
                 resArea.appendChild(btn);
             }
             }
-            document.getElementById('menu-btn').style.display = 'block'; // Hide the menu button during tie-breaker  
+            let menuBtn = document.getElementById('menu-btn');
+            if (menuBtn) {
+                menuBtn.style.display = 'block';
+            } else {
+                console.error("Could not find menu-btn in HTML!");
+            }
             displayLeaderboard(); // Load and display the leaderboard
         }
 
@@ -253,7 +261,7 @@
     async function saveScoreToSheet() {
     let name = document.getElementById('playerName').value;
     let mod = document.getElementById('moduleSelect').value;
-    let WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxIVy-uzyzVeCco6TgSdIOoAr95NYaTv6AW2i1cM3E4Dip3yN6pm41VaVijunAQF_-WvA/exec";
+    let WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7fE-ps5-xgMYFxbSnrSzAuIf_zbKBGsNxsMGUJBB3tf6f1NPUxueJZf42ms-i_VO1Ig/exec";
 
     if (!name) return alert("Please enter a name!");
 
@@ -262,7 +270,6 @@
     try {
         await fetch(WEB_APP_URL, {
             method: 'POST',
-            mode: 'no-cors', // Essential for Google Apps Script
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
@@ -274,7 +281,11 @@
 
 async function displayLeaderboard() {
     let container = document.getElementById('leaderboard-container');
-    let GET_URL = "https://script.google.com/macros/s/AKfycbxIVy-uzyzVeCco6TgSdIOoAr95NYaTv6AW2i1cM3E4Dip3yN6pm41VaVijunAQF_-WvA/exec"; // Use the same URL, it works for both POST and GET
+    if (!container) {
+        console.error("Critical Error: 'leaderboard-container' not found in the DOM!");
+        return;
+    }
+    let GET_URL = "https://script.google.com/macros/s/AKfycbx7fE-ps5-xgMYFxbSnrSzAuIf_zbKBGsNxsMGUJBB3tf6f1NPUxueJZf42ms-i_VO1Ig/exec"; // Use the same URL, it works for both POST and GET
 
     try {
         let res = await fetch(GET_URL);
