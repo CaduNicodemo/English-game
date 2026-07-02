@@ -82,9 +82,9 @@ let res = await fetch('./questions.json?t=' + new Date().getTime());
             let mediaArea = document.getElementById('media-container');
             mediaArea.innerHTML = "";
 
-            if (q.type === 'image') {;
+            if (q.type === 'Image') {;
                 mediaArea.innerHTML = `<img src="assets/${q.media}" style="max-width:300px;">`;
-            } else if (q.type === 'audio') {
+            } else if (q.type === 'Audio') {
                 mediaArea.innerHTML = `<audio controls source src="assets/${q.media}" </audio>`;
             }
             qArea.innerText = q.q;

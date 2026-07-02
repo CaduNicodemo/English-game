@@ -15,8 +15,8 @@ for _, row in df.iterrows():
     
     json_output[mod][lvl].append({
         "q": row['Question'],
-        "type": row.get('Type', 'text'),
-        "media": row.get('Media', ''),
+        "type": str(type_val) if type_val else "text",
+        "media": str(media_val) if media_val else "",
         "options": [row['Option 1'], row['Option 2'], row['Option 3'], row['Option 4']],
         "answer": row['Answer']
     })
