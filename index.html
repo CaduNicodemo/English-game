@@ -44,25 +44,36 @@
         let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
 
         async function loadAndStart() {
-let res = await fetch('./questions.json?t=' + new Date().getTime());
-            let mod = document.getElementById('moduleSelect').value;
-            let test = document.getElementById('testSelect').value;
-            mode = document.getElementById('modeSelect').value;
+        // 1. Fetch and store the data
+        let res = await fetch('./questions.json?t=' + new Date().getTime());
+        fullData = await res.json(); 
+
+        // 2. Get values from the setup screen
+        let mod = document.getElementById('moduleSelect').value;
+        let test = document.getElementById('testSelect').value;
+        mode = document.getElementById('modeSelect').value;
             
-            currentQ = [...fullData[mod][test]].sort(() => Math.random() - 0.5);
-            document.getElementById('setup-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-            
-            if (mode === 'teams') setupTeams();
-            showQuestion();
-            mode = document.getElementById('modeSelect').value;
-            
-            let scoreDisplay = document.getElementById('score-display');
-            if (mode === 'solo') {
-                scoreDisplay.classList.remove('hidden');
-            } else {
-                scoreDisplay.classList.add('hidden');
-            }
+        // 3. DEBUGGING: Check if data exists BEFORE accessing it
+        if (!fullData[mod] || !fullData[mod][test]) {
+            console.error("Path not found:", mod, test);
+            console.error("Available:", Object.keys(fullData));
+            alert("Error: Could not find " + mod + " -> " + test + " in your JSON.");
+            return; // Stop the function here so it doesn't crash
+        }
+
+        // 4. Everything is safe, now run the game
+        currentQ = [...fullData[mod][test]].sort(() => Math.random() - 0.5);
+
+        document.getElementById('setup-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+
+        if (mode === 'teams') setupTeams();
+
+        // Hide/Show score based on mode
+        let scoreDisplay = document.getElementById('score-display');
+        scoreDisplay.style.display = (mode === 'solo') ? 'block' : 'none';
+
+        showQuestion();
         }
 
         function showQuestion() {
