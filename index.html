@@ -39,7 +39,7 @@
     <div id="options-area"></div>
 
     <div id="final-results" class="hidden">
-        <h3>Quiz Complete!</h3>
+        <div id="results-text"></div> <hr>
         <input type="text" id="playerName" placeholder="Enter your name">
         <button onclick="saveScoreToSheet()">Save Score</button>
         <hr>
@@ -202,6 +202,8 @@
         function showFinalResults() {
             let resArea = document.getElementById('final-results');
             resArea.classList.remove('hidden');
+
+            let textContainer = document.getElementById('results-text');
     
             if (mode === 'solo') {
                 resArea.innerHTML = `<h3>Your Final Score: ${score}</h3>`;
@@ -212,24 +214,24 @@
                 teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s'+i).innerText) });
                 }
                 teamScores.sort((a, b) => b.points - a.points);
+                
+                // Check for tie between 1st and 2nd place
+                let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
 
-            // Check for tie between 1st and 2nd place
-            let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
-
-            let podium = `<h3>Results:</h3>`;
-            teamScores.forEach((t, i) => {
-                podium += `<p><strong>${i + 1}st Place:</strong> ${t.name} with ${t.points} points</p>`;
-            });
+                let podium = `<h3>Results:</h3>`;
+                teamScores.forEach((t, i) => {
+                    podium += `<p><strong>${i + 1}st Place:</strong> ${t.name} with ${t.points} points</p>`;
+                });
         
-            resArea.innerHTML = podium;
+                textContainer.innerHTML = podium;
 
-            if (isTie) {
-                let btn = document.createElement('button');
-                btn.innerText = "Sudden Death Tie-Breaker!";
-                btn.style.backgroundColor = "orange";
-                btn.onclick = startSuddenDeath;
-                resArea.appendChild(btn);
-            }
+                if (isTie) {
+                    let btn = document.createElement('button');
+                    btn.innerText = "Sudden Death Tie-Breaker!";
+                    btn.style.backgroundColor = "orange";
+                    btn.onclick = startSuddenDeath;
+                    textContainer.appendChild(btn);
+                }
             }
             let menuBtn = document.getElementById('menu-btn');
             if (menuBtn) {
