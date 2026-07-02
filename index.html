@@ -200,8 +200,9 @@
         }
 
         function showFinalResults() {
-            let resArea = document.getElementById('final-results');
-            resArea.classList.remove('hidden');
+            setTimeout(() => {
+                let resArea = document.getElementById('final-results');
+                resArea.classList.remove('hidden');
 
             let textContainer = document.getElementById('results-text');
     
@@ -240,7 +241,8 @@
                 console.error("Could not find menu-btn in HTML!");
             }
             displayLeaderboard(); // Load and display the leaderboard
-        }
+        },100);
+    }
 
     function startSuddenDeath() {
         // Reset index to a new single question
