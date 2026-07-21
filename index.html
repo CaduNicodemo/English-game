@@ -297,26 +297,31 @@
         }
 
         async function saveScoreToSheet() {
-            let name = document.getElementById('playerName').value;
-            let mod = document.getElementById('moduleSelect').value;
-            let WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7fE-ps5-xgMYFxbSnrSzAuIf_zbKBGsNxsMGUJBB3tf6f1NPUxueJZf42ms-i_VO1Ig/exec";
+    let name = document.getElementById('playerName').value;
+    let mod = document.getElementById('moduleSelect').value;
+    let WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7fE-ps5-xgMYFxbSnrSzAuIf_zbKBGsNxsMGUJBB3tf6f1NPUxueJZf42ms-i_VO1Ig/exec";
 
-            if (!name) return alert("Please enter a name!");
+    if (!name) return alert("Please enter a name!");
 
-            let payload = { name: name, score: score, module: mod };
+    let payload = { name: name, score: score, module: mod };
 
-            try {
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                alert("Score saved to global leaderboard!");
-                displayLeaderboard(); // Atualiza o ranking na tela
-            } catch (e) {
-                console.error("Error saving score:", e);
-            }
-        }
+    try {
+        // Usamos mode: 'no-cors' para evitar que o navegador bloqueie a requisição por segurança de domínio cruzado
+        await fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        
+        alert("Score saved successfully!");
+        document.getElementById('playerName').value = ""; // Limpa o input
+        displayLeaderboard(); // Atualiza a tabela na tela
+    } catch (e) {
+        console.error("Error saving score:", e);
+        alert("Could not save score. Check your connection.");
+    }
+}
 
         async function displayLeaderboard() {
             let container = document.getElementById('leaderboard-container');
