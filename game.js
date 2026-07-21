@@ -117,15 +117,24 @@ function checkSolo(btn, sel, corr) {
     }
 }
 
-function setupTeams() {
+    function setupTeams() {
     let num = document.getElementById('teamCountSelect').value;
     let scoreboard = document.getElementById('scoreboard');
+    
+    // Adiciona uma classe container para alinhar os times lado a lado no PC
+    scoreboard.className = "team-container";
     scoreboard.innerHTML = "";
+    
     for(let i = 1; i <= num; i++) {
-        scoreboard.innerHTML += `<div class="team-box">T${i}: <span id="s${i}">0</span><br><button onclick="teamPoint(${i})">+ Point</button></div>`;
+        scoreboard.innerHTML += `
+            <div class="team-box">
+                <strong>Team ${i}</strong><br>
+                <span id="s${i}" style="font-size: 24px; font-weight: bold;">0</span><br>
+                <button onclick="teamPoint(${i})" style="width: 100%; margin-top: 8px; padding: 8px;">+ Point</button>
+            </div>
+        `;
     }
 }
-
 function teamPoint(i) {
     document.getElementById('s'+i).innerText = parseInt(document.getElementById('s'+i).innerText) + 1;
     let timerEl = document.getElementById('timer-display');
