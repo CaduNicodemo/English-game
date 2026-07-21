@@ -146,7 +146,7 @@ function calcularBadge(scoreAtual, scoreMaximo) {
     } else if (porcentagem >= 75) {
         return { nome: "🥇 Gold Badge", classe: "badge-gold", desc: "Great job! Above 75% accuracy." };
     } else if (porcentagem >= 50) {
-        return { nome: "🥈 Silver Badge", classe: "badge-silver", desc: "Good effort! Passed 50%." };
+        return { nome: "🥈 Silver Badge", classe: "badge-silver", desc: "Good effort! Over 50% accuracy." };
     } else {
         return { nome: "🥉 Bronze Badge", classe: "badge-bronze", desc: "Keep practicing to improve!" };
     }
