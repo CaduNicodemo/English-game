@@ -1,0 +1,75 @@
+body { 
+    font-family: sans-serif; 
+    text-align: center; 
+    padding: 20px; 
+}
+
+.hidden { 
+    display: none; 
+}
+
+.team-box { 
+    display: inline-block; 
+    border: 2px solid #333; 
+    padding: 10px; 
+    margin: 5px; 
+    width: 120px; 
+}
+
+button { 
+    padding: 15px; 
+    margin: 10px; 
+    cursor: pointer; 
+    width: 80%; 
+    font-size: 18px; 
+}
+
+.correct { 
+    background-color: #90EE90 !important; 
+}
+
+.wrong { 
+    background-color: #FF7F7F !important; 
+}
+
+#timer-display { 
+    font-size: 30px; 
+    font-weight: bold; 
+    color: blue; 
+    margin: 15px; 
+}
+
+/* Estilos para as Badges */
+.badge-box { 
+    padding: 15px; 
+    margin: 15px auto; 
+    border-radius: 10px; 
+    width: 80%; 
+    max-width: 400px; 
+    font-weight: bold; 
+    font-size: 20px; 
+}
+
+.badge-legendary { 
+    background-color: #ffd700; 
+    border: 3px solid #ff8c00; 
+    color: #5c4033; 
+}
+
+.badge-gold { 
+    background-color: #fffae6; 
+    border: 3px solid #ffd700; 
+    color: #b8860b; 
+}
+
+.badge-silver { 
+    background-color: #f0f0f0; 
+    border: 3px solid #c0c0c0; 
+    color: #696969; 
+}
+
+.badge-bronze { 
+    background-color: #faebd7; 
+    border: 3px solid #cd7f32; 
+    color: #8b4513; 
+}

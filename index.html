@@ -4,22 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Learning Quiz</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 20px; }
-        .hidden { display: none; }
-        .team-box { display: inline-block; border: 2px solid #333; padding: 10px; margin: 5px; width: 120px; }
-        button { padding: 15px; margin: 10px; cursor: pointer; width: 80%; font-size: 18px; }
-        .correct { background-color: #90EE90 !important; }
-        .wrong { background-color: #FF7F7F !important; }
-        #timer-display { font-size: 30px; font-weight: bold; color: blue; margin: 15px; }
-        
-        /* Estilos para as Badges */
-        .badge-box { padding: 15px; margin: 15px auto; border-radius: 10px; width: 80%; max-width: 400px; font-weight: bold; font-size: 20px; }
-        .badge-legendary { background-color: #ffd700; border: 3px solid #ff8c00; color: #5c4033; }
-        .badge-gold { background-color: #fffae6; border: 3px solid #ffd700; color: #b8860b; }
-        .badge-silver { background-color: #f0f0f0; border: 3px solid #c0c0c0; color: #696969; }
-        .badge-bronze { background-color: #faebd7; border: 3px solid #cd7f32; color: #8b4513; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -30,326 +15,42 @@
             <option value="teams">Multi-Team (Classroom)</option>
         </select>
         <div id="team-dropdown-area" class="hidden">
-            <select id="teamCountSelect"><option value="2">2 Teams</option><option value="3">3 Teams</option><option value="4">4 Teams</option></select>
+            <select id="teamCountSelect">
+                <option value="2">2 Teams</option>
+                <option value="3">3 Teams</option>
+                <option value="4">4 Teams</option>
+            </select>
         </div>
         <select id="moduleSelect"><option value="TA">TA</option><option value="T1">T1</option></select>
         <select id="testSelect"><option value="Test 1">Test 1</option></select>
         <button onclick="loadAndStart()">Start Game</button>
     </div>
 
-<div id="game-screen" class="hidden">
-    <div id="timer-display"></div>
-    <div id="score-display" style="font-weight:bold; font-size:20px;">Score: 0</div>
-    <h2 id="q-text"></h2>
-    <div id="scoreboard"></div>
-    <div id="media-container"></div>
-    <div id="options-area"></div>
+    <div id="game-screen" class="hidden">
+        <div id="timer-display"></div>
+        <div id="score-display" style="font-weight:bold; font-size:20px;">Score: 0</div>
+        <h2 id="q-text"></h2>
+        <div id="scoreboard"></div>
+        <div id="media-container"></div>
+        <div id="options-area"></div>
 
-    <div id="final-results" class="hidden">
-        <div id="results-text"></div> 
-        
-        <!-- Badge Container -->
-        <div id="badge-display-area"></div>
-        <hr>
-
-        <!-- Seção exclusiva para Single Player (Salvar Nome e Score) -->
-        <div id="single-player-controls">
-            <input type="text" id="playerName" placeholder="Enter your name">
-            <button onclick="saveScoreToSheet()">Save Score</button>
+        <div id="final-results" class="hidden">
+            <div id="results-text"></div> 
+            
+            <!-- Badge Container -->
+            <div id="badge-display-area"></div>
             <hr>
-            <h4>Global Leaderboard (Top 5)</h4>
-            <div id="leaderboard-container">Loading scores...</div>
+
+            <!-- Seção exclusiva para Single Player -->
+            <div id="single-player-controls">
+                <p style="font-style: italic; color: #555;">Take a screenshot of your badge to show your teacher!</p>
+            </div>
+
+            <button id="menu-btn" onclick="location.reload()">Back to Menu</button>
         </div>
-
-        <button id="menu-btn" onclick="location.reload()">Back to Menu</button>
     </div>
-</div>
 
-    <script>
-        let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
-        let maxPossibleScore = 0; // Armazena a pontuação máxima dinâmica do teste
-
-        async function loadAndStart() {
-            let res = await fetch('./questions.json?t=' + new Date().getTime());
-            fullData = await res.json(); 
-
-            let mod = document.getElementById('moduleSelect').value;
-            let test = document.getElementById('testSelect').value;
-            mode = document.getElementById('modeSelect').value;
-                
-            if (!fullData[mod] || !fullData[mod][test]) {
-                alert("Error: Could not find " + mod + " -> " + test + " in your JSON.");
-                return;
-            }
-
-            currentQ = [...fullData[mod][test]].sort(() => Math.random() - 0.5);
-            
-            // Calcula o score máximo possível para este teste específico (ex: 100 pontos por questão)
-            maxPossibleScore = currentQ.length * 100;
-            score = 0;
-            index = 0;
-
-            document.getElementById('setup-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-
-            if (mode === 'teams') setupTeams();
-
-            let scoreDisplay = document.getElementById('score-display');
-            scoreDisplay.style.display = (mode === 'solo') ? 'block' : 'none';
-
-            showQuestion();
-        }
-
-        function showQuestion() {
-            let optArea = document.getElementById('options-area');
-            let timerEl = document.getElementById('timer-display');
-            let qArea = document.getElementById('q-text');
-            
-            if (index >= currentQ.length) {
-                qArea.innerText = "Quiz Complete!";
-                optArea.innerHTML = "";
-                timerEl.innerText = "";
-                document.getElementById('scoreboard').classList.add('hidden');
-                showFinalResults();
-                return;
-            }
-            let q = currentQ[index];
-            let mediaArea = document.getElementById('media-container');
-            mediaArea.innerHTML = "";
-
-            if (q.type === 'Image') {
-                mediaArea.innerHTML = `<img src="assets/${q.media}" style="max-width:300px;">`;
-            } else if (q.type === 'Audio') {
-                mediaArea.innerHTML = `<audio controls source src="assets/${q.media}"></audio>`;
-            }
-            qArea.innerText = q.q;
-
-            if (mode === 'solo') {
-                startTime = Date.now();
-                renderOptions(q);
-            } else {
-                let count = 3;
-                timerEl.innerText = "Get ready... " + count;
-                let interval = setInterval(() => {
-                    count--;
-                    timerEl.innerText = count > 0 ? "Get ready... " + count : "GO!";
-                    if(count <= 0) { 
-                        clearInterval(interval); 
-                        timerEl.innerText = "";
-                    }
-                }, 1000);
-            }
-        }
-
-        function renderOptions(q) {
-            let optArea = document.getElementById('options-area');
-            optArea.innerHTML = "";
-            let opts = [...q.options].sort(() => Math.random() - 0.5);
-            opts.forEach(o => {
-                let btn = document.createElement('button');
-                btn.innerText = o;
-                btn.onclick = (e) => (mode === 'solo') ? checkSolo(e.target, o, q.answer) : null;
-                optArea.appendChild(btn);
-            });
-        }
-        
-        function checkSolo(btn, sel, corr) {
-            let buttons = document.querySelectorAll('#options-area button');
-        
-            if (sel === corr) {
-                let timeTaken = (Date.now() - startTime) / 1000;
-                let earned = Math.max(10, Math.round(100 - (timeTaken * 10)));
-                score += earned;
-        
-                btn.classList.add('correct');
-                buttons.forEach(b => b.disabled = true);
-                document.getElementById('score-display').innerText = "Score: " + score;
-        
-                setTimeout(() => { 
-                    index++; 
-                    showQuestion(); 
-                }, 1000);
-            } else {
-                score = Math.max(0, score - 5);
-                document.getElementById('score-display').innerText = "Score: " + score;
-        
-                btn.classList.add('wrong');
-                btn.disabled = true;
-        
-                let originalText = btn.innerText;
-                btn.innerText = "-5 Penalty!";
-        
-                setTimeout(() => { 
-                    btn.classList.remove('wrong'); 
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }, 1000);
-            }
-        }
-
-        function setupTeams() {
-            let num = document.getElementById('teamCountSelect').value;
-            let scoreboard = document.getElementById('scoreboard');
-            scoreboard.innerHTML = "";
-            for(let i = 1; i <= num; i++) {
-                scoreboard.innerHTML += `<div class="team-box">T${i}: <span id="s${i}">0</span><br><button onclick="teamPoint(${i})">+ Point</button></div>`;
-            }
-        }
-
-        function teamPoint(i) {
-            document.getElementById('s'+i).innerText = parseInt(document.getElementById('s'+i).innerText) + 1;
-            let timerEl = document.getElementById('timer-display');
-            timerEl.innerText = "";
-            index++;
-            showQuestion();
-        }
-        
-        function toggleTeamDropdown() { 
-            document.getElementById('team-dropdown-area').style.display = (document.getElementById('modeSelect').value === 'teams') ? 'block' : 'none'; 
-        }
-
-        // Função para calcular a Badge baseada na porcentagem real de acertos
-        function calcularBadge(scoreAtual, scoreMaximo) {
-            let porcentagem = scoreMaximo > 0 ? (scoreAtual / scoreMaximo) * 100 : 0;
-            
-            if (porcentagem >= 90) {
-                return { nome: "🌟 Legendary Badge", classe: "badge-legendary", desc: "Desempenho lendário! Domínio total." };
-            } else if (porcentagem >= 75) {
-                return { nome: "🥇 Gold Badge", classe: "badge-gold", desc: "Excelente trabalho! Acima de 75%." };
-            } else if (porcentagem >= 50) {
-                return { nome: "🥈 Silver Badge", classe: "badge-silver", desc: "Bom esforço! Passou de 50%." };
-            } else {
-                return { nome: "🥉 Bronze Badge", classe: "badge-bronze", desc: "Continue praticando para melhorar!" };
-            }
-        }
-
-        function showFinalResults() {
-            setTimeout(() => {
-                let resArea = document.getElementById('final-results');
-                resArea.classList.remove('hidden');
-
-                let textContainer = document.getElementById('results-text');
-                let badgeArea = document.getElementById('badge-display-area');
-                let singleControls = document.getElementById('single-player-controls');
-
-                if (mode === 'solo') {
-                    // Exibe controles de Single Player e oculta no multiplayer
-                    singleControls.style.display = 'block';
-
-                    // Calcula a badge
-                    let badge = calcularBadge(score, maxPossibleScore);
-                    let porcentagemReal = ((score / maxPossibleScore) * 100).toFixed(1);
-
-                    textContainer.innerHTML = `<h3>Your Final Score: ${score} / ${maxPossibleScore} (${porcentagemReal}%)</h3>`;
-                    
-                    badgeArea.innerHTML = `
-                        <div class="badge-box ${badge.classe}">
-                            <h3>${badge.nome}</h3>
-                            <p>${badge.desc}</p>
-                        </div>
-                    `;
-
-                    displayLeaderboard(); // Puxa e filtra os top 5 da planilha
-                } else {
-                    // Se for multiplayer, esconde input de nome, leaderboard e mostra o pódio das equipes
-                    singleControls.style.display = 'none';
-                    badgeArea.innerHTML = "";
-
-                    let teamScores = [];
-                    let numTeams = document.getElementById('teamCountSelect').value;
-                    for(let i = 1; i <= numTeams; i++) {
-                        teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s'+i).innerText) });
-                    }
-                    teamScores.sort((a, b) => b.points - a.points);
-                    
-                    let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
-
-                    let podium = `<h3>Results:</h3>`;
-                    teamScores.forEach((t, i) => {
-                        podium += `<p><strong>${i + 1}º Place:</strong> ${t.name} with ${t.points} points</p>`;
-                    });
-            
-                    textContainer.innerHTML = podium;
-
-                    if (isTie) {
-                        let btn = document.createElement('button');
-                        btn.innerText = "Sudden Death Tie-Breaker!";
-                        btn.style.backgroundColor = "orange";
-                        btn.onclick = startSuddenDeath;
-                        textContainer.appendChild(btn);
-                    }
-                }
-            }, 100);
-        }
-
-        function startSuddenDeath() {
-            index = 0;
-            currentQ = [currentQ[Math.floor(Math.random() * currentQ.length)]];
-            
-            let numTeams = document.getElementById('teamCountSelect').value;
-            for(let i = 1; i <= numTeams; i++) {
-                document.getElementById('s'+i).innerText = "0";
-            }
-        
-            document.getElementById('final-results').classList.add('hidden');
-            document.getElementById('scoreboard').classList.remove('hidden');
-            showQuestion();
-        }
-
-        async function saveScoreToSheet() {
-    let name = document.getElementById('playerName').value;
-    let mod = document.getElementById('moduleSelect').value;
-    let WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7fE-ps5-xgMYFxbSnrSzAuIf_zbKBGsNxsMGUJBB3tf6f1NPUxueJZf42ms-i_VO1Ig/exec";
-
-    if (!name) return alert("Please enter a name!");
-
-    let payload = { name: name, score: score, module: mod };
-
-    try {
-        // Usamos mode: 'no-cors' para evitar que o navegador bloqueie a requisição por segurança de domínio cruzado
-        await fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        
-        alert("Score saved successfully!");
-        document.getElementById('playerName').value = ""; // Limpa o input
-        displayLeaderboard(); // Atualiza a tabela na tela
-    } catch (e) {
-        console.error("Error saving score:", e);
-        alert("Could not save score. Check your connection.");
-    }
-}
-
-        async function displayLeaderboard() {
-            let container = document.getElementById('leaderboard-container');
-            if (!container) return;
-
-            let GET_URL = "https://script.google.com/macros/s/AKfycbx7fE-ps5-xgMYFxbSnrSzAuIf_zbKBGsNxsMGUJBB3tf6f1NPUxueJZf42ms-i_VO1Ig/exec"; 
-
-            try {
-                let res = await fetch(GET_URL);
-                let data = await res.json();
-                
-                let rows = data.slice(1); // Ignora o cabeçalho
-                rows.sort((a, b) => b[1] - a[1]); // Ordena do maior para o menor score
-                
-                let html = `<table border="1" style="width:100%; border-collapse: collapse; margin-top: 10px;">
-                    <tr style="background-color: #f2f2f2;"><th>Rank</th><th>Name</th><th>Score</th><th>Module</th></tr>`;
-                
-                // Pega apenas os 5 melhores (Top 5)
-                rows.slice(0, 5).forEach((row, index) => {
-                    html += `<tr><td>${index + 1}º</td><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`;
-                });
-                
-                html += `</table>`;
-                container.innerHTML = html;
-            } catch (e) {
-                container.innerHTML = "Could not load leaderboard.";
-            }
-        }
-    </script>
+    <!-- Importa o arquivo JavaScript -->
+    <script src="game.js"></script>
 </body>
 </html>
