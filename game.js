@@ -34,6 +34,7 @@ function showQuestion() {
     let optArea = document.getElementById('options-area');
     let timerEl = document.getElementById('timer-display');
     let qArea = document.getElementById('q-text');
+    let mediaArea = document.getElementById('media-container');
     
     if (index >= currentQ.length) {
         qArea.innerText = "Quiz Complete!";
@@ -44,20 +45,26 @@ function showQuestion() {
         return;
     }
     let q = currentQ[index];
-    let mediaArea = document.getElementById('media-container');
-    mediaArea.innerHTML = "";
 
-    if (q.type === 'Image') {
-        mediaArea.innerHTML = `<img src="assets/${q.media}" style="max-width:300px;">`;
-    } else if (q.type === 'Audio') {
-        mediaArea.innerHTML = `<audio controls source src="assets/${q.media}"></audio>`;
-    }
-    qArea.innerText = q.q;
+    // Clear media and question initially for teams mode; solo shows immediately
+    mediaArea.innerHTML = "";
+    qArea.innerText = "";
 
     if (mode === 'solo') {
+        // Show media immediately for solo
+        if (q.type === 'Image') {
+            mediaArea.innerHTML = `<img src="assets/${q.media}" style="max-width:300px;">`;
+        } else if (q.type === 'Audio') {
+            mediaArea.innerHTML = `<audio controls src="assets/${q.media}"></audio>`;
+        }
+
+        qArea.innerText = q.q;
         startTime = Date.now();
         renderOptions(q);
     } else {
+        // Teams mode: show options immediately but disabled; reveal media and question after countdown
+        renderOptions(q, true); // render buttons disabled so they are visible but not clickable
+
         let count = 3;
         timerEl.innerText = "Get ready... " + count;
         let interval = setInterval(() => {
@@ -66,19 +73,35 @@ function showQuestion() {
             if(count <= 0) { 
                 clearInterval(interval); 
                 timerEl.innerText = "";
+
+                // Reveal media and question now
+                if (q.type === 'Image') {
+                    mediaArea.innerHTML = `<img src="assets/${q.media}" style="max-width:300px;">`;
+                } else if (q.type === 'Audio') {
+                    mediaArea.innerHTML = `<audio controls src="assets/${q.media}"></audio>`;
+                }
+                qArea.innerText = q.q;
+
+                // Enable option buttons so they become clickable after countdown
+                let buttons = document.querySelectorAll('#options-area button');
+                buttons.forEach(b => b.disabled = false);
             }
         }, 1000);
     }
 }
 
-function renderOptions(q) {
+function renderOptions(q, disableButtons = false) {
     let optArea = document.getElementById('options-area');
     optArea.innerHTML = "";
     let opts = [...q.options].sort(() => Math.random() - 0.5);
     opts.forEach(o => {
         let btn = document.createElement('button');
         btn.innerText = o;
-        btn.onclick = (e) => (mode === 'solo') ? checkSolo(e.target, o, q.answer) : null;
+        btn.disabled = disableButtons;
+        // Only attach solo behavior for solo mode; teams buttons are left for future behaviors or can be enabled later
+        if (mode === 'solo') {
+            btn.onclick = (e) => checkSolo(e.target, o, q.answer);
+        }
         optArea.appendChild(btn);
     });
 }
