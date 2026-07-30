@@ -1,6 +1,6 @@
 {
-  "TA": {
-    "Quiz 1": [
+  "T2": {
+    "Quiz 2": [
       {
         "q": "What is this musical instrument?",
         "type": "Image",
@@ -31,7 +31,7 @@
         "media": "music/bass.jpeg",
         "options": [
           "Bass",
-          "Brasilian",
+          "Drums",
           "Keyboard",
           "Guitar"
         ],
@@ -51,51 +51,51 @@
       },
       {
         "q": "What is their profession?",
-        "type": "\"\"",
-        "media": "\"\"",
+        "type": "Image",
+        "media": "music/conductor.jpeg",
         "options": [
-          "a",
-          "b",
-          "c",
-          "Drums"
+          "Conductor",
+          "DJ",
+          "Producer",
+          "Songwriter"
         ],
-        "answer": "Drums"
+        "answer": "Conductor"
       },
       {
         "q": "What is their profession?",
-        "type": "\"\"",
-        "media": "\"\"",
+        "type": "Image",
+        "media": "music/songwriter.jpeg",
         "options": [
-          "a",
-          "b",
-          "c",
-          "Drums"
+          "Songwriter",
+          "Conductor",
+          "DJ",
+          "Producer"
         ],
-        "answer": "Drums"
+        "answer": "Songwriter"
       },
       {
         "q": "What is their profession?",
-        "type": "\"\"",
-        "media": "\"\"",
+        "type": "Image",
+        "media": "music/producer.jpeg",
         "options": [
-          "a",
-          "b",
-          "c",
-          "Drums"
+          "Producer",
+          "Songwriter",
+          "Conductor",
+          "DJ"
         ],
-        "answer": "Drums"
+        "answer": "Producer"
       },
       {
         "q": "What is their profession?",
-        "type": "\"\"",
-        "media": "\"\"",
+        "type": "Image",
+        "media": "music/DJ.jpeg",
         "options": [
-          "a",
-          "b",
-          "c",
-          "Drums"
+          "DJ",
+          "Producer",
+          "Songwriter",
+          "Conductor"
         ],
-        "answer": "Drums"
+        "answer": "DJ"
       }
     ]
   }
