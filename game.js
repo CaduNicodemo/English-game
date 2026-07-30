@@ -46,7 +46,7 @@ function showQuestion() {
     }
     let q = currentQ[index];
 
-    // Clear media and question initially for teams mode; solo shows immediately
+    // Clear media and question initially
     mediaArea.innerHTML = "";
     qArea.innerText = "";
 
@@ -62,8 +62,11 @@ function showQuestion() {
         startTime = Date.now();
         renderOptions(q);
     } else {
-        // Teams mode: show options immediately but disabled; reveal media and question after countdown
-        renderOptions(q, true); // render buttons disabled so they are visible but not clickable
+        // Teams mode: no answer options shown (oral answers). Ensure options area is cleared.
+        optArea.innerHTML = "";
+
+        // Disable team +Point buttons during countdown (teacher will enable after reveal)
+        document.querySelectorAll('#scoreboard button').forEach(b => b.disabled = true);
 
         let count = 3;
         timerEl.innerText = "Get ready... " + count;
@@ -82,9 +85,8 @@ function showQuestion() {
                 }
                 qArea.innerText = q.q;
 
-                // Enable option buttons so they become clickable after countdown
-                let buttons = document.querySelectorAll('#options-area button');
-                buttons.forEach(b => b.disabled = false);
+                // Enable team +Point buttons so the teacher can award points
+                document.querySelectorAll('#scoreboard button').forEach(b => b.disabled = false);
             }
         }, 1000);
     }
@@ -98,7 +100,7 @@ function renderOptions(q, disableButtons = false) {
         let btn = document.createElement('button');
         btn.innerText = o;
         btn.disabled = disableButtons;
-        // Only attach solo behavior for solo mode; teams buttons are left for future behaviors or can be enabled later
+        // Only attach solo behavior for solo mode; teams do not render options
         if (mode === 'solo') {
             btn.onclick = (e) => checkSolo(e.target, o, q.answer);
         }
@@ -140,7 +142,7 @@ function checkSolo(btn, sel, corr) {
     }
 }
 
-    function setupTeams() {
+function setupTeams() {
     let num = document.getElementById('teamCountSelect').value;
     let scoreboard = document.getElementById('scoreboard');
     
@@ -153,16 +155,21 @@ function checkSolo(btn, sel, corr) {
             <div class="team-box">
                 <strong>Team ${i}</strong><br>
                 <span id="s${i}" style="font-size: 24px; font-weight: bold;">0</span><br>
-                <button onclick="teamPoint(${i})" style="width: 100%; margin-top: 8px; padding: 8px;">+ Point</button>
+                <button disabled onclick="teamPoint(${i})" style="width: 100%; margin-top: 8px; padding: 8px;">+ Point</button>
             </div>
         `;
     }
 }
+
 function teamPoint(i) {
     document.getElementById('s'+i).innerText = parseInt(document.getElementById('s'+i).innerText) + 1;
     let timerEl = document.getElementById('timer-display');
     timerEl.innerText = "";
     index++;
+
+    // After teacher awards a point and we move to next question, hide/disable +Point buttons until reveal
+    document.querySelectorAll('#scoreboard button').forEach(b => b.disabled = true);
+
     showQuestion();
 }
 
@@ -186,6 +193,25 @@ function calcularBadge(scoreAtual, scoreMaximo) {
 
 function showFinalResults() {
     setTimeout(() => {
+        // Stop any playing media (audio/video) and reset
+        document.querySelectorAll('#media-container audio, #media-container video').forEach(m => {
+            try { m.pause(); m.currentTime = 0; } catch(e) {}
+        });
+
+        // Clear any visible question/media so final results UI doesn't show previous content underneath
+        let mediaArea = document.getElementById('media-container');
+        let qArea = document.getElementById('q-text');
+        let optArea = document.getElementById('options-area');
+        let timerEl = document.getElementById('timer-display');
+
+        if (mediaArea) mediaArea.innerHTML = "";
+        if (qArea) qArea.innerText = "";
+        if (optArea) optArea.innerHTML = "";
+        if (timerEl) timerEl.innerText = "";
+
+        // Make sure scoreboard is hidden while showing final results
+        document.getElementById('scoreboard').classList.add('hidden');
+
         let resArea = document.getElementById('final-results');
         resArea.classList.remove('hidden');
 
