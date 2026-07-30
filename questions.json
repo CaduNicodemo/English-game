@@ -1,6 +1,6 @@
 {
-  "T2": {
-    "Quiz 2": [
+  "TA": {
+    "Quiz 1": [
       {
         "q": "What is this musical instrument?",
         "type": "Image",
@@ -12,7 +12,11 @@
           "Drums"
         ],
         "answer": "Keyboard"
-      },
+      }
+    ]
+  },
+  "T1": {
+    "Test 1": [
       {
         "q": "What is this musical instrument?",
         "type": "Image",
@@ -24,7 +28,11 @@
           "Bass"
         ],
         "answer": "Guitar"
-      },
+      }
+    ]
+  },
+  "T2": {
+    "Test 2": [
       {
         "q": "What is this musical instrument?",
         "type": "Image",
@@ -36,18 +44,6 @@
           "Guitar"
         ],
         "answer": "Bass"
-      },
-      {
-        "q": "What is this musical instrument?",
-        "type": "Image",
-        "media": "drums.png",
-        "options": [
-          "Guitar",
-          "Bass",
-          "Drums",
-          "Keyboard"
-        ],
-        "answer": "Drums"
       }
     ],
     "NaN": [
@@ -62,42 +58,70 @@
           NaN
         ],
         "answer": NaN
-      },
+      }
+    ]
+  },
+  "T3": {
+    "Quiz 2": [
+      {
+        "q": "What is this musical instrument?",
+        "type": "Image",
+        "media": "drums.png",
+        "options": [
+          "Guitar",
+          "Bass",
+          "Drums",
+          "Keyboard"
+        ],
+        "answer": "Drums"
+      }
+    ]
+  },
+  "T4": {
+    "Test 3": [
       {
         "q": "What is their profession?",
         "type": "Image",
         "media": NaN,
         "options": [
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          "a",
+          "b",
+          "c",
+          "Drums"
         ],
-        "answer": NaN
-      },
+        "answer": "Drums"
+      }
+    ]
+  },
+  "T5": {
+    "Quiz 3": [
       {
         "q": "What is their profession?",
         "type": "Image",
         "media": NaN,
         "options": [
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          "a",
+          "b",
+          "c",
+          "Drums"
         ],
-        "answer": NaN
-      },
+        "answer": "Drums"
+      }
+    ]
+  },
+  "T6": {
+    "Test 4": [
       {
         "q": "What is their profession?",
         "type": "Image",
         "media": NaN,
         "options": [
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          "a",
+          "b",
+          "c",
+          "Drums"
         ],
-        "answer": NaN
+        "answer": "Drums"
       }
     ]
   }
