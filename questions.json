@@ -51,8 +51,8 @@
       },
       {
         "q": "What is their profession?",
-        "type": NaN,
-        "media": NaN,
+        "type": "\"\"",
+        "media": "\"\"",
         "options": [
           "a",
           "b",
@@ -63,8 +63,8 @@
       },
       {
         "q": "What is their profession?",
-        "type": NaN,
-        "media": NaN,
+        "type": "\"\"",
+        "media": "\"\"",
         "options": [
           "a",
           "b",
@@ -75,8 +75,8 @@
       },
       {
         "q": "What is their profession?",
-        "type": NaN,
-        "media": NaN,
+        "type": "\"\"",
+        "media": "\"\"",
         "options": [
           "a",
           "b",
@@ -84,20 +84,18 @@
           "Drums"
         ],
         "answer": "Drums"
-      }
-    ],
-    "NaN": [
+      },
       {
         "q": "What is their profession?",
-        "type": NaN,
-        "media": NaN,
+        "type": "\"\"",
+        "media": "\"\"",
         "options": [
-          NaN,
-          NaN,
-          NaN,
-          NaN
+          "a",
+          "b",
+          "c",
+          "Drums"
         ],
-        "answer": NaN
+        "answer": "Drums"
       }
     ]
   }
