@@ -1,6 +1,6 @@
 {
   "TA": {
-    "Test 1": [
+    "Quiz 1": [
       {
         "q": "What is this musical instrument?",
         "type": "Image",
@@ -28,7 +28,7 @@
       {
         "q": "What is this musical instrument?",
         "type": "Image",
-        "media": "bass.jpeg",
+        "media": "music/bass.jpeg",
         "options": [
           "Bass",
           "Brasilian",
@@ -40,7 +40,7 @@
       {
         "q": "What is this musical instrument?",
         "type": "Image",
-        "media": "drums.png",
+        "media": "music/drums.png",
         "options": [
           "Guitar",
           "Bass",
