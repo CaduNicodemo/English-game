@@ -66,14 +66,14 @@ function showQuestion() {
         optArea.innerHTML = "";
 
         // Disable team +Point buttons during countdown (teacher will enable after reveal)
-        document.querySelectorAll('#scoreboard button').forEach(b => b.disabled = true);
+        document.querySelectorAll('#scoreboard .team-point').forEach(b => { b.disabled = true; });
 
         let count = 3;
         timerEl.innerText = "Get ready... " + count;
         let interval = setInterval(() => {
             count--;
             timerEl.innerText = count > 0 ? "Get ready... " + count : "GO!";
-            if(count <= 0) { 
+            if (count <= 0) { 
                 clearInterval(interval); 
                 timerEl.innerText = "";
 
@@ -86,13 +86,16 @@ function showQuestion() {
                 qArea.innerText = q.q;
 
                 // Enable team +Point buttons so the teacher can award points
-                document.querySelectorAll('#scoreboard button').forEach(b => b.disabled = false);
+                document.querySelectorAll('#scoreboard .team-point').forEach(b => { b.disabled = false; });
             }
         }, 1000);
     }
 }
 
 function renderOptions(q, disableButtons = false) {
+    // Only render options for solo mode
+    if (mode !== 'solo') return;
+
     let optArea = document.getElementById('options-area');
     optArea.innerHTML = "";
     let opts = [...q.options].sort(() => Math.random() - 0.5);
@@ -100,10 +103,8 @@ function renderOptions(q, disableButtons = false) {
         let btn = document.createElement('button');
         btn.innerText = o;
         btn.disabled = disableButtons;
-        // Only attach solo behavior for solo mode; teams do not render options
-        if (mode === 'solo') {
-            btn.onclick = (e) => checkSolo(e.target, o, q.answer);
-        }
+        // Only attach solo behavior for solo mode
+        btn.addEventListener('click', (e) => checkSolo(e.target, o, q.answer));
         optArea.appendChild(btn);
     });
 }
@@ -143,32 +144,53 @@ function checkSolo(btn, sel, corr) {
 }
 
 function setupTeams() {
-    let num = document.getElementById('teamCountSelect').value;
+    let num = parseInt(document.getElementById('teamCountSelect').value, 10) || 1;
     let scoreboard = document.getElementById('scoreboard');
     
     // Adiciona uma classe container para alinhar os times lado a lado no PC
     scoreboard.className = "team-container";
     scoreboard.innerHTML = "";
     
-    for(let i = 1; i <= num; i++) {
-        scoreboard.innerHTML += `
-            <div class="team-box">
-                <strong>Team ${i}</strong><br>
-                <span id="s${i}" style="font-size: 24px; font-weight: bold;">0</span><br>
-                <button disabled onclick="teamPoint(${i})" style="width: 100%; margin-top: 8px; padding: 8px;">+ Point</button>
-            </div>
-        `;
+    for (let i = 1; i <= num; i++) {
+        let box = document.createElement('div');
+        box.className = 'team-box';
+
+        let title = document.createElement('strong');
+        title.innerText = `Team ${i}`;
+
+        let scoreSpan = document.createElement('span');
+        scoreSpan.id = `s${i}`;
+        scoreSpan.style.fontSize = '24px';
+        scoreSpan.style.fontWeight = 'bold';
+        scoreSpan.innerText = '0';
+
+        let btn = document.createElement('button');
+        btn.className = 'team-point';
+        btn.style.width = '100%';
+        btn.style.marginTop = '8px';
+        btn.style.padding = '8px';
+        btn.disabled = true; // start disabled; enabled after reveal
+        btn.innerText = '+ Point';
+        btn.addEventListener('click', () => teamPoint(i));
+
+        box.appendChild(title);
+        box.appendChild(document.createElement('br'));
+        box.appendChild(scoreSpan);
+        box.appendChild(document.createElement('br'));
+        box.appendChild(btn);
+
+        scoreboard.appendChild(box);
     }
 }
 
 function teamPoint(i) {
-    document.getElementById('s'+i).innerText = parseInt(document.getElementById('s'+i).innerText) + 1;
+    document.getElementById('s' + i).innerText = parseInt(document.getElementById('s' + i).innerText) + 1;
     let timerEl = document.getElementById('timer-display');
     timerEl.innerText = "";
     index++;
 
-    // After teacher awards a point and we move to next question, hide/disable +Point buttons until reveal
-    document.querySelectorAll('#scoreboard button').forEach(b => b.disabled = true);
+    // After teacher awards a point and we move to next question, disable +Point buttons until reveal
+    document.querySelectorAll('#scoreboard .team-point').forEach(b => { b.disabled = true; });
 
     showQuestion();
 }
@@ -195,7 +217,7 @@ function showFinalResults() {
     setTimeout(() => {
         // Stop any playing media (audio/video) and reset
         document.querySelectorAll('#media-container audio, #media-container video').forEach(m => {
-            try { m.pause(); m.currentTime = 0; } catch(e) {}
+            try { m.pause(); m.currentTime = 0; } catch (e) {}
         });
 
         // Clear any visible question/media so final results UI doesn't show previous content underneath
@@ -239,8 +261,8 @@ function showFinalResults() {
 
             let teamScores = [];
             let numTeams = document.getElementById('teamCountSelect').value;
-            for(let i = 1; i <= numTeams; i++) {
-                teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s'+i).innerText) });
+            for (let i = 1; i <= numTeams; i++) {
+                teamScores.push({ name: "Team " + i, points: parseInt(document.getElementById('s' + i).innerText) });
             }
             teamScores.sort((a, b) => b.points - a.points);
             
@@ -250,7 +272,7 @@ function showFinalResults() {
             teamScores.forEach((t, i) => {
                 podium += `<p><strong>${i + 1}º Place:</strong> ${t.name} with ${t.points} points</p>`;
             });
-    
+
             textContainer.innerHTML = podium;
 
             if (isTie) {
@@ -269,8 +291,8 @@ function startSuddenDeath() {
     currentQ = [currentQ[Math.floor(Math.random() * currentQ.length)]];
     
     let numTeams = document.getElementById('teamCountSelect').value;
-    for(let i = 1; i <= numTeams; i++) {
-        document.getElementById('s'+i).innerText = "0";
+    for (let i = 1; i <= numTeams; i++) {
+        document.getElementById('s' + i).innerText = "0";
     }
 
     document.getElementById('final-results').classList.add('hidden');
