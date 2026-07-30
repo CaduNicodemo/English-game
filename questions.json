@@ -51,7 +51,7 @@
       },
       {
         "q": "What is their profession?",
-        "type": "Image",
+        "type": NaN,
         "media": NaN,
         "options": [
           "a",
@@ -63,7 +63,7 @@
       },
       {
         "q": "What is their profession?",
-        "type": "Image",
+        "type": NaN,
         "media": NaN,
         "options": [
           "a",
@@ -75,7 +75,7 @@
       },
       {
         "q": "What is their profession?",
-        "type": "Image",
+        "type": NaN,
         "media": NaN,
         "options": [
           "a",
@@ -89,7 +89,7 @@
     "NaN": [
       {
         "q": "What is their profession?",
-        "type": "Image",
+        "type": NaN,
         "media": NaN,
         "options": [
           NaN,
