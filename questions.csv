@@ -1,9 +1,9 @@
 Type,Media,Module,Level,Question,Option 1,Option 2,Option 3,Option 4,Answer
-Image,music/music_keyboard.png,TA,Test 1,What is this musical instrument?,Keyboard,Guitar,Bass,Drums,Keyboard
-Image,music/electric_guitar.png,TA,Test 1,What is this musical instrument?,Drums,Keyboard,Guitar,Bass,Guitar
-Image,bass.jpeg,TA,Test 1,What is this musical instrument?,Bass,Brasilian,Keyboard,Guitar,Bass
-Image,drums.png,TA,Test 1,What is this musical instrument?,Guitar,Bass,Drums,Keyboard,Drums
-"""""","""""",TA,Test 1,What is their profession?,a,b,c,Drums,Drums
-"""""","""""",TA,Test 1,What is their profession?,a,b,c,Drums,Drums
-"""""","""""",TA,Test 1,What is their profession?,a,b,c,Drums,Drums
-"""""","""""",TA,Test 1,What is their profession?,a,b,c,Drums,Drums
+Image,music/music_keyboard.png,TA,Quiz 1,What is this musical instrument?,Keyboard,Guitar,Bass,Drums,Keyboard
+Image,music/electric_guitar.png,TA,Quiz 1,What is this musical instrument?,Drums,Keyboard,Guitar,Bass,Guitar
+Image,music/bass.jpeg,TA,Quiz 1,What is this musical instrument?,Bass,Brasilian,Keyboard,Guitar,Bass
+Image,music/drums.png,TA,Quiz 1,What is this musical instrument?,Guitar,Bass,Drums,Keyboard,Drums
+"""""","""""",TA,Quiz 1,What is their profession?,a,b,c,Drums,Drums
+"""""","""""",TA,Quiz 1,What is their profession?,a,b,c,Drums,Drums
+"""""","""""",TA,Quiz 1,What is their profession?,a,b,c,Drums,Drums
+"""""","""""",TA,Quiz 1,What is their profession?,a,b,c,Drums,Drums
