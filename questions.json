@@ -98,5 +98,21 @@
         "answer": "DJ"
       }
     ]
+  },
+  "T5": {
+    "Test 3": [
+      {
+        "q": "Definition of squatter",
+        "type": "\"\"",
+        "media": "\"\"",
+        "options": [
+          "Someone who lives in a place without paying rent",
+          "The owner of a property that can be rent",
+          "A person that lives with their friends",
+          NaN
+        ],
+        "answer": "Someone who lives in a place without paying rent"
+      }
+    ]
   }
 }
