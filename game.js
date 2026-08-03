@@ -114,7 +114,23 @@ function checkSolo(btn, sel, corr) {
 
     if (sel === corr) {
         let timeTaken = (Date.now() - startTime) / 1000;
-        let earned = Math.max(10, Math.round(100 - (timeTaken * 10)));
+
+        // Scoring changes:
+        // - First 10 seconds are a grace period: no time penalty.
+        // - Time-based penalty accrues from 10s to 60s (a 50s window) and is capped at 50 points.
+        // - Penalty is 1 point per second after the 10s grace period, up to 50 points.
+        // - Earned points = 100 - timePenalty (rounded). Minimum safety floor kept at 10 points.
+        let grace = 10; // seconds with no penalty
+        let maxPenaltyPoints = 50; // maximum points lost due to time
+        let maxPenaltyDuration = 60; // seconds at which max penalty applies
+
+        let penaltySeconds = Math.min(Math.max(timeTaken - grace, 0), maxPenaltyDuration - grace);
+        let timePenalty = Math.round(penaltySeconds); // 1 point per second
+        if (timePenalty > maxPenaltyPoints) timePenalty = maxPenaltyPoints;
+
+        let earned = Math.round(100 - timePenalty);
+        earned = Math.max(10, earned);
+
         score += earned;
 
         btn.classList.add('correct');
@@ -266,7 +282,7 @@ function showFinalResults() {
             }
             teamScores.sort((a, b) => b.points - a.points);
             
-            let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
+            let isTie = teamScores.length > 1 and teamScores[0].points === teamScores[1].points;
 
             let podium = `<h3>Results:</h3>`;
             teamScores.forEach((t, i) => {
