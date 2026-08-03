@@ -119,7 +119,7 @@ function checkSolo(btn, sel, corr) {
         // - First 10 seconds are a grace period: no time penalty.
         // - Time-based penalty accrues from 10s to 60s (a 50s window) and is capped at 50 points.
         // - Penalty is 1 point per second after the 10s grace period, up to 50 points.
-        // - Earned points = 100 - timePenalty (rounded). Minimum safety floor kept at 10 points.
+        // - Earned points = 100 - timePenalty (rounded). Minimum earned due to time is 50 points.
         let grace = 10; // seconds with no penalty
         let maxPenaltyPoints = 50; // maximum points lost due to time
         let maxPenaltyDuration = 60; // seconds at which max penalty applies
@@ -129,7 +129,7 @@ function checkSolo(btn, sel, corr) {
         if (timePenalty > maxPenaltyPoints) timePenalty = maxPenaltyPoints;
 
         let earned = Math.round(100 - timePenalty);
-        earned = Math.max(10, earned);
+        earned = Math.max(50, earned);
 
         score += earned;
 
