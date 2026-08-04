@@ -282,7 +282,7 @@ function showFinalResults() {
             }
             teamScores.sort((a, b) => b.points - a.points);
             
-            let isTie = teamScores.length > 1 and teamScores[0].points === teamScores[1].points;
+            let isTie = teamScores.length > 1 && teamScores[0].points === teamScores[1].points;
 
             let podium = `<h3>Results:</h3>`;
             teamScores.forEach((t, i) => {
