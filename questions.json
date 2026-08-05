@@ -107,7 +107,7 @@
           "Appear",
           "Appeared",
           "Appeared",
-          NaN
+          "Appear"
         ],
         "answer": "Appeared"
       },
@@ -119,7 +119,7 @@
           "Argue",
           "Argued",
           "Argued",
-          NaN
+          "Argue"
         ],
         "answer": "Argued"
       },
@@ -131,7 +131,7 @@
           "Be",
           "was / were",
           "been",
-          NaN
+          "Be"
         ],
         "answer": "been"
       },
@@ -143,7 +143,7 @@
           "become",
           "became",
           "become",
-          NaN
+          "become"
         ],
         "answer": "become"
       },
@@ -155,7 +155,7 @@
           "begin",
           "began",
           "begun",
-          NaN
+          "begin"
         ],
         "answer": "begun"
       },
@@ -167,7 +167,7 @@
           "bounce",
           "bounced",
           "bounced",
-          NaN
+          "bounce"
         ],
         "answer": "bounced"
       },
@@ -179,7 +179,7 @@
           "break",
           "broke",
           "broken",
-          NaN
+          "break"
         ],
         "answer": "broken"
       },
@@ -191,7 +191,7 @@
           "burn",
           "burnt / burned",
           "burnt / burned",
-          NaN
+          "burn"
         ],
         "answer": "burnt / burned"
       },
@@ -203,7 +203,7 @@
           "buy",
           "bought",
           "bought",
-          NaN
+          "buy"
         ],
         "answer": "bought"
       },
@@ -215,7 +215,7 @@
           "call",
           "called",
           "called",
-          NaN
+          "call"
         ],
         "answer": "called"
       },
@@ -227,7 +227,7 @@
           "callect",
           "collected",
           "collected",
-          NaN
+          "callect"
         ],
         "answer": "collected"
       },
@@ -239,7 +239,7 @@
           "catch",
           "caught",
           "caught",
-          NaN
+          "catch"
         ],
         "answer": "caught"
       },
@@ -251,7 +251,7 @@
           "come",
           "came",
           "come",
-          NaN
+          "come"
         ],
         "answer": "come"
       },
@@ -263,7 +263,7 @@
           "count",
           "counted",
           "counted",
-          NaN
+          "count"
         ],
         "answer": "counted"
       },
@@ -275,7 +275,7 @@
           "design",
           "designed",
           "designed",
-          NaN
+          "design"
         ],
         "answer": "designed"
       },
@@ -287,7 +287,7 @@
           "develop",
           "developed",
           "developed",
-          NaN
+          "develop"
         ],
         "answer": "developed"
       },
@@ -299,7 +299,7 @@
           "discontinue",
           "discontinued",
           "discontinued",
-          NaN
+          "discontinue"
         ],
         "answer": "discontinued"
       },
@@ -311,7 +311,7 @@
           "download",
           "downloaded",
           "downloaded",
-          NaN
+          "download"
         ],
         "answer": "downloaded"
       },
@@ -323,7 +323,7 @@
           "draw",
           "drew",
           "drawn",
-          NaN
+          "draw"
         ],
         "answer": "drawn"
       },
@@ -335,7 +335,7 @@
           "drink",
           "drank",
           "drunk",
-          NaN
+          "drink"
         ],
         "answer": "drunk"
       },
@@ -347,7 +347,7 @@
           "drive",
           "drove",
           "driven",
-          NaN
+          "drive"
         ],
         "answer": "driven"
       },
@@ -359,7 +359,7 @@
           "eat",
           "ate",
           "eaten",
-          NaN
+          "eat"
         ],
         "answer": "eaten"
       },
@@ -371,7 +371,7 @@
           "fall",
           "fell",
           "fallen",
-          NaN
+          "fall"
         ],
         "answer": "fallen"
       },
@@ -383,7 +383,7 @@
           "feel",
           "felt",
           "felt",
-          NaN
+          "feel"
         ],
         "answer": "felt"
       },
@@ -395,7 +395,7 @@
           "fight",
           "fought",
           "fought",
-          NaN
+          "fight"
         ],
         "answer": "fought"
       },
@@ -407,7 +407,7 @@
           "find",
           "found",
           "found",
-          NaN
+          "find"
         ],
         "answer": "found"
       },
@@ -419,7 +419,7 @@
           "finish",
           "finished",
           "finished",
-          NaN
+          "finish"
         ],
         "answer": "finished"
       },
@@ -431,7 +431,7 @@
           "fix",
           "fixed",
           "fixed",
-          NaN
+          "fix"
         ],
         "answer": "fixed"
       },
@@ -443,7 +443,7 @@
           "fly",
           "flew",
           "flown",
-          NaN
+          "fly"
         ],
         "answer": "flown"
       },
@@ -455,7 +455,7 @@
           "follow",
           "followed",
           "followed",
-          NaN
+          "follow"
         ],
         "answer": "followed"
       },
@@ -467,7 +467,7 @@
           "get",
           "got",
           "gotten / got",
-          NaN
+          "get"
         ],
         "answer": "gotten / got"
       },
@@ -479,7 +479,7 @@
           "go",
           "went",
           "gone / been",
-          NaN
+          "go"
         ],
         "answer": "gone / been"
       },
@@ -491,7 +491,7 @@
           "grow",
           "grew",
           "grown",
-          NaN
+          "grow"
         ],
         "answer": "grown"
       },
@@ -503,7 +503,7 @@
           "hang",
           "hung",
           "hung",
-          NaN
+          "hang"
         ],
         "answer": "hung"
       },
@@ -515,7 +515,7 @@
           "have",
           "had",
           "had",
-          NaN
+          "have"
         ],
         "answer": "had"
       },
@@ -527,7 +527,7 @@
           "hear",
           "heard",
           "heard",
-          NaN
+          "hear"
         ],
         "answer": "heard"
       },
@@ -539,7 +539,7 @@
           "help",
           "helped",
           "helped",
-          NaN
+          "help"
         ],
         "answer": "helped"
       },
@@ -551,7 +551,7 @@
           "hit",
           "hit",
           "hit",
-          NaN
+          "hit"
         ],
         "answer": "hit"
       },
@@ -563,7 +563,7 @@
           "introduce",
           "introduced",
           "introduced",
-          NaN
+          "introduce"
         ],
         "answer": "introduced"
       },
@@ -575,7 +575,7 @@
           "kick",
           "kicked",
           "kicked",
-          NaN
+          "kick"
         ],
         "answer": "kicked"
       },
@@ -587,7 +587,7 @@
           "know",
           "knew",
           "known",
-          NaN
+          "know"
         ],
         "answer": "known"
       },
@@ -599,7 +599,7 @@
           "launch",
           "launched",
           "launched",
-          NaN
+          "launch"
         ],
         "answer": "launched"
       },
@@ -611,7 +611,7 @@
           "learn",
           "learnt / learned",
           "learnt / learned",
-          NaN
+          "learn"
         ],
         "answer": "learnt / learned"
       },
@@ -623,7 +623,7 @@
           "leave",
           "left",
           "left",
-          NaN
+          "leave"
         ],
         "answer": "left"
       },
@@ -635,7 +635,7 @@
           "look",
           "looked",
           "looked",
-          NaN
+          "look"
         ],
         "answer": "looked"
       },
@@ -647,7 +647,7 @@
           "lose",
           "lost",
           "lost",
-          NaN
+          "lose"
         ],
         "answer": "lost"
       },
@@ -659,7 +659,7 @@
           "make",
           "made",
           "made",
-          NaN
+          "make"
         ],
         "answer": "made"
       },
@@ -671,7 +671,7 @@
           "meet",
           "met",
           "met",
-          NaN
+          "meet"
         ],
         "answer": "met"
       },
@@ -683,7 +683,7 @@
           "miss",
           "missed",
           "missed",
-          NaN
+          "miss"
         ],
         "answer": "missed"
       },
@@ -695,7 +695,7 @@
           "need",
           "needed",
           "needed",
-          NaN
+          "need"
         ],
         "answer": "needed"
       },
@@ -707,7 +707,7 @@
           "open",
           "opened",
           "opened",
-          NaN
+          "open"
         ],
         "answer": "opened"
       },
@@ -719,7 +719,7 @@
           "pay",
           "paid",
           "paid",
-          NaN
+          "pay"
         ],
         "answer": "paid"
       },
@@ -731,7 +731,7 @@
           "pick",
           "picked",
           "picked",
-          NaN
+          "pick"
         ],
         "answer": "picked"
       },
@@ -743,7 +743,7 @@
           "play",
           "played",
           "played",
-          NaN
+          "play"
         ],
         "answer": "played"
       },
@@ -755,7 +755,7 @@
           "put",
           "put",
           "put",
-          NaN
+          "put"
         ],
         "answer": "put"
       },
@@ -767,7 +767,7 @@
           "rain",
           "rained",
           "rained",
-          NaN
+          "rain"
         ],
         "answer": "rained"
       },
@@ -779,7 +779,7 @@
           "read",
           "read",
           "read",
-          NaN
+          "read"
         ],
         "answer": "read"
       },
@@ -791,7 +791,7 @@
           "receive",
           "received",
           "received",
-          NaN
+          "receive"
         ],
         "answer": "received"
       },
@@ -803,7 +803,7 @@
           "release",
           "released",
           "released",
-          NaN
+          "release"
         ],
         "answer": "released"
       },
@@ -815,7 +815,7 @@
           "run",
           "ran",
           "ran",
-          NaN
+          "run"
         ],
         "answer": "ran"
       },
@@ -827,7 +827,7 @@
           "say",
           "said",
           "said",
-          NaN
+          "say"
         ],
         "answer": "said"
       },
@@ -839,7 +839,7 @@
           "see",
           "saw",
           "seen",
-          NaN
+          "see"
         ],
         "answer": "seen"
       },
@@ -851,7 +851,7 @@
           "sell",
           "sold",
           "sold",
-          NaN
+          "sell"
         ],
         "answer": "sold"
       },
@@ -863,7 +863,7 @@
           "speak",
           "spoke",
           "spoken",
-          NaN
+          "speak"
         ],
         "answer": "spoken"
       },
@@ -875,7 +875,7 @@
           "spend",
           "spent",
           "spent",
-          NaN
+          "spend"
         ],
         "answer": "spent"
       },
@@ -887,7 +887,7 @@
           "sprain",
           "sprained",
           "sprained",
-          NaN
+          "sprain"
         ],
         "answer": "sprained"
       },
@@ -899,7 +899,7 @@
           "start",
           "started",
           "started",
-          NaN
+          "start"
         ],
         "answer": "started"
       },
@@ -911,7 +911,7 @@
           "stay",
           "stayed",
           "stayed",
-          NaN
+          "stay"
         ],
         "answer": "stayed"
       },
@@ -923,7 +923,7 @@
           "steal",
           "stole",
           "stolen",
-          NaN
+          "steal"
         ],
         "answer": "stolen"
       },
@@ -935,7 +935,7 @@
           "stop",
           "stopped",
           "stopped",
-          NaN
+          "stop"
         ],
         "answer": "stopped"
       }
