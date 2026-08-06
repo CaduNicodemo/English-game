@@ -21,8 +21,11 @@
                 <option value="4">4 Teams</option>
             </select>
         </div>
-        <select id="moduleSelect"><option value="T2">T2</option><option value="T5">T5</option></select>
-        <select id="testSelect"><option value="Past Participle">Past Participle</option><option value="Quiz 1">Quiz 1</option><option value="Quiz 2">Quiz 2</option><option value="Quiz 3">Quiz 3</option><option value="Test 1">Test 1</option><option value="Test 2">Test 2</option><option value="Test 3">Test 3</option><option value="Test 4">Test 4</option></select>
+
+        <!-- Populated dynamically by game.js -->
+        <select id="moduleSelect" onchange="updateTests()"></select>
+        <select id="testSelect"></select>
+
         <button onclick="loadAndStart()">Start Game</button>
     </div>
 
