@@ -1,135 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Train+One&display=swap');
 /* Estilos Gerais (Padrão para Computador / Telas Grandes) */
-body { 
-    font-family: sans-serif; 
-    text-align: center; 
-    padding: 20px; 
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
+ body {
+     font-family: sans-serif;
+     text-align: center;
+     padding: 20px;
+     max-width: 800px;
+     margin: 0 auto;
+     background-color: #f9f9f9;
 }
-
-.hidden { 
-    display: none !important; 
+ .hidden {
+     display: none !important;
 }
-
-h1 { font-size: 28px; }
-h2 { font-size: 22px; }
-
+ h1 {
+     font-family: "Train One", system-ui;
+     font-size: 28px;
+}
+ h2 {
+     font-size: 22px;
+}
 /* Configuração dos Botões (Ótimos para clique e toque) */
-button { 
-    padding: 15px; 
-    margin: 10px auto; 
-    cursor: pointer; 
-    width: 80%; 
-    max-width: 400px;
-    font-size: 18px; 
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    display: block;
-    transition: background-color 0.2s;
+ button {
+     padding: 15px;
+     margin: 10px auto;
+     cursor: pointer;
+     width: 80%;
+     max-width: 400px;
+     font-size: 18px;
+     border-radius: 8px;
+     border: 1px solid #ccc;
+     background-color: #fff;
+     display: block;
+     transition: background-color 0.2s;
 }
-
-button:hover {
-    background-color: #f0f0f0;
+ button:hover {
+     background-color: #f0f0f0;
 }
-
-.correct { background-color: #90EE90 !important; border-color: #4CAF50; }
-.wrong { background-color: #FF7F7F !important; border-color: #F44336; }
-
-#timer-display { 
-    font-size: 30px; 
-    font-weight: bold; 
-    color: #0066cc; 
-    margin: 15px; 
+ .correct {
+     background-color: #90EE90 !important;
+     border-color: #4CAF50;
 }
-
-#score-display {
-    font-size: 22px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
+ .wrong {
+     background-color: #FF7F7F !important;
+     border-color: #F44336;
 }
-
+ #timer-display {
+     font-size: 30px;
+     font-weight: bold;
+     color: #0066cc;
+     margin: 15px;
+}
+ #score-display {
+     font-size: 22px;
+     font-weight: bold;
+     color: #333;
+     margin-bottom: 15px;
+}
 /* Área de Mídia (Imagens e Áudios) */
-#media-container img {
-    max-width: 100%;
-    height: auto;
-    max-height: 250px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+ #media-container img {
+     max-width: 100%;
+     height: auto;
+     max-height: 250px;
+     border-radius: 8px;
+     margin-bottom: 10px;
 }
-
 /* Placar do Multiplayer (Teams) */
-.team-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin: 20px 0;
+ .team-container {
+     display: flex;
+     justify-content: center;
+     gap: 15px;
+     flex-wrap: wrap;
+     margin: 20px 0;
 }
-
-.team-box { 
-    border: 2px solid #333; 
-    padding: 15px; 
-    border-radius: 8px;
-    min-width: 130px; 
-    background: #fff;
+ .team-box {
+     border: 2px solid #333;
+     padding: 15px;
+     border-radius: 8px;
+     min-width: 130px;
+     background: #fff;
 }
-
 /* Estilos para as Badges na Tela Final */
-.badge-box { 
-    padding: 20px; 
-    margin: 20px auto; 
-    border-radius: 12px; 
-    width: 90%; 
-    max-width: 400px; 
-    font-weight: bold; 
-    font-size: 22px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+ .badge-box {
+     padding: 20px;
+     margin: 20px auto;
+     border-radius: 12px;
+     width: 90%;
+     max-width: 400px;
+     font-weight: bold;
+     font-size: 22px;
+     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
-
-
-.badge-legendary { 
-    background-color: #a200ff; 
-    border: 3px solid #77019b; 
-    color: #4f2f5e; 
+ .badge-legendary {
+     background-color: #a200ff;
+     border: 3px solid #77019b;
+     color: #4f2f5e;
 }
-.badge-gold { background-color: #fffdf0; border: 4px solid #ffd700; color: #b8860b; }
-.badge-silver { background-color: #f5f5f5; border: 4px solid #c0c0c0; color: #696969; }
-.badge-bronze { background-color: #fdf5e6; border: 4px solid #cd7f32; color: #8b4513; }
-
-
+ .badge-gold {
+     background-color: #fffdf0;
+     border: 4px solid #ffd700;
+     color: #b8860b;
+}
+ .badge-silver {
+     background-color: #f5f5f5;
+     border: 4px solid #c0c0c0;
+     color: #696969;
+}
+ .badge-bronze {
+     background-color: #fdf5e6;
+     border: 4px solid #cd7f32;
+     color: #8b4513;
+}
 /* --- OTIMIZAÇÃO ESPECÍFICA PARA SMARTPHONES (Telas menores que 600px) --- */
-@media screen and (max-width: 600px) {
-    body {
-        padding: 10px;
+ @media screen and (max-width: 600px) {
+     body {
+         padding: 20px 0;
     }
-
-    h1 { font-size: 24px; }
-    h2 { font-size: 18px; }
-
+     h1 {
+         font-size: 24px;
+    }
+     h2 {
+         font-size: 18px;
+    }
     /* Botões ocupam quase toda a largura para facilitar o toque com o dedo */
-    button {
-        width: 95%;
-        padding: 18px;
-        font-size: 16px;
-        margin: 8px auto;
+     button {
+         width: 95%;
+         padding: 18px;
+         font-size: 16px;
+         margin: 8px auto;
     }
-
     /* Selects e inputs maiores no celular */
-    select, input[type="text"] {
-        width: 90%;
-        padding: 12px;
-        font-size: 16px;
-        margin: 8px 0;
-        border-radius: 6px;
-        border: 1px solid #ccc;
+     select, input[type="text"] {
+         width: 90%;
+         padding: 12px;
+         font-size: 16px;
+         margin: 8px 0;
+         border-radius: 6px;
+         border: 1px solid #ccc;
     }
-
-    .team-box {
-        width: 40%;
-        padding: 10px;
+     .team-box {
+         width: 40%;
+         padding: 10px;
     }
 }
