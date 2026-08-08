@@ -238,3 +238,22 @@ function checkSolo(btn, sel, corr) {
         let maxPenaltyDuration = 60; // seconds at which max penalty applies
     }
 }
+
+// Toggle display of team count dropdown and update tests
+function toggleTeamDropdown() {
+    const modeSelect = document.getElementById('modeSelect');
+    const teamArea = document.getElementById('team-dropdown-area');
+    if (!modeSelect || !teamArea) return;
+    if (modeSelect.value === 'teams') {
+        teamArea.classList.remove('hidden');
+    } else {
+        teamArea.classList.add('hidden');
+    }
+    // Refresh the tests list to reflect the new mode
+    updateTests();
+}
+
+// Initialize when DOM is ready
+window.addEventListener('DOMContentLoaded', () => {
+    initSetup();
+});
