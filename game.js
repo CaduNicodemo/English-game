@@ -227,49 +227,58 @@ function renderOptions(q, disableButtons = false) {
 }
 
 function checkSolo(btn, sel, corr) {
+    // debug: log entry and arguments
+    console.log('checkSolo called', { btnPresent: !!btn, sel, corr, btnDisabled: !!(btn && btn.disabled) });
+
     // guard: ignore clicks when buttons are already disabled
     if (!btn || btn.disabled) return;
 
-    const buttons = Array.from(document.querySelectorAll('#options-area button'));
-    // disable all buttons immediately to prevent double clicks
-    buttons.forEach(b => b.disabled = true);
+    try {
+        const buttons = Array.from(document.querySelectorAll('#options-area button'));
+        // disable all buttons immediately to prevent double clicks
+        buttons.forEach(b => b.disabled = true);
 
-    const selected = (typeof sel === 'string') ? sel.trim() : sel;
-    const correct = (typeof corr === 'string') ? corr.trim() : corr;
+        const selected = (typeof sel === 'string') ? sel.trim() : sel;
+        const correct = (typeof corr === 'string') ? corr.trim() : corr;
 
-    if (selected === correct) {
-        let timeTaken = (Date.now() - startTime) / 1000;
+        if (selected === correct) {
+            let timeTaken = (Date.now() - startTime) / 1000;
 
-        // Scoring parameters (kept from original behavior):
-        let grace = 5; // seconds with no penalty
-        let maxPenaltyPoints = 90; // maximum points lost due to time
-        let maxPenaltyDuration = 60; // seconds at which max penalty applies
+            // Scoring parameters (kept from original behavior):
+            let grace = 5; // seconds with no penalty
+            let maxPenaltyPoints = 90; // maximum points lost due to time
+            let maxPenaltyDuration = 60; // seconds at which max penalty applies
 
-        let penalty = 0;
-        if (timeTaken > grace) {
-            penalty = Math.min(maxPenaltyPoints, Math.round(((timeTaken - grace) / maxPenaltyDuration) * maxPenaltyPoints));
+            let penalty = 0;
+            if (timeTaken > grace) {
+                penalty = Math.min(maxPenaltyPoints, Math.round(((timeTaken - grace) / maxPenaltyDuration) * maxPenaltyPoints));
+            }
+            let points = Math.max(10, 100 - penalty);
+            score += points;
+
+            // Visual feedback
+            btn.classList.add('correct');
+        } else {
+            // wrong answer: mark selected wrong and reveal correct
+            btn.classList.add('wrong');
+            let correctBtn = buttons.find(b => (b.innerText || b.textContent).trim() === correct);
+            if (correctBtn) correctBtn.classList.add('correct');
         }
-        let points = Math.max(10, 100 - penalty);
-        score += points;
 
-        // Visual feedback
-        btn.classList.add('correct');
-    } else {
-        // wrong answer: mark selected wrong and reveal correct
-        btn.classList.add('wrong');
-        let correctBtn = buttons.find(b => (b.innerText || b.textContent).trim() === correct);
-        if (correctBtn) correctBtn.classList.add('correct');
+        // Update score display (if present)
+        let scoreDisplay = document.getElementById('score-display');
+        if (scoreDisplay) scoreDisplay.innerText = 'Score: ' + score;
+
+        // Move to next question after brief delay
+        setTimeout(() => {
+            index++;
+            showQuestion();
+        }, 800);
+    } catch (err) {
+        console.error('checkSolo error', err);
+        // Re-enable buttons so user can try again
+        document.querySelectorAll('#options-area button').forEach(b => b.disabled = false);
     }
-
-    // Update score display (if present)
-    let scoreDisplay = document.getElementById('score-display');
-    if (scoreDisplay) scoreDisplay.innerText = 'Score: ' + score;
-
-    // Move to next question after brief delay
-    setTimeout(() => {
-        index++;
-        showQuestion();
-    }, 800);
 }
 
 // Toggle display of team count dropdown and update tests
