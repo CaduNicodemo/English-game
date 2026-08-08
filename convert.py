@@ -13,11 +13,15 @@ for _, row in df.iterrows():
     if mod not in json_output: json_output[mod] = {}
     if lvl not in json_output[mod]: json_output[mod][lvl] = []
     
+    # Filter out NaN values from options
+    options = [row['Option 1'], row['Option 2'], row['Option 3'], row['Option 4']]
+    options = [opt for opt in options if pd.notna(opt)]
+    
     json_output[mod][lvl].append({
         "q": row['Question'],
         "type": row.get('Type') if row.get('Type') else "text",
         "media": row.get('Media') if row.get('Media') else "none",
-        "options": [row['Option 1'], row['Option 2'], row['Option 3'], row['Option 4']],
+        "options": options,
         "answer": row['Answer']
     })
 
