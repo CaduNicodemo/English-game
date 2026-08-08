@@ -354,35 +354,60 @@ function showFinalResults() {
 
         // Basic badge logic with additional info
         badgeArea.innerHTML = '';
-        const badge = document.createElement('div');
-        badge.className = 'badge-box badge-bronze';
-        if (pct >= 95) badge.className = 'badge-box badge-legendary';
-        else if (pct >= 80) badge.className = 'badge-box badge-gold';
-        else if (pct >= 50) badge.className = 'badge-box badge-silver';
+        // create canvas badge
+        const canvas = document.createElement('canvas');
+        const w = 800, h = 420;
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
 
-        // Build badge contents: module/test, pct correct, total time
-        const title = document.createElement('div');
-        title.style.fontSize = '20px';
-        title.style.fontWeight = 'bold';
-        title.style.marginBottom = '8px';
-        title.innerText = `Level: ${currentModule} — ${currentTest}`;
+        // choose palette based on tier
+        let bgGradient;
+        let emblemColor = '#ffffff';
+        if (pct >= 95) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#a200ff'); bgGradient.addColorStop(1,'#ff8aff');
+            emblemColor = '#fffdf0';
+        } else if (pct >= 80) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#ffd700'); bgGradient.addColorStop(1,'#ffdf70');
+            emblemColor = '#5a3d00';
+        } else if (pct >= 50) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#c0c0c0'); bgGradient.addColorStop(1,'#ededed');
+            emblemColor = '#333';
+        } else {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#fdf5e6'); bgGradient.addColorStop(1,'#fff6e0');
+            emblemColor = '#8b4513';
+        }
 
-        const pctEl = document.createElement('div');
-        pctEl.innerText = `Correct: ${correctCount} / ${currentQ.length} (${pct}%)`;
+        // background
+        ctx.fillStyle = bgGradient; ctx.fillRect(0,0,w,h);
+        // rounded panel
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        roundRect(ctx, 40, 40, w-80, h-80, 20, true, false);
 
-        const timeEl = document.createElement('div');
-        timeEl.innerText = `Time: ${timeStr}`;
+        // emblem circle
+        const ex = 120, ey = 150, er = 80;
+        ctx.beginPath(); ctx.arc(ex, ey, er, 0, Math.PI*2); ctx.closePath();
+        ctx.fillStyle = emblemColor; ctx.fill();
+        // draw a simple star emblem
+        drawStar(ctx, ex, ey, 5, 40, 20, '#ffffff');
 
-        const note = document.createElement('p');
-        note.style.fontStyle = 'italic';
-        note.style.marginTop = '10px';
-        note.innerText = 'Take a screenshot of this badge to show your teacher next class!';
+        // text
+        ctx.fillStyle = '#222'; ctx.font = 'bold 28px sans-serif';
+        ctx.fillText(`Level: ${currentModule} — ${currentTest}`, 240, 120);
+        ctx.font = '24px sans-serif'; ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, 240, 170);
+        ctx.fillText(`Time: ${timeStr}`, 240, 210);
 
-        badge.appendChild(title);
-        badge.appendChild(pctEl);
-        badge.appendChild(timeEl);
-        badge.appendChild(note);
-        badgeArea.appendChild(badge);
+        // convert to image and show + download
+        const dataUrl = canvas.toDataURL('image/png');
+        const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+        const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
+
+        badgeArea.appendChild(img);
+        badgeArea.appendChild(dl);
+
     } else {
         // Teams: show simple team totals
         const teams = Array.from(document.querySelectorAll('#scoreboard .team-box'));
@@ -408,6 +433,47 @@ function showFinalResults() {
 
     const finalResults = document.getElementById('final-results');
     if (finalResults) finalResults.classList.remove('hidden');
+}
+
+// rounded rectangle helper
+function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+    if (typeof r === 'undefined') r = 5;
+    if (typeof fill === 'undefined') fill = true;
+    if (typeof stroke === 'undefined') stroke = true;
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.arcTo(x+w, y,   x+w, y+h, r);
+    ctx.arcTo(x+w, y+h, x,   y+h, r);
+    ctx.arcTo(x,   y+h, x,   y,   r);
+    ctx.arcTo(x,   y,   x+w, y,   r);
+    ctx.closePath();
+    if (fill) ctx.fill();
+    if (stroke) ctx.stroke();
+}
+
+// draw star helper
+function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius, color) {
+    let rot = Math.PI / 2 * 3;
+    let x = cx;
+    let y = cy;
+    let step = Math.PI / spikes;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius);
+    for (let i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+    }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
 }
 
 // Toggle display of team count dropdown and update tests
