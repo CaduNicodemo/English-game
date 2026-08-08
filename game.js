@@ -233,8 +233,8 @@ function checkSolo(btn, sel, corr) {
         let timeTaken = (Date.now() - startTime) / 1000;
 
         // Scoring parameters (kept from original behavior):
-        let grace = 10; // seconds with no penalty
-        let maxPenaltyPoints = 50; // maximum points lost due to time
+        let grace = 5; // seconds with no penalty
+        let maxPenaltyPoints = 90; // maximum points lost due to time
         let maxPenaltyDuration = 60; // seconds at which max penalty applies
-
-{
+    }
+}
