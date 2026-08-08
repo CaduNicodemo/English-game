@@ -827,7 +827,7 @@
           "say",
           "said",
           "said",
-          "say"
+          NaN
         ],
         "answer": "said"
       },
@@ -839,7 +839,7 @@
           "see",
           "saw",
           "seen",
-          "see"
+          NaN
         ],
         "answer": "seen"
       },
@@ -851,7 +851,7 @@
           "sell",
           "sold",
           "sold",
-          "sell"
+          NaN
         ],
         "answer": "sold"
       },
@@ -863,7 +863,7 @@
           "speak",
           "spoke",
           "spoken",
-          "speak"
+          NaN
         ],
         "answer": "spoken"
       },
@@ -875,7 +875,7 @@
           "spend",
           "spent",
           "spent",
-          "spend"
+          NaN
         ],
         "answer": "spent"
       },
@@ -887,7 +887,7 @@
           "sprain",
           "sprained",
           "sprained",
-          "sprain"
+          NaN
         ],
         "answer": "sprained"
       },
@@ -899,7 +899,7 @@
           "start",
           "started",
           "started",
-          "start"
+          NaN
         ],
         "answer": "started"
       },
@@ -911,7 +911,7 @@
           "stay",
           "stayed",
           "stayed",
-          "stay"
+          NaN
         ],
         "answer": "stayed"
       },
@@ -923,7 +923,7 @@
           "steal",
           "stole",
           "stolen",
-          "steal"
+          NaN
         ],
         "answer": "stolen"
       },
@@ -935,7 +935,7 @@
           "stop",
           "stopped",
           "stopped",
-          "stop"
+          NaN
         ],
         "answer": "stopped"
       }
