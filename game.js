@@ -411,68 +411,102 @@ function showFinalResults() {
         const emblemImg = new Image();
         emblemImg.crossOrigin = 'anonymous';
         emblemImg.onload = function() {
-            // draw emblem image at 250x250 centered
-            ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
+    // Draw emblem image on left, vertically centered
+    ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
 
-            // compute center X for text
-            const centerX = panelX + panelW / 2;
-            // text positions below emblem
-            const levelY = emblemY + emblemH + 30;
-            const scoreY = levelY + 40;
-            const timeY = scoreY + 30;
+    // Prepare fonts and compute line heights
+    const levelFontSize = 28;
+    const scoreFontSize = 22;
+    const timeFontSize = 18;
+    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const scoreFont = `${scoreFontSize}px sans-serif`;
+    const timeFont = `${timeFontSize}px sans-serif`;
+    const gap = 8; // gap between lines
 
-            // Draw text centered
-            ctx.fillStyle = '#222';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+    // Text content
+    const levelText = `Level: ${currentModule} — ${currentTest}`;
+    const scoreText = `Correct: ${correctCount} / ${currentQ.length} (${pct}%)`;
+    const timeText = `Time: ${timeStr}`;
 
-            // Level - 28px bold
-            ctx.font = 'bold 28px sans-serif';
-            ctx.fillText(`Level: ${currentModule} — ${currentTest}`, centerX, levelY);
+    // Use textBaseline='middle' and textAlign='left' to place lines
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#222';
 
-            // Score - 22px
-            ctx.font = '22px sans-serif';
-            ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, centerX, scoreY);
+    // Estimate line heights (px). Using a multiplier is more reliable than measureText for height.
+    const levelLH = Math.round(levelFontSize * 1.2);
+    const scoreLH = Math.round(scoreFontSize * 1.2);
+    const timeLH = Math.round(timeFontSize * 1.2);
 
-            // Time - 18px
-            ctx.font = '18px sans-serif';
-            ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
+    // Total text block height
+    const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
 
-            // convert to image and show + download
-            const dataUrl = canvas.toDataURL('image/png');
-            const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
-            const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
+    // Starting Y for the first (level) line so the block is vertically centered
+    const startY = Math.round(centerY - (totalTextH / 2));
 
-            badgeArea.appendChild(img);
-            badgeArea.appendChild(dl);
-        };
-        emblemImg.onerror = function() {
-            // fallback: draw the emblem as a simple rectangle (no circle) centered
-            ctx.fillStyle = emblemColor;
-            ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
+    // Draw Level
+    ctx.font = levelFont;
+    ctx.fillText(levelText, textX, startY + levelLH / 2);
 
-            const centerX = panelX + panelW / 2;
-            const levelY = emblemY + emblemH + 30;
-            const scoreY = levelY + 40;
-            const timeY = scoreY + 30;
+    // Draw Score
+    ctx.font = scoreFont;
+    ctx.fillText(scoreText, textX, startY + levelLH + gap + scoreLH / 2);
 
-            ctx.fillStyle = '#222';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.font = 'bold 28px sans-serif';
-            ctx.fillText(`Level: ${currentModule} — ${currentTest}`, centerX, levelY);
-            ctx.font = '22px sans-serif';
-            ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, centerX, scoreY);
-            ctx.font = '18px sans-serif';
-            ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
+    // Draw Time
+    ctx.font = timeFont;
+    ctx.fillText(timeText, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
 
-            const dataUrl = canvas.toDataURL('image/png');
-            const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
-            const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
-            badgeArea.appendChild(img);
-            badgeArea.appendChild(dl);
-        };
+    // Convert to image and show + download
+    const dataUrl = canvas.toDataURL('image/png');
+    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
 
+    badgeArea.appendChild(img);
+    badgeArea.appendChild(dl);
+};
+
+emblemImg.onerror = function() {
+    // If PNG can't load, draw a colored rectangle as emblem placeholder (vertically centered)
+    ctx.fillStyle = emblemColor;
+    ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
+
+    // Same text drawing as onload
+    const levelFontSize = 28;
+    const scoreFontSize = 22;
+    const timeFontSize = 18;
+    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const scoreFont = `${scoreFontSize}px sans-serif`;
+    const timeFont = `${timeFontSize}px sans-serif`;
+    const gap = 8;
+
+    const levelText = `Level: ${currentModule} — ${currentTest}`;
+    const scoreText = `Correct: ${correctCount} / ${currentQ.length} (${pct}%)`;
+    const timeText = `Time: ${timeStr}`;
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#222';
+
+    const levelLH = Math.round(levelFontSize * 1.2);
+    const scoreLH = Math.round(scoreFontSize * 1.2);
+    const timeLH = Math.round(timeFontSize * 1.2);
+    const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
+    const startY = Math.round(centerY - (totalTextH / 2));
+
+    ctx.font = levelFont;
+    ctx.fillText(levelText, textX, startY + levelLH / 2);
+    ctx.font = scoreFont;
+    ctx.fillText(scoreText, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.font = timeFont;
+    ctx.fillText(timeText, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
+
+    const dataUrl = canvas.toDataURL('image/png');
+    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
+
+    badgeArea.appendChild(img);
+    badgeArea.appendChild(dl);
+};
         // set emblem source (prefer repository-level PNGs added by you)
         emblemImg.src = emblemSrc;
 
