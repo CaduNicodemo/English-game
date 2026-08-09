@@ -410,96 +410,78 @@ function showFinalResults() {
 
         const emblemImg = new Image();
         emblemImg.crossOrigin = 'anonymous';
-        emblemImg.onload = function() {
-    // ensure centerY is defined in this scope
+       emblemImg.onload = function() {
+    // ensure panel geometry variables exist (panelX/panelY/panelW/panelH should be defined earlier in showFinalResults)
     const centerY = panelY + panelH / 2;
-
-    // Draw emblem image on left, vertically centered
+    const emblemX = panelX + 30;                     // left padding inside panel
+    const emblemY = panelY + Math.round((panelH - emblemH) / 2); // vertically centered
+    // draw emblem
     ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
 
-    // Prepare fonts and compute line heights
-    const levelFontSize = 28;
-    const scoreFontSize = 22;
-    const timeFontSize = 18;
-    const levelFont = `bold ${levelFontSize}px sans-serif`;
-    const scoreFont = `${scoreFontSize}px sans-serif`;
-    const timeFont = `${timeFontSize}px sans-serif`;
-    const gap = 8; // gap between lines
-
-    // Text content
-    const levelText = `Level: ${currentModule} — ${currentTest}`;
-    const scoreText = `Correct: ${correctCount} / ${currentQ.length} (${pct}%)`;
-    const timeText = `Time: ${timeStr}`;
-
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#222';
-
-    const levelLH = Math.round(levelFontSize * 1.2);
-    const scoreLH = Math.round(scoreFontSize * 1.2);
-    const timeLH = Math.round(timeFontSize * 1.2);
-    const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
-    const startY = Math.round(centerY - (totalTextH / 2));
-
-    ctx.font = levelFont;
-    ctx.fillText(levelText, textX, startY + levelLH / 2);
-    ctx.font = scoreFont;
-    ctx.fillText(scoreText, textX, startY + levelLH + gap + scoreLH / 2);
-    ctx.font = timeFont;
-    ctx.fillText(timeText, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
-
-    // convert to image and show + download
-    const dataUrl = canvas.toDataURL('image/png');
-    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
-    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
-
-    badgeArea.appendChild(img);
-    badgeArea.appendChild(dl);
-};
-
-emblemImg.onerror = function() {
-    // ensure centerY is defined in this scope
-    const centerY = panelY + panelH / 2;
-
-    // fallback emblem rectangle
-    ctx.fillStyle = emblemColor;
-    ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
-
-    const levelFontSize = 28;
-    const scoreFontSize = 22;
-    const timeFontSize = 18;
+    // text area start X (to the right of emblem with gap)
+    const textX = emblemX + emblemW + 30;
+    // fonts and spacing
+    const levelFontSize = 28, scoreFontSize = 22, timeFontSize = 18;
     const levelFont = `bold ${levelFontSize}px sans-serif`;
     const scoreFont = `${scoreFontSize}px sans-serif`;
     const timeFont = `${timeFontSize}px sans-serif`;
     const gap = 8;
-
-    const levelText = `Level: ${currentModule} — ${currentTest}`;
-    const scoreText = `Correct: ${correctCount} / ${currentQ.length} (${pct}%)`;
-    const timeText = `Time: ${timeStr}`;
-
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#222';
-
     const levelLH = Math.round(levelFontSize * 1.2);
     const scoreLH = Math.round(scoreFontSize * 1.2);
     const timeLH = Math.round(timeFontSize * 1.2);
     const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
     const startY = Math.round(centerY - (totalTextH / 2));
 
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#222';
+
     ctx.font = levelFont;
-    ctx.fillText(levelText, textX, startY + levelLH / 2);
+    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
-    ctx.fillText(scoreText, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
     ctx.font = timeFont;
-    ctx.fillText(timeText, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
+    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
 
     const dataUrl = canvas.toDataURL('image/png');
-    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
-    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
+    const img = document.createElement('img'); img.src = dataUrl;
+    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
+    badgeArea.appendChild(img); badgeArea.appendChild(dl);
+};
 
-    badgeArea.appendChild(img);
-    badgeArea.appendChild(dl);
+emblemImg.onerror = function() {
+    const centerY = panelY + panelH / 2;
+    const emblemX = panelX + 30;
+    const emblemY = panelY + Math.round((panelH - emblemH) / 2);
+    ctx.fillStyle = emblemColor;
+    ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
+
+    const textX = emblemX + emblemW + 30;
+    const levelFontSize = 28, scoreFontSize = 22, timeFontSize = 18;
+    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const scoreFont = `${scoreFontSize}px sans-serif`;
+    const timeFont = `${timeFontSize}px sans-serif`;
+    const gap = 8;
+    const levelLH = Math.round(levelFontSize * 1.2);
+    const scoreLH = Math.round(scoreFontSize * 1.2);
+    const timeLH = Math.round(timeFontSize * 1.2);
+    const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
+    const startY = Math.round(centerY - (totalTextH / 2));
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#222';
+    ctx.font = levelFont;
+    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, textX, startY + levelLH / 2);
+    ctx.font = scoreFont;
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.font = timeFont;
+    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
+
+    const dataUrl = canvas.toDataURL('image/png');
+    const img = document.createElement('img'); img.src = dataUrl;
+    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
+    badgeArea.appendChild(img); badgeArea.appendChild(dl);
 };
         // set emblem source (prefer repository-level PNGs added by you)
         emblemImg.src = emblemSrc;
