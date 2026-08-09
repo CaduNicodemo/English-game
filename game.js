@@ -340,6 +340,7 @@ function showFinalResults() {
     // Simple solo summary
     if (mode === 'solo') {
         const pct = maxPossibleScore > 0 ? Math.round((score / maxPossibleScore) * 100) : 0;
+        const correctPct = maxPossibleScore > 0 ? Math.round((correctCount / currentQ.length) * 100) : 0;
         const timeSec = Math.round((Date.now() - gameStartTime) / 1000);
         const minutes = Math.floor(timeSec / 60);
         const seconds = timeSec % 60;
@@ -437,7 +438,7 @@ function showFinalResults() {
     ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
     ctx.fillText(`Score: ${score} / ${maxPossibleScore} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
-    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH + gap + correctLH / 2);
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${correctPct}%)`, textX, startY + levelLH + gap + scoreLH + gap + correctLH / 2);
     ctx.font = timeFont;
     ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + correctLH + gap + timeLH / 2);
 
@@ -488,6 +489,7 @@ emblemImg.onerror = function() {
     const gap = 8;
     const levelLH = Math.round(levelFontSize * 1.2);
     const scoreLH = Math.round(scoreFontSize * 1.2);
+    const correctLH = Math.round(scoreFontSize * 1.2);
     const timeLH = Math.round(timeFontSize * 1.2);
     const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
     const startY = Math.round(centerY - (totalTextH / 2));
@@ -495,12 +497,14 @@ emblemImg.onerror = function() {
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#222';
+
     ctx.font = levelFont;
     ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
-    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.fillText(`Score: ${score} / ${maxPossibleScore} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${correctPct}%)`, textX, startY + levelLH + gap + scoreLH + gap + correctLH / 2);
     ctx.font = timeFont;
-    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
+    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + correctLH + gap + timeLH / 2);
 
     const dataUrl = canvas.toDataURL('image/png');
     const img = document.createElement('img'); img.src = dataUrl;
@@ -520,9 +524,6 @@ emblemImg.onerror = function() {
     btn.type = 'button';
     btn.className = `download-btn badge-${tierClass}`;
     btn.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="vertical-align:middle; margin-right:8px; fill:currentColor">
-        <path d="M12 2l1.5 4.5L18 8l-4 3 1.2 4.8L12 13.5 8.8 15.8 10 11 6 8l4.5-1.5L12 2z"/>
-      </svg>
       <span>Download Badge (PNG)</span>
     `;
     btn.setAttribute('aria-label', `Download ${tierClass} badge as PNG`);
