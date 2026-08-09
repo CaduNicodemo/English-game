@@ -1,5 +1,9 @@
 let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
 let maxPossibleScore = 0;
+let gameStartTime = 0; // overall game start timestamp
+let correctCount = 0; // track number of correct answers
+let currentModule = '';
+let currentTest = '';
 
 // Module-specific test exclusions: hide Quiz 1/2/3 for T5 only.
 // T2 will keep all quizzes/tests.
@@ -107,9 +111,13 @@ async function loadAndStart() {
         }
     }
 
-    let mod = document.getElementById('moduleSelect').value;
-    let test = document.getElementById('testSelect').value;
+    const mod = document.getElementById('moduleSelect').value;
+    const test = document.getElementById('testSelect').value;
     mode = document.getElementById('modeSelect').value;
+
+    // store current module/test for final results
+    currentModule = mod;
+    currentTest = test;
 
     if (!fullData[mod] || !fullData[mod][test]) {
         // If the chosen test is empty (placeholder), notify the user
@@ -128,6 +136,8 @@ async function loadAndStart() {
     maxPossibleScore = currentQ.length * 100;
     score = 0;
     index = 0;
+    correctCount = 0;
+    gameStartTime = Date.now();
 
     document.getElementById('setup-screen').classList.add('hidden');
     document.getElementById('game-screen').classList.remove('hidden');
@@ -146,10 +156,10 @@ async function loadAndStart() {
 // I preserved function names so integration is seamless.
 
 function showQuestion() {
-    let optArea = document.getElementById('options-area');
-    let timerEl = document.getElementById('timer-display');
-    let qArea = document.getElementById('q-text');
-    let mediaArea = document.getElementById('media-container');
+    const optArea = document.getElementById('options-area');
+    const timerEl = document.getElementById('timer-display');
+    const qArea = document.getElementById('q-text');
+    const mediaArea = document.getElementById('media-container');
     
     if (index >= currentQ.length) {
         if (qArea) qArea.innerText = "Quiz Complete!";
@@ -160,7 +170,7 @@ function showQuestion() {
         showFinalResults();
         return;
     }
-    let q = currentQ[index];
+    const q = currentQ[index];
 
     // Clear media and question initially
     if (mediaArea) mediaArea.innerHTML = "";
@@ -212,7 +222,7 @@ function renderOptions(q, disableButtons = false) {
     // Only render options for solo mode
     if (mode !== 'solo') return;
 
-    let optArea = document.getElementById('options-area');
+    const optArea = document.getElementById('options-area');
     if (!optArea) return;
     optArea.innerHTML = "";
     let opts = [...q.options].sort(() => Math.random() - 0.5);
@@ -221,15 +231,13 @@ function renderOptions(q, disableButtons = false) {
         btn.innerText = o;
         btn.disabled = disableButtons;
         // Only attach solo behavior for solo mode
-        btn.addEventListener('click', (e) => checkSolo(e.target, o, q.answer));
+        // use e.currentTarget to ensure the button element is passed
+        btn.addEventListener('click', (e) => checkSolo(e.currentTarget, o, q.answer));
         optArea.appendChild(btn);
     });
 }
 
 function checkSolo(btn, sel, corr) {
-    // debug: log entry and arguments
-    console.log('checkSolo called', { btnPresent: !!btn, sel, corr, btnDisabled: !!(btn && btn.disabled) });
-
     // guard: ignore clicks when buttons are already disabled
     if (!btn || btn.disabled) return;
 
@@ -258,11 +266,16 @@ function checkSolo(btn, sel, corr) {
 
             // Visual feedback
             btn.classList.add('correct');
+            correctCount++;
         } else {
             // wrong answer: mark selected wrong and reveal correct
             btn.classList.add('wrong');
             let correctBtn = buttons.find(b => (b.innerText || b.textContent).trim() === correct);
             if (correctBtn) correctBtn.classList.add('correct');
+
+            // apply wrong-answer penalty (restore previous behavior):
+            const wrongPenalty = 20; // points subtracted for wrong answer
+            score = Math.max(0, score - wrongPenalty);
         }
 
         // Update score display (if present)
@@ -279,6 +292,266 @@ function checkSolo(btn, sel, corr) {
         // Re-enable buttons so user can try again
         document.querySelectorAll('#options-area button').forEach(b => b.disabled = false);
     }
+}
+
+// Setup teams scoreboard and handlers
+function setupTeams() {
+    const sb = document.getElementById('scoreboard');
+    if (!sb) return;
+    sb.innerHTML = '';
+
+    const teamCount = parseInt(document.getElementById('teamCountSelect')?.value) || 2;
+
+    for (let i = 1; i <= teamCount; i++) {
+        const teamBox = document.createElement('div');
+        teamBox.className = 'team-box';
+        teamBox.dataset.team = i;
+
+        const title = document.createElement('div');
+        title.innerText = `Team ${i}`;
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '8px';
+
+        const scoreSpan = document.createElement('div');
+        scoreSpan.className = 'team-score';
+        scoreSpan.innerText = '0';
+        scoreSpan.style.fontSize = '18px';
+        scoreSpan.style.marginBottom = '8px';
+
+        const btn = document.createElement('button');
+        btn.className = 'team-point';
+        btn.innerText = '+Point';
+        btn.disabled = true; // disabled until reveal in showQuestion for fairness
+        btn.addEventListener('click', () => {
+            const current = parseInt(scoreSpan.innerText) || 0;
+            scoreSpan.innerText = current + 10;
+        });
+
+        teamBox.appendChild(title);
+        teamBox.appendChild(scoreSpan);
+        teamBox.appendChild(btn);
+        sb.appendChild(teamBox);
+    }
+}
+
+// Show final results screen (solo flow and simple team summary)
+function showFinalResults() {
+    const final = document.getElementById('final-results');
+    const resultsText = document.getElementById('results-text');
+    const badgeArea = document.getElementById('badge-display-area');
+
+    if (!final || !resultsText) return;
+
+    // Simple solo summary
+    if (mode === 'solo') {
+        const pct = maxPossibleScore > 0 ? Math.round((correctCount / currentQ.length) * 100) : 0;
+        const timeSec = Math.round((Date.now() - gameStartTime) / 1000);
+        const minutes = Math.floor(timeSec / 60);
+        const seconds = timeSec % 60;
+        const timeStr = `${minutes}m ${seconds}s`;
+
+        resultsText.innerText = `Your score: ${score} / ${maxPossibleScore} (${pct}%)`;
+
+        // Basic badge logic with additional info
+        badgeArea.innerHTML = '';
+        // create canvas badge
+        const canvas = document.createElement('canvas');
+        const w = 800, h = 420;
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+
+        // choose palette based on tier
+        let bgGradient;
+        let emblemColor = '#ffffff';
+        if (pct >= 95) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#a200ff'); bgGradient.addColorStop(1,'#ff8aff');
+            emblemColor = '#fffdf0';
+        } else if (pct >= 80) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#ffd700'); bgGradient.addColorStop(1,'#ffdf70');
+            emblemColor = '#5a3d00';
+        } else if (pct >= 50) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#c0c0c0'); bgGradient.addColorStop(1,'#ededed');
+            emblemColor = '#333';
+        } else {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#fdf5e6'); bgGradient.addColorStop(1,'#fff6e0');
+            emblemColor = '#8b4513';
+        }
+
+        // background
+        ctx.fillStyle = bgGradient; ctx.fillRect(0,0,w,h);
+        // rounded panel
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        roundRect(ctx, 40, 40, w-80, h-80, 20, true, false);
+
+        // panel geometry
+        const panelX = 40;
+        const panelY = 40;
+        const panelW = w - 80;
+        const panelH = h - 80;
+
+        // emblem placement: make badge 5x larger than previous 50x50 -> 250x250
+        const pad = 5;
+        const emblemW = 50 * 5; // 250
+        const emblemH = 50 * 5; // 250
+
+        // center emblem horizontally and position near top inside panel
+        const emblemX = panelX + Math.round((panelW - emblemW) / 2);
+        const emblemY = panelY + 20; // small top margin
+
+        // pick emblem source by tier (prefer repository PNGs if present)
+        let emblemSrc = 'bronze.png';
+        if (pct >= 95) emblemSrc = 'legendary.png';
+        else if (pct >= 80) emblemSrc = 'gold.png';
+        else if (pct >= 50) emblemSrc = 'silver.png';
+
+        const emblemImg = new Image();
+        emblemImg.crossOrigin = 'anonymous';
+       emblemImg.onload = function() {
+    // ensure panel geometry variables exist (panelX/panelY/panelW/panelH should be defined earlier in showFinalResults)
+    const centerY = panelY + panelH / 2;
+    const emblemX = panelX + 30;                     // left padding inside panel
+    const emblemY = panelY + Math.round((panelH - emblemH) / 2); // vertically centered
+    // draw emblem
+    ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
+
+    // text area start X (to the right of emblem with gap)
+    const textX = emblemX + emblemW + 30;
+    // fonts and spacing
+    const levelFontSize = 28, scoreFontSize = 22, timeFontSize = 18;
+    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const scoreFont = `${scoreFontSize}px sans-serif`;
+    const timeFont = `${timeFontSize}px sans-serif`;
+    const gap = 8;
+    const levelLH = Math.round(levelFontSize * 1.2);
+    const scoreLH = Math.round(scoreFontSize * 1.2);
+    const timeLH = Math.round(timeFontSize * 1.2);
+    const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
+    const startY = Math.round(centerY - (totalTextH / 2));
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#222';
+
+    ctx.font = levelFont;
+    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, textX, startY + levelLH / 2);
+    ctx.font = scoreFont;
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.font = timeFont;
+    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
+
+    const dataUrl = canvas.toDataURL('image/png');
+    const img = document.createElement('img'); img.src = dataUrl;
+    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
+    badgeArea.appendChild(img); badgeArea.appendChild(dl);
+};
+
+emblemImg.onerror = function() {
+    const centerY = panelY + panelH / 2;
+    const emblemX = panelX + 30;
+    const emblemY = panelY + Math.round((panelH - emblemH) / 2);
+    ctx.fillStyle = emblemColor;
+    ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
+
+    const textX = emblemX + emblemW + 30;
+    const levelFontSize = 28, scoreFontSize = 22, timeFontSize = 18;
+    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const scoreFont = `${scoreFontSize}px sans-serif`;
+    const timeFont = `${timeFontSize}px sans-serif`;
+    const gap = 8;
+    const levelLH = Math.round(levelFontSize * 1.2);
+    const scoreLH = Math.round(scoreFontSize * 1.2);
+    const timeLH = Math.round(timeFontSize * 1.2);
+    const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
+    const startY = Math.round(centerY - (totalTextH / 2));
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#222';
+    ctx.font = levelFont;
+    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, textX, startY + levelLH / 2);
+    ctx.font = scoreFont;
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
+    ctx.font = timeFont;
+    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
+
+    const dataUrl = canvas.toDataURL('image/png');
+    const img = document.createElement('img'); img.src = dataUrl;
+    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
+    badgeArea.appendChild(img); badgeArea.appendChild(dl);
+};
+        // set emblem source (prefer repository-level PNGs added by you)
+        emblemImg.src = emblemSrc;
+
+    } else {
+        // Teams: show simple team totals
+        const teams = Array.from(document.querySelectorAll('#scoreboard .team-box'));
+        let text = 'Team results:\n';
+        teams.forEach(tb => {
+            const name = tb.querySelector('div').innerText;
+            const sc = tb.querySelector('.team-score').innerText;
+            text += `${name}: ${sc}\n`;
+        });
+        resultsText.innerText = text;
+    }
+
+    // Clear question UI elements so only results show
+    const optionsArea = document.getElementById('options-area');
+    const qText = document.getElementById('q-text');
+    const timerDisplay = document.getElementById('timer-display');
+    const mediaContainer = document.getElementById('media-container');
+
+    if (optionsArea) optionsArea.innerHTML = '';
+    if (qText) qText.innerText = '';
+    if (timerDisplay) timerDisplay.innerText = '';
+    if (mediaContainer) mediaContainer.innerHTML = '';
+
+    const finalResults = document.getElementById('final-results');
+    if (finalResults) finalResults.classList.remove('hidden');
+}
+
+// rounded rectangle helper
+function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+    if (typeof r === 'undefined') r = 5;
+    if (typeof fill === 'undefined') fill = true;
+    if (typeof stroke === 'undefined') stroke = true;
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.arcTo(x+w, y,   x+w, y+h, r);
+    ctx.arcTo(x+w, y+h, x,   y+h, r);
+    ctx.arcTo(x,   y+h, x,   y,   r);
+    ctx.arcTo(x,   y,   x+w, y,   r);
+    ctx.closePath();
+    if (fill) ctx.fill();
+    if (stroke) ctx.stroke();
+}
+
+// draw star helper
+function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius, color) {
+    let rot = Math.PI / 2 * 3;
+    let x = cx;
+    let y = cy;
+    let step = Math.PI / spikes;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius);
+    for (let i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+    }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
 }
 
 // Toggle display of team count dropdown and update tests
