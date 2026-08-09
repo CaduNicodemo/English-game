@@ -423,6 +423,7 @@ function showFinalResults() {
     const gap = 8;
     const levelLH = Math.round(levelFontSize * 1.2);
     const scoreLH = Math.round(scoreFontSize * 1.2);
+    const correctLH = Math.round(scoreFontSize * 1.2);
     const timeLH = Math.round(timeFontSize * 1.2);
     const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
     const startY = Math.round(centerY - (totalTextH / 2));
@@ -435,9 +436,9 @@ function showFinalResults() {
     ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
     ctx.fillText(`Score: ${score} / ${maxPossibleScore} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
-    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + gap + levelLH + gap + scoreLH / 2);
+    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH + gap + correctLH / 2);
     ctx.font = timeFont;
-    ctx.fillText(`Time: ${timeStr}`, textX, startY + gap + levelLH + gap + scoreLH + gap + timeLH / 2);
+    ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + correctLH + gap + timeLH / 2);
 
     const dataUrl = canvas.toDataURL('image/png');
     const img = document.createElement('img'); img.src = dataUrl;
