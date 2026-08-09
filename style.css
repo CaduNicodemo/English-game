@@ -18,19 +18,19 @@ body {
      margin: 0 auto;
      background-color: #f9f9f9;
 }
- .hidden {
+.hidden {
      display: none !important;
 }
- h1 {
+h1 {
      font-family: "Train One", system-ui;
      font-size: 28px;
      font-weight: 300;
 }
- h2 {
+h2 {
      font-size: 22px;
 }
 /* Configuração dos Botões (Ótimos para clique e toque) */
- button {
+button {
      padding: 15px;
      margin: 10px auto;
      cursor: pointer;
@@ -43,47 +43,48 @@ body {
      display: block;
      transition: background-color 0.2s;
 }
- button:hover {
+button:hover {
      background-color: #f0f0f0;
 }
+/* hover styles for badge-prefixed classes (use CSS variables correctly) */
 .download-btn.badge-legendary:hover {
-     background-color: var--legendary2;
-     color: var--legendary1;
+     background-color: var(--legendary2);
+     color: var(--legendary1);
 }
 .download-btn.badge-gold:hover {
-     background-color: var--gold2;
-     color: var--gold1;
+     background-color: var(--gold2);
+     color: var(--gold1);
 }
 .download-btn.badge-silver:hover {
-     background-color: var--silver2;
-     color: var--silver1;
+     background-color: var(--silver2);
+     color: var(--silver1);
 }
 .download-btn.badge-bronze:hover {
-     background-color: var--bronze2;
-     color: var--bronze1;
+     background-color: var(--bronze2);
+     color: var(--bronze1);
 }
- .correct {
+.correct {
      background-color: #90EE90 !important;
      border-color: #4CAF50;
 }
- .wrong {
+.wrong {
      background-color: #FF7F7F !important;
      border-color: #F44336;
 }
- #timer-display {
+#timer-display {
      font-size: 30px;
      font-weight: bold;
      color: #0066cc;
      margin: 15px;
 }
- #score-display {
+#score-display {
      font-size: 22px;
      font-weight: bold;
      color: #333;
      margin-bottom: 15px;
 }
 /* Área de Mídia (Imagens e Áudios) */
- #media-container img {
+#media-container img {
      max-width: 100%;
      height: auto;
      max-height: 250px;
@@ -91,14 +92,14 @@ body {
      margin-bottom: 10px;
 }
 /* Placar do Multiplayer (Teams) */
- .team-container {
+.team-container {
      display: flex;
      justify-content: center;
      gap: 15px;
      flex-wrap: wrap;
      margin: 20px 0;
 }
- .team-box {
+.team-box {
      border: 2px solid #333;
      padding: 15px;
      border-radius: 8px;
@@ -106,64 +107,64 @@ body {
      background: #fff;
 }
 /* Estilos para as Badges na Tela Final */
- .badge-box {
+.badge-box {
      padding: 20px;
      margin: 20px auto;
      border-radius: 12px;
      width: 90%;
      max-width: 400px;
-     box-shadow: 0 4px 6px rgba(0,0,0,0.1;
+     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
- .badge-legendary {
-     background-color: var--legendary1;
-     color: var--legendary2;
+.badge-legendary {
+     background-color: var(--legendary1);
+     color: var(--legendary2);
 }
- .badge-gold {
-     background-color: var--gold1;
-     color: var--gold2;
+.badge-gold {
+     background-color: var(--gold1);
+     color: var(--gold2);
 }
- .badge-silver {
-     background-color: var--silver1;
-     color: var--silver2;
+.badge-silver {
+     background-color: var(--silver1);
+     color: var(--silver2);
 }
- .badge-bronze {
-     background-color: var--bronze1;
-     color: var--bronze2;
+.badge-bronze {
+     background-color: var(--bronze1);
+     color: var(--bronze2);
 }
 /* --- OTIMIZAÇÃO ESPECÍFICA PARA SMARTPHONES (Telas menores que 600px) --- */
- @media screen and (max-width: 600px) {
-     body {
-         padding: 20px 0;
-    }
-     h1 {
-         font-size: 24px;
-         font-style: normal;
-         font-weight: 400;
-    }
-     h2 {
-         font-size: 18px;
-    }
-    /* Botões ocupam quase toda a largura para facilitar o toque com o dedo */
-     button {
-         width: 95%;
-         padding: 18px;
-         font-size: 16px;
-         margin: 8px auto;
-    }
-    /* Selects e inputs maiores no celular */
-     select, input[type="text"] {
-         width: 90%;
-         padding: 12px;
-         font-size: 16px;
-         margin: 8px 0;
-         border-radius: 6px;
-         border: 1px solid #ccc;
-    }
-     .team-box {
-         width: 40%;
-         padding: 10px;
-    }
- }
+@media screen and (max-width: 600px) {
+    body {
+        padding: 20px 0;
+   }
+    h1 {
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+   }
+    h2 {
+        font-size: 18px;
+   }
+   /* Botões ocupam quase toda a largura para facilitar o toque com o dedo */
+    button {
+        width: 95%;
+        padding: 18px;
+        font-size: 16px;
+        margin: 8px auto;
+   }
+   /* Selects e inputs maiores no celular */
+    select, input[type="text"] {
+        width: 90%;
+        padding: 12px;
+        font-size: 16px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+   }
+    .team-box {
+        width: 40%;
+        padding: 10px;
+   }
+}
 
 /* -------- Badge preview and download button styles (added) -------- */
 .badge-image {
@@ -172,7 +173,7 @@ body {
   display: block;
   margin: 12px auto;
   border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.12;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
 }
 
 /* Generic download button base */
@@ -187,11 +188,29 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   transition: transform 0.08s ease, box-shadow 0.12s ease;
   font-size: 16px;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  text-decoration: none;
 }
 
 /* hover / active */
-.download-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.12; }
+.download-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
 .download-btn:active { transform: translateY(0); }
+.download-btn:focus-visible { box-shadow: 0 0 0 3px rgba(0,102,204,0.2); }
+
+/* Tier colors - accept both the "bare" tier class (legendary) or the prefixed one (badge-legendary) */
+/* Legendary (purple) */
+.download-btn.legendary, .download-btn.badge-legendary { background-color: #a200ff; color: #fff; border: 1px solid #77019b; }
+
+/* Gold */
+.download-btn.gold, .download-btn.badge-gold { background-color: #ffd700; color: #5a3d00; border: 1px solid #d4a700; }
+
+/* Silver */
+.download-btn.silver, .download-btn.badge-silver { background-color: #c0c0c0; color: #222; border: 1px solid #9a9a9a; }
+
+/* Bronze */
+.download-btn.bronze, .download-btn.badge-bronze { background-color: #cd7f32; color: #fff; border: 1px solid #8b4513; }
 
 /* make button full width on narrow screens */
 @media (max-width: 600px) {
