@@ -355,127 +355,126 @@ function showFinalResults() {
         // Basic badge logic with additional info
         badgeArea.innerHTML = '';
         // create canvas badge
-const canvas = document.createElement('canvas');
-const w = 800, h = 420;
-canvas.width = w; canvas.height = h;
-const ctx = canvas.getContext('2d');
+        const canvas = document.createElement('canvas');
+        const w = 800, h = 420;
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
 
-// choose palette based on tier
-let bgGradient;
-let emblemColor = '#ffffff';
-if (pct >= 95) {
-    bgGradient = ctx.createLinearGradient(0,0,w,0);
-    bgGradient.addColorStop(0,'#a200ff'); bgGradient.addColorStop(1,'#ff8aff');
-    emblemColor = '#fffdf0';
-} else if (pct >= 80) {
-    bgGradient = ctx.createLinearGradient(0,0,w,0);
-    bgGradient.addColorStop(0,'#ffd700'); bgGradient.addColorStop(1,'#ffdf70');
-    emblemColor = '#5a3d00';
-} else if (pct >= 50) {
-    bgGradient = ctx.createLinearGradient(0,0,w,0);
-    bgGradient.addColorStop(0,'#c0c0c0'); bgGradient.addColorStop(1,'#ededed');
-    emblemColor = '#333';
-} else {
-    bgGradient = ctx.createLinearGradient(0,0,w,0);
-    bgGradient.addColorStop(0,'#fdf5e6'); bgGradient.addColorStop(1,'#fff6e0');
-    emblemColor = '#8b4513';
-}
+        // choose palette based on tier
+        let bgGradient;
+        let emblemColor = '#ffffff';
+        if (pct >= 95) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#a200ff'); bgGradient.addColorStop(1,'#ff8aff');
+            emblemColor = '#fffdf0';
+        } else if (pct >= 80) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#ffd700'); bgGradient.addColorStop(1,'#ffdf70');
+            emblemColor = '#5a3d00';
+        } else if (pct >= 50) {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#c0c0c0'); bgGradient.addColorStop(1,'#ededed');
+            emblemColor = '#333';
+        } else {
+            bgGradient = ctx.createLinearGradient(0,0,w,0);
+            bgGradient.addColorStop(0,'#fdf5e6'); bgGradient.addColorStop(1,'#fff6e0');
+            emblemColor = '#8b4513';
+        }
 
-// background
-ctx.fillStyle = bgGradient; ctx.fillRect(0,0,w,h);
-// rounded panel
-ctx.fillStyle = 'rgba(255,255,255,0.85)';
-roundRect(ctx, 40, 40, w-80, h-80, 20, true, false);
+        // background
+        ctx.fillStyle = bgGradient; ctx.fillRect(0,0,w,h);
+        // rounded panel
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        roundRect(ctx, 40, 40, w-80, h-80, 20, true, false);
 
-// panel geometry
-const panelX = 40;
-const panelY = 40;
-const panelW = w - 80;
-const panelH = h - 80;
+        // panel geometry
+        const panelX = 40;
+        const panelY = 40;
+        const panelW = w - 80;
+        const panelH = h - 80;
 
-// emblem size: 5x bigger than the previous 50x50 => 250x250
-const emblemW = 50 * 5; // 250
-const emblemH = 50 * 5; // 250
+        // emblem placement: make badge 5x larger than previous 50x50 -> 250x250
+        const pad = 5;
+        const emblemW = 50 * 5; // 250
+        const emblemH = 50 * 5; // 250
 
-// center emblem horizontally; place it so text has room underneath.
-// we'll center emblem horizontally and vertically within the top ~70% of panel
-const topAreaHeight = Math.round(panelH * 0.7);
-const emblemX = panelX + Math.round((panelW - emblemW) / 2);
-const emblemY = panelY + Math.round((topAreaHeight - emblemH) / 2);
+        // center emblem horizontally and position near top inside panel
+        const emblemX = panelX + Math.round((panelW - emblemW) / 2);
+        const emblemY = panelY + 20; // small top margin
 
-// pick emblem source by tier (prefer repository PNGs if present)
-let emblemSrc = 'bronze.png';
-if (pct >= 95) emblemSrc = 'legendary.png';
-else if (pct >= 80) emblemSrc = 'gold.png';
-else if (pct >= 50) emblemSrc = 'silver.png';
+        // pick emblem source by tier (prefer repository PNGs if present)
+        let emblemSrc = 'bronze.png';
+        if (pct >= 95) emblemSrc = 'legendary.png';
+        else if (pct >= 80) emblemSrc = 'gold.png';
+        else if (pct >= 50) emblemSrc = 'silver.png';
 
-const emblemImg = new Image();
-emblemImg.crossOrigin = 'anonymous';
-emblemImg.onload = function() {
-    // draw emblem image at desired size, centered
-    ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
+        const emblemImg = new Image();
+        emblemImg.crossOrigin = 'anonymous';
+        emblemImg.onload = function() {
+            // draw emblem image at 250x250 centered
+            ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
 
-    // compute center X for text
-    const centerX = panelX + panelW / 2;
-    // text positions below emblem
-    const levelY = emblemY + emblemH + 28;
-    const scoreY = levelY + 36;
-    const timeY = scoreY + 28;
+            // compute center X for text
+            const centerX = panelX + panelW / 2;
+            // text positions below emblem
+            const levelY = emblemY + emblemH + 30;
+            const scoreY = levelY + 40;
+            const timeY = scoreY +  thirty || 18; // fallback in case of unexpected value
 
-    // Draw text centered
-    ctx.fillStyle = '#222';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+            // Draw text centered
+            ctx.fillStyle = '#222';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
 
-    // Level - 28px bold
-    ctx.font = 'bold 28px sans-serif';
-    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, centerX, levelY);
+            // Level - 28px bold
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillText(`Level: ${currentModule} — ${currentTest}`, centerX, levelY);
 
-    // Score - 22px
-    ctx.font = '22px sans-serif';
-    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, centerX, scoreY);
+            // Score - 22px
+            ctx.font = '22px sans-serif';
+            ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, centerX, scoreY);
 
-    // Time - 18px
-    ctx.font = '18px sans-serif';
-    ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
+            // Time - 18px
+            ctx.font = '18px sans-serif';
+            ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
 
-    // convert to image and show + download
-    const dataUrl = canvas.toDataURL('image/png');
-    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
-    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
+            // convert to image and show + download
+            const dataUrl = canvas.toDataURL('image/png');
+            const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+            const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
 
-    badgeArea.appendChild(img);
-    badgeArea.appendChild(dl);
-};
-emblemImg.onerror = function() {
-    // fallback: draw the emblem area as a filled rectangle (no circle) centered
-    ctx.fillStyle = emblemColor;
-    ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
+            badgeArea.appendChild(img);
+            badgeArea.appendChild(dl);
+        };
+        emblemImg.onerror = function() {
+            // fallback: draw the emblem as a simple rectangle (no circle) centered
+            ctx.fillStyle = emblemColor;
+            ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
 
-    const centerX = panelX + panelW / 2;
-    const levelY = emblemY + emblemH + 28;
-    const scoreY = levelY + 36;
-    const timeY = scoreY + 28;
+            const centerX = panelX + panelW / 2;
+            const levelY = emblemY + emblemH + 30;
+            const scoreY = levelY + 40;
+            const timeY = scoreY + 30;
 
-    ctx.fillStyle = '#222';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = 'bold 28px sans-serif';
-    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, centerX, levelY);
-    ctx.font = '22px sans-serif';
-    ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, centerX, scoreY);
-    ctx.font = '18px sans-serif';
-    ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
+            ctx.fillStyle = '#222';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillText(`Level: ${currentModule} — ${currentTest}`, centerX, levelY);
+            ctx.font = '22px sans-serif';
+            ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, centerX, scoreY);
+            ctx.font = '18px sans-serif';
+            ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
 
-    const dataUrl = canvas.toDataURL('image/png');
-    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
-    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
-    badgeArea.appendChild(img);
-    badgeArea.appendChild(dl);
-};
+            const dataUrl = canvas.toDataURL('image/png');
+            const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+            const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
+            badgeArea.appendChild(img);
+            badgeArea.appendChild(dl);
+        };
 
-// set emblem source (repo-level PNGs)
-emblemImg.src = emblemSrc;
+        // set emblem source (prefer repository-level PNGs added by you)
+        emblemImg.src = emblemSrc;
 
     } else {
         // Teams: show simple team totals
