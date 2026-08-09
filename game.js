@@ -421,8 +421,8 @@ function showFinalResults() {
     // text area start X (to the right of emblem with gap)
     const textX = emblemX + emblemW + 30;
     // fonts and spacing
-    const levelFontSize = 28, scoreFontSize = 22, timeFontSize = 18;
-    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const levelFontSize = 30, scoreFontSize = 26, timeFontSize = 24;
+    const levelFont = `bold ${levelFontSize}px "Train One", sans-serif`;
     const scoreFont = `${scoreFontSize}px sans-serif`;
     const timeFont = `${timeFontSize}px sans-serif`;
     const gap = 8;
@@ -437,7 +437,7 @@ function showFinalResults() {
     ctx.fillStyle = '#222';
 
     ctx.font = levelFont;
-    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, textX, startY + levelLH / 2);
+    ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
     ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
     ctx.font = timeFont;
@@ -456,9 +456,8 @@ emblemImg.onerror = function() {
     ctx.fillStyle = emblemColor;
     ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
 
-    const textX = emblemX + emblemW + 30;
-    const levelFontSize = 28, scoreFontSize = 22, timeFontSize = 18;
-    const levelFont = `bold ${levelFontSize}px sans-serif`;
+    const levelFontSize = 30, scoreFontSize = 26, timeFontSize = 24;
+    const levelFont = `bold ${levelFontSize}px "Train One", sans-serif`;
     const scoreFont = `${scoreFontSize}px sans-serif`;
     const timeFont = `${timeFontSize}px sans-serif`;
     const gap = 8;
@@ -472,7 +471,7 @@ emblemImg.onerror = function() {
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#222';
     ctx.font = levelFont;
-    ctx.fillText(`Level: ${currentModule} — ${currentTest}`, textX, startY + levelLH / 2);
+    ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
     ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
     ctx.font = timeFont;
