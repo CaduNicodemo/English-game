@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Train+One&display=swap');
 /* Estilos Gerais (Padrão para Computador / Telas Grandes) */
- body {
+var {
+    --legendary1: #2d1a47;
+    --legendary2: #f59d34;
+    --gold1: #c99a3e;
+    --gold2: #f7d165;
+    --silver1: #666b7d;
+    --silver2: #ccd2de;
+    --bronze1: #713221;
+    --bronze2: #f7b585;
+}
+body {
      font-family: sans-serif;
      text-align: center;
      padding: 20px;
@@ -35,6 +45,22 @@
 }
  button:hover {
      background-color: #f0f0f0;
+}
+.download-btn.legendary:hover {
+     background-color: var(--legendary2);
+     color: var(--legendary1);
+}
+.download-btn.gold:hover {
+     background-color: var(--gold2);
+     color: var(--gold1);
+}
+.download-btn.silver:hover {
+     background-color: var(--silver2);
+     color: var(--silver1);
+}
+.download-btn.bronze:hover {
+     background-color: var(--bronze2);
+     color: var(--bronze1);
 }
  .correct {
      background-color: #90EE90 !important;
@@ -89,20 +115,20 @@
      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
  .badge-legendary {
-     background-color: #2d1a47;
-     color: #f59d34;
+     background-color: var(--legendary1);
+     color: var(--legendary2);
 }
  .badge-gold {
-     background-color: #c99a3e;
-     color:#f7d165;
+     background-color: var(--gold1);
+     color: var(--gold2);
 }
  .badge-silver {
-     background-color: #666b7d;
-     color: #ccd2de;;
+     background-color: var(--silver1);
+     color: var(--silver2);
 }
  .badge-bronze {
-     background-color: #713221;
-     color:#f7b585;
+     background-color: var(--bronze1);
+     color: var(--bronze2);
 }
 /* --- OTIMIZAÇÃO ESPECÍFICA PARA SMARTPHONES (Telas menores que 600px) --- */
  @media screen and (max-width: 600px) {
