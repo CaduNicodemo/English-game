@@ -1,6 +1,3 @@
-// Paste the full working game.js below (starting with "let fullData = {}, ...")
-// (I include the full file so you can paste it directly into your editor or GitHub UI.)
-
 let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
 let maxPossibleScore = 0;
 let gameStartTime = 0; // overall game start timestamp
@@ -415,7 +412,7 @@ function showFinalResults() {
         emblemImg.crossOrigin = 'anonymous';
        emblemImg.onload = function() {
     // ensure panel geometry variables exist (panelX/panelY/panelW/panelH should be defined earlier in showFinalResults)
-    const centerY = panelY + panelH / 2;
+    const centerY = panelX + panelH / 2;
     const emblemX = panelX + 30;                     // left padding inside panel
     const emblemY = panelY + Math.round((panelH - emblemH) / 2); // vertically centered
     // draw emblem
@@ -453,13 +450,33 @@ function showFinalResults() {
     img.style.height = 'auto';
     img.className = 'badge-image';
 
-    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
-    dl.textContent = 'Download Badge (PNG)';
-    dl.className = 'download-link';
-    dl.target = '_blank';
-    dl.rel = 'noopener';
+    // determine tier class for button colors (match badge tiers)
+    let tierClass = 'bronze';
+    if (pct >= 95) tierClass = 'legendary';
+    else if (pct >= 80) tierClass = 'gold';
+    else if (pct >= 50) tierClass = 'silver';
 
-    badgeArea.appendChild(img); badgeArea.appendChild(dl);
+    // create pill-shaped download button that uses badge color classes
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `download-btn badge-${tierClass}`;
+    btn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="vertical-align:middle; margin-right:8px; fill:currentColor">
+        <path d="M12 2l1.5 4.5L18 8l-4 3 1.2 4.8L12 13.5 8.8 15.8 10 11 6 8l4.5-1.5L12 2z"/>
+      </svg>
+      <span>Download Badge (PNG)</span>
+    `;
+    btn.setAttribute('aria-label', `Download ${tierClass} badge as PNG`);
+    btn.addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = `${currentModule}-${currentTest}-badge.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    badgeArea.appendChild(img); badgeArea.appendChild(btn);
 };
 
 emblemImg.onerror = function() {
@@ -492,8 +509,38 @@ emblemImg.onerror = function() {
 
     const dataUrl = canvas.toDataURL('image/png');
     const img = document.createElement('img'); img.src = dataUrl;
-    const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
-    badgeArea.appendChild(img); badgeArea.appendChild(dl);
+    img.alt = 'Your badge';
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+    img.className = 'badge-image';
+
+    // determine tier class for button colors (match badge tiers)
+    let tierClass = 'bronze';
+    if (pct >= 95) tierClass = 'legendary';
+    else if (pct >= 80) tierClass = 'gold';
+    else if (pct >= 50) tierClass = 'silver';
+
+    // create pill-shaped download button that uses badge color classes
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `download-btn badge-${tierClass}`;
+    btn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="vertical-align:middle; margin-right:8px; fill:currentColor">
+        <path d="M12 2l1.5 4.5L18 8l-4 3 1.2 4.8L12 13.5 8.8 15.8 10 11 6 8l4.5-1.5L12 2z"/>
+      </svg>
+      <span>Download Badge (PNG)</span>
+    `;
+    btn.setAttribute('aria-label', `Download ${tierClass} badge as PNG`);
+    btn.addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = `${currentModule}-${currentTest}-badge.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    badgeArea.appendChild(img); badgeArea.appendChild(btn);
 };
         // set emblem source (prefer repository-level PNGs added by you)
         emblemImg.src = emblemSrc;
