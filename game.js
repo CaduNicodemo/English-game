@@ -530,7 +530,7 @@ emblemImg.onerror = function() {
     btn.addEventListener('click', () => {
       const a = document.createElement('a');
       a.href = dataUrl;
-      a.download = `${currentModule}-${currentTest}-badge.png`;
+      a.download = `${currentModule}-${currentTest}-${tierClass}.png`;
       document.body.appendChild(a);
       a.click();
       a.remove();
