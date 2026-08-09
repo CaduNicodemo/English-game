@@ -445,7 +445,17 @@ function showFinalResults() {
 
     const dataUrl = canvas.toDataURL('image/png');
     const img = document.createElement('img'); img.src = dataUrl;
+    img.alt = 'Your badge';
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+    img.className = 'badge-image';
+
     const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
+    dl.textContent = 'Download Badge (PNG)';
+    dl.className = 'download-link';
+    dl.target = '_blank';
+    dl.rel = 'noopener';
+
     badgeArea.appendChild(img); badgeArea.appendChild(dl);
 };
 
@@ -479,7 +489,17 @@ emblemImg.onerror = function() {
 
     const dataUrl = canvas.toDataURL('image/png');
     const img = document.createElement('img'); img.src = dataUrl;
+    img.alt = 'Your badge';
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+    img.className = 'badge-image';
+
     const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`;
+    dl.textContent = 'Download Badge (PNG)';
+    dl.className = 'download-link';
+    dl.target = '_blank';
+    dl.rel = 'noopener';
+
     badgeArea.appendChild(img); badgeArea.appendChild(dl);
 };
         // set emblem source (prefer repository-level PNGs added by you)
