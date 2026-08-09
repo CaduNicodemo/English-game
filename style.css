@@ -90,23 +90,19 @@
 }
  .badge-legendary {
      background-color: #2d1a47;
-     border: 3px solid #f59d34;
-     color: #bc77a5;
+     color: #f59d34;
 }
  .badge-gold {
      background-color: #c99a3e;
-     border: 4px solid #f7d165;
-     color: #a56827;
+     color:#f7d165;
 }
  .badge-silver {
      background-color: #666b7d;
-     border: 4px solid #ccd2de;
-     color: #545966;
+     color: #ccd2de;;
 }
  .badge-bronze {
      background-color: #713221;
-     border: 4px solid #f7b585;
-     color: #79402f;
+     color:#f7b585;
 }
 /* --- OTIMIZAÇÃO ESPECÍFICA PARA SMARTPHONES (Telas menores que 600px) --- */
  @media screen and (max-width: 600px) {

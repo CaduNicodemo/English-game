@@ -459,7 +459,7 @@ function showFinalResults() {
     btn.type = 'button';
     btn.className = `download-btn badge-${tierClass}`;
     btn.innerHTML = `
-    span>Download Badge (PNG)</span>
+      <span>Download Badge (PNG)</span>
     `;
     btn.setAttribute('aria-label', `Download ${tierClass} badge as PNG`);
     btn.addEventListener('click', () => {
