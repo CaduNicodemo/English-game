@@ -141,4 +141,50 @@
          width: 40%;
          padding: 10px;
     }
+ }
+
+/* -------- Badge preview and download button styles (added) -------- */
+.badge-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+}
+
+/* Generic download button base */
+.download-btn {
+  display: inline-block;
+  margin: 10px auto;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  transition: transform 0.08s ease, box-shadow 0.12s ease;
+  font-size: 16px;
+}
+
+/* hover / active */
+.download-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
+.download-btn:active { transform: translateY(0); }
+
+/* Tier colors */
+/* Legendary (purple) */
+.download-btn.legendary { background: #a200ff; color: #fff; border: 1px solid #77019b; }
+
+/* Gold */
+.download-btn.gold { background: #ffd700; color: #5a3d00; border: 1px solid #d4a700; }
+
+/* Silver */
+.download-btn.silver { background: #c0c0c0; color: #222; border: 1px solid #9a9a9a; }
+
+/* Bronze */
+.download-btn.bronze { background: #cd7f32; color: #fff; border: 1px solid #8b4513; }
+
+/* make button full width on narrow screens */
+@media (max-width: 600px) {
+  .download-btn { width: 90%; display: block; margin-left: auto; margin-right: auto; }
 }
