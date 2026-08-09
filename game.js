@@ -150,11 +150,6 @@ async function loadAndStart() {
     showQuestion();
 }
 
-// ----------------- existing game logic -----------------
-// The rest of this file preserves your existing game logic for showing questions,
-// rendering options, scoring, teams, final results, and sudden death.
-// I preserved function names so integration is seamless.
-
 function showQuestion() {
     const optArea = document.getElementById('options-area');
     const timerEl = document.getElementById('timer-display');
@@ -439,6 +434,7 @@ function showFinalResults() {
     ctx.font = levelFont;
     ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
+    ctx.fillText(`Score: ${resultsText} / ${maxPossibleScore});
     ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
     ctx.font = timeFont;
     ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
