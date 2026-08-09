@@ -393,14 +393,9 @@ const panelY = 40;
 const panelW = w - 80;
 const panelH = h - 80;
 
-// emblem size: 5x bigger than the previous 50x50 => 250x250
-const emblemW = 50 * 5; // 250
-const emblemH = 50 * 5; // 250
+const emblemW = 250;
+const emblemH = 250;
 
-// center emblem horizontally; place it so text has room underneath.
-// we'll center emblem horizontally and vertically within the top ~70% of panel
-const topAreaHeight = Math.round(panelH * 0.7);
-const emblemX = panelX + Math.round((panelW - emblemW) / 2);
 const emblemY = panelY + Math.round((topAreaHeight - emblemH) / 2);
 
 // pick emblem source by tier (prefer repository PNGs if present)
@@ -413,7 +408,7 @@ const emblemImg = new Image();
 emblemImg.crossOrigin = 'anonymous';
 emblemImg.onload = function() {
     // draw emblem image at desired size, centered
-    ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
+    ctx.drawImage(emblemImg, emblemY, emblemW, emblemH);
 
     // compute center X for text
     const centerX = panelX + panelW / 2;
@@ -441,14 +436,13 @@ emblemImg.onload = function() {
 
     // convert to image and show + download
     const dataUrl = canvas.toDataURL('image/png');
-    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '10px auto 10px';
     const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
 
     badgeArea.appendChild(img);
     badgeArea.appendChild(dl);
 };
 emblemImg.onerror = function() {
-    // fallback: draw the emblem area as a filled rectangle (no circle) centered
     ctx.fillStyle = emblemColor;
     ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
 
@@ -468,7 +462,7 @@ emblemImg.onerror = function() {
     ctx.fillText(`Time: ${timeStr}`, centerX, timeY);
 
     const dataUrl = canvas.toDataURL('image/png');
-    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
+    const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '10px auto 10px';
     const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
     badgeArea.appendChild(img);
     badgeArea.appendChild(dl);
