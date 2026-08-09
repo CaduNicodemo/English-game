@@ -339,7 +339,7 @@ function showFinalResults() {
 
     // Simple solo summary
     if (mode === 'solo') {
-        const pct = maxPossibleScore > 0 ? Math.round((correctCount / currentQ.length) * 100) : 0;
+        const pct = maxPossibleScore > 0 ? Math.round((score / maxPossibleScore) * 100) : 0;
         const timeSec = Math.round((Date.now() - gameStartTime) / 1000);
         const minutes = Math.floor(timeSec / 60);
         const seconds = timeSec % 60;
@@ -408,7 +408,7 @@ function showFinalResults() {
         emblemImg.crossOrigin = 'anonymous';
        emblemImg.onload = function() {
     // ensure panel geometry variables exist (panelX/panelY/panelW/panelH should be defined earlier in showFinalResults)
-    const centerY = panelX + panelH / 2;
+    const centerY = panelY + panelH / 2;
     const emblemX = panelX + 30;                     // left padding inside panel
     const emblemY = panelY + Math.round((panelH - emblemH) / 2); // vertically centered
     // draw emblem
