@@ -360,24 +360,25 @@ function showFinalResults() {
         let emblemColor = '#ffffff';
         if (pct >= 95) {
             bgGradient = ctx.createLinearGradient(0,0,w,0);
-            bgGradient.addColorStop(0,'#a200ff'); bgGradient.addColorStop(1,'#ff8aff');
-            emblemColor = '#fffdf0';
+            bgGradient.addColorStop(0,'#2d1a47'); bgGradient.addColorStop(1,'#bc77a5');
+            emblemColor = '#f59d34';
         } else if (pct >= 80) {
             bgGradient = ctx.createLinearGradient(0,0,w,0);
-            bgGradient.addColorStop(0,'#ffd700'); bgGradient.addColorStop(1,'#ffdf70');
-            emblemColor = '#5a3d00';
+            bgGradient.addColorStop(0,'#c99a3e'); bgGradient.addColorStop(1,'#f7d165');
+            emblemColor = '#a56827';
         } else if (pct >= 50) {
             bgGradient = ctx.createLinearGradient(0,0,w,0);
-            bgGradient.addColorStop(0,'#c0c0c0'); bgGradient.addColorStop(1,'#ededed');
-            emblemColor = '#333';
+            bgGradient.addColorStop(0,'#666b7d'); bgGradient.addColorStop(1,'#ccd2de');
+            emblemColor = '#545966';
         } else {
             bgGradient = ctx.createLinearGradient(0,0,w,0);
-            bgGradient.addColorStop(0,'#fdf5e6'); bgGradient.addColorStop(1,'#fff6e0');
-            emblemColor = '#8b4513';
+            bgGradient.addColorStop(0,'#713221'); bgGradient.addColorStop(1,'#f7b585');
+            emblemColor = '#79402f';
         }
 
         // background
         ctx.fillStyle = bgGradient; ctx.fillRect(0,0,w,h);
+        roundRect(ctx, 20, 20, w-40, h-40, 30, true, false);
         // rounded panel
         ctx.fillStyle = 'rgba(255,255,255,0.85)';
         roundRect(ctx, 40, 40, w-80, h-80, 20, true, false);
@@ -458,10 +459,7 @@ function showFinalResults() {
     btn.type = 'button';
     btn.className = `download-btn badge-${tierClass}`;
     btn.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="vertical-align:middle; margin-right:8px; fill:currentColor">
-        <path d="M12 2l1.5 4.5L18 8l-4 3 1.2 4.8L12 13.5 8.8 15.8 10 11 6 8l4.5-1.5L12 2z"/>
-      </svg>
-      <span>Download Badge (PNG)</span>
+    span>Download Badge (PNG)</span>
     `;
     btn.setAttribute('aria-label', `Download ${tierClass} badge as PNG`);
     btn.addEventListener('click', () => {
