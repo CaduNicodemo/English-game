@@ -46,19 +46,19 @@ body {
  button:hover {
      background-color: #f0f0f0;
 }
-.badge-legendary:hover {
+.download-btn.badge-legendary:hover {
      background-color: var(--legendary2);
      color: var(--legendary1);
 }
-.badge-gold:hover {
+.download-btn.badge-gold:hover {
      background-color: var(--gold2);
      color: var(--gold1);
 }
-.badge-silver:hover {
+.download-btn.badge-silver:hover {
      background-color: var(--silver2);
      color: var(--silver1);
 }
-.badge-bronze:hover {
+.download-btn.badge-bronze:hover {
      background-color: var(--bronze2);
      color: var(--bronze1);
 }
