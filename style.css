@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Train+One&display=swap');
 /* Estilos Gerais (Padrão para Computador / Telas Grandes) */
-var {
+:root{
     --legendary1: #2d1a47;
     --legendary2: #f59d34;
     --gold1: #c99a3e;
