@@ -419,7 +419,7 @@ function showFinalResults() {
             // text positions below emblem
             const levelY = emblemY + emblemH + 30;
             const scoreY = levelY + 40;
-            const timeY = scoreY +  thirty || 18; // fallback in case of unexpected value
+            const timeY = scoreY + 30;
 
             // Draw text centered
             ctx.fillStyle = '#222';
