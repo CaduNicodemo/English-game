@@ -411,6 +411,9 @@ function showFinalResults() {
         const emblemImg = new Image();
         emblemImg.crossOrigin = 'anonymous';
         emblemImg.onload = function() {
+    // ensure centerY is defined in this scope
+    const centerY = panelY + panelH / 2;
+
     // Draw emblem image on left, vertically centered
     ctx.drawImage(emblemImg, emblemX, emblemY, emblemW, emblemH);
 
@@ -428,35 +431,24 @@ function showFinalResults() {
     const scoreText = `Correct: ${correctCount} / ${currentQ.length} (${pct}%)`;
     const timeText = `Time: ${timeStr}`;
 
-    // Use textBaseline='middle' and textAlign='left' to place lines
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#222';
 
-    // Estimate line heights (px). Using a multiplier is more reliable than measureText for height.
     const levelLH = Math.round(levelFontSize * 1.2);
     const scoreLH = Math.round(scoreFontSize * 1.2);
     const timeLH = Math.round(timeFontSize * 1.2);
-
-    // Total text block height
     const totalTextH = levelLH + gap + scoreLH + gap + timeLH;
-
-    // Starting Y for the first (level) line so the block is vertically centered
     const startY = Math.round(centerY - (totalTextH / 2));
 
-    // Draw Level
     ctx.font = levelFont;
     ctx.fillText(levelText, textX, startY + levelLH / 2);
-
-    // Draw Score
     ctx.font = scoreFont;
     ctx.fillText(scoreText, textX, startY + levelLH + gap + scoreLH / 2);
-
-    // Draw Time
     ctx.font = timeFont;
     ctx.fillText(timeText, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
 
-    // Convert to image and show + download
+    // convert to image and show + download
     const dataUrl = canvas.toDataURL('image/png');
     const img = document.createElement('img'); img.src = dataUrl; img.alt = 'Badge'; img.style.maxWidth = '480px'; img.style.display = 'block'; img.style.margin = '0 auto 10px';
     const dl = document.createElement('a'); dl.href = dataUrl; dl.download = `${currentModule}-${currentTest}-badge.png`; dl.innerText = 'Download Badge (PNG)'; dl.style.display = 'inline-block'; dl.style.margin = '8px auto'; dl.style.padding = '8px 12px'; dl.style.background = '#0066cc'; dl.style.color = '#fff'; dl.style.borderRadius = '6px'; dl.style.textDecoration = 'none';
@@ -466,11 +458,13 @@ function showFinalResults() {
 };
 
 emblemImg.onerror = function() {
-    // If PNG can't load, draw a colored rectangle as emblem placeholder (vertically centered)
+    // ensure centerY is defined in this scope
+    const centerY = panelY + panelH / 2;
+
+    // fallback emblem rectangle
     ctx.fillStyle = emblemColor;
     ctx.fillRect(emblemX, emblemY, emblemW, emblemH);
 
-    // Same text drawing as onload
     const levelFontSize = 28;
     const scoreFontSize = 22;
     const timeFontSize = 18;
