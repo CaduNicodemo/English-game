@@ -201,16 +201,16 @@ button:hover {
 
 /* Tier colors - accept both the "bare" tier class (legendary) or the prefixed one (badge-legendary) */
 /* Legendary (purple) */
-.download-btn.legendary, .download-btn.badge-legendary { background-color: #a200ff; color: #fff; border: 1px solid #77019b; }
+.download-btn.legendary, .download-btn.badge-legendary { background-color: var(--legendary1); color: var(--legendary2); }
 
 /* Gold */
-.download-btn.gold, .download-btn.badge-gold { background-color: #ffd700; color: #5a3d00; border: 1px solid #d4a700; }
+.download-btn.gold, .download-btn.badge-gold { background-color: var(--gold1); color: var(--gold2); }
 
 /* Silver */
-.download-btn.silver, .download-btn.badge-silver { background-color: #c0c0c0; color: #222; border: 1px solid #9a9a9a; }
+.download-btn.silver, .download-btn.badge-silver { background-color: var(--silver1); color: var(--silver2); }
 
 /* Bronze */
-.download-btn.bronze, .download-btn.badge-bronze { background-color: #cd7f32; color: #fff; border: 1px solid #8b4513; }
+.download-btn.bronze, .download-btn.badge-bronze { background-color: var(--bronze1); color: var(--bronze2); }
 
 /* make button full width on narrow screens */
 @media (max-width: 600px) {
