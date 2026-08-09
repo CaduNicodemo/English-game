@@ -434,7 +434,7 @@ function showFinalResults() {
     ctx.font = levelFont;
     ctx.fillText(`Level: ${currentModule} - ${currentTest}`, textX, startY + levelLH / 2);
     ctx.font = scoreFont;
-    ctx.fillText(`Scor: ${score} / ${maxPossibleScore} (${pct}%)`;
+    ctx.fillText(`Scor: ${score} / ${maxPossibleScore} (${pct}%)`);
     ctx.fillText(`Correct: ${correctCount} / ${currentQ.length} (${pct}%)`, textX, startY + levelLH + gap + scoreLH / 2);
     ctx.font = timeFont;
     ctx.fillText(`Time: ${timeStr}`, textX, startY + levelLH + gap + scoreLH + gap + timeLH / 2);
