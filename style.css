@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Train+One&display=swap');
+
 /* Estilos Gerais (Padrão para Computador / Telas Grandes) */
-:root{
+:root {
     --legendary1: #2d1a47;
     --legendary2: #f59d34;
     --gold1: #c99a3e;
@@ -10,209 +11,232 @@
     --bronze1: #713221;
     --bronze2: #f7b585;
 }
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-     font-family: sans-serif;
-     text-align: center;
-     padding: 20px;
-     max-width: 800px;
-     margin: 0 auto;
-     background-color: #f9f9f9;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 20px;
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
 }
+
 .hidden {
-     display: none !important;
+    display: none !important;
 }
+
 h1 {
-     font-family: "Train One", system-ui;
-     font-size: 28px;
-     font-weight: 300;
+    font-family: "Train One", system-ui;
+    font-size: 28px;
+    font-weight: 300;
 }
+
 h2 {
-     font-size: 22px;
+    font-size: 22px;
 }
-/* Configuração dos Botões (Ótimos para clique e toque) */
+
+/* Campos de Seleção (Dropdowns) */
+select {
+    padding: 12px;
+    font-size: 16px;
+    margin: 8px auto;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 80%;
+    max-width: 400px;
+    display: block;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Configuração Padrão de Botões */
 button {
-     padding: 15px;
-     margin: 10px auto;
-     cursor: pointer;
-     width: 80%;
-     max-width: 400px;
-     font-size: 18px;
-     border-radius: 8px;
-     border: 1px solid #ccc;
-     background-color: #fff;
-     display: block;
-     transition: background-color 0.2s;
+    padding: 15px;
+    margin: 10px auto;
+    cursor: pointer;
+    width: 80%;
+    max-width: 400px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    display: block;
+    transition: background-color 0.2s, opacity 0.2s;
 }
-button:hover {
-     background-color: #f0f0f0;
+
+button:hover:not(:disabled) {
+    background-color: #f0f0f0;
 }
-/* hover styles for badge-prefixed classes (use CSS variables correctly) */
-.download-btn.badge-legendary:hover {
-     background-color: var(--legendary2);
-     color: var(--legendary1);
+
+/* Estado de botões desabilitados */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    background-color: #eaeaea !important;
+    border-color: #ddd !important;
 }
-.download-btn.badge-gold:hover {
-     background-color: var(--gold2);
-     color: var(--gold1);
-}
-.download-btn.badge-silver:hover {
-     background-color: var(--silver2);
-     color: var(--silver1);
-}
-.download-btn.badge-bronze:hover {
-     background-color: var(--bronze2);
-     color: var(--bronze1);
-}
+
+/* Respostas Solo (Correta / Incorreta) */
 .correct {
-     background-color: #90EE90 !important;
-     border-color: #4CAF50;
+    background-color: #90EE90 !important;
+    border-color: #4CAF50;
+    color: #1b5e20;
 }
+
 .wrong {
-     background-color: #FF7F7F !important;
-     border-color: #F44336;
+    background-color: #FF7F7F !important;
+    border-color: #F44336;
+    color: #7f0000;
 }
+
 #timer-display {
-     font-size: 30px;
-     font-weight: bold;
-     color: #0066cc;
-     margin: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #0066cc;
+    margin: 15px;
 }
+
 #score-display {
-     font-size: 22px;
-     font-weight: bold;
-     color: #333;
-     margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
 }
+
 /* Área de Mídia (Imagens e Áudios) */
 #media-container img {
-     max-width: 100%;
-     height: auto;
-     max-height: 250px;
-     border-radius: 8px;
-     margin-bottom: 10px;
+    max-width: 100%;
+    height: auto;
+    max-height: 250px;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
-/* Placar do Multiplayer (Teams) */
-.team-container {
-     display: flex;
-     justify-content: center;
-     gap: 15px;
-     flex-wrap: wrap;
-     margin: 20px 0;
+
+/* --- PAINEL DO PROFESSOR E MULTIPLAYER (TEAMS) --- */
+#scoreboard {
+    background-color: #edf2f7;
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 20px 0;
 }
+
+/* Botão "Ninguém Pontuou / Revelar Resposta" */
+.teacher-controls button {
+    width: auto !important;
+    max-width: 100% !important;
+    display: inline-block !important;
+    margin: 0 0 15px 0 !important;
+    font-weight: bold;
+}
+
 .team-box {
-     border: 2px solid #333;
-     padding: 15px;
-     border-radius: 8px;
-     min-width: 130px;
-     background: #fff;
+    border: 2px solid #cbd5e0;
+    padding: 12px;
+    border-radius: 8px;
+    min-width: 130px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
+
+.team-score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2d3748;
+    margin: 6px 0;
+}
+
+/* Botão de adicionar ponto dentro da caixa do time */
+.team-box button {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin: 6px 0 0 0 !important;
+    padding: 8px 12px !important;
+    font-size: 15px !important;
+    font-weight: bold;
+}
+
 /* Estilos para as Badges na Tela Final */
 .badge-box {
-     padding: 20px;
-     margin: 20px auto;
-     border-radius: 12px;
-     width: 90%;
-     max-width: 400px;
-     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-.badge-legendary {
-     background-color: var(--legendary1);
-     color: var(--legendary2);
-}
-.badge-gold {
-     background-color: var(--gold1);
-     color: var(--gold2);
-}
-.badge-silver {
-     background-color: var(--silver1);
-     color: var(--silver2);
-}
-.badge-bronze {
-     background-color: var(--bronze1);
-     color: var(--bronze2);
-}
-/* --- OTIMIZAÇÃO ESPECÍFICA PARA SMARTPHONES (Telas menores que 600px) --- */
-@media screen and (max-width: 600px) {
-    body {
-        padding: 20px 0;
-   }
-    h1 {
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 400;
-   }
-    h2 {
-        font-size: 18px;
-   }
-   /* Botões ocupam quase toda a largura para facilitar o toque com o dedo */
-    button {
-        width: 95%;
-        padding: 18px;
-        font-size: 16px;
-        margin: 8px auto;
-   }
-   /* Selects e inputs maiores no celular */
-    select, input[type="text"] {
-        width: 90%;
-        padding: 12px;
-        font-size: 16px;
-        margin: 8px 0;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-   }
-    .team-box {
-        width: 40%;
-        padding: 10px;
-   }
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* -------- Badge preview and download button styles (added) -------- */
+.badge-legendary { background-color: var(--legendary1); color: var(--legendary2); }
+.badge-gold { background-color: var(--gold1); color: var(--gold2); }
+.badge-silver { background-color: var(--silver1); color: var(--silver2); }
+.badge-bronze { background-color: var(--bronze1); color: var(--bronze2); }
+
+/* Preview da Badge e Botão de Download */
 .badge-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 12px auto;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 12px auto;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
 }
 
-/* Generic download button base */
 .download-btn {
-  display: inline-block;
-  margin: 10px auto;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  transition: transform 0.08s ease, box-shadow 0.12s ease;
-  font-size: 16px;
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-  text-decoration: none;
+    display: inline-block;
+    margin: 10px auto;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+    font-size: 16px;
+    outline: none;
+    text-decoration: none;
 }
 
-/* hover / active */
 .download-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
 .download-btn:active { transform: translateY(0); }
-.download-btn:focus-visible { box-shadow: 0 0 0 3px rgba(0,102,204,0.2); }
 
-/* Tier colors - accept both the "bare" tier class (legendary) or the prefixed one (badge-legendary) */
-/* Legendary (purple) */
 .download-btn.legendary, .download-btn.badge-legendary { background-color: var(--legendary1); color: var(--legendary2); }
-
-/* Gold */
 .download-btn.gold, .download-btn.badge-gold { background-color: var(--gold1); color: var(--gold2); }
-
-/* Silver */
 .download-btn.silver, .download-btn.badge-silver { background-color: var(--silver1); color: var(--silver2); }
-
-/* Bronze */
 .download-btn.bronze, .download-btn.badge-bronze { background-color: var(--bronze1); color: var(--bronze2); }
 
-/* make button full width on narrow screens */
-@media (max-width: 600px) {
-  .download-btn { width: 90%; display: block; margin-left: auto; margin-right: auto; }
+.download-btn.badge-legendary:hover { background-color: var(--legendary2); color: var(--legendary1); }
+.download-btn.badge-gold:hover { background-color: var(--gold2); color: var(--gold1); }
+.download-btn.badge-silver:hover { background-color: var(--silver2); color: var(--silver1); }
+.download-btn.badge-bronze:hover { background-color: var(--bronze2); color: var(--bronze1); }
+
+/* --- OTIMIZAÇÃO PARA SMARTPHONES (Telas menores que 600px) --- */
+@media screen and (max-width: 600px) {
+    body {
+        padding: 15px 0;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: 400;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    button, select {
+        width: 92%;
+        padding: 16px;
+        font-size: 16px;
+        margin: 8px auto;
+    }
+    .download-btn { 
+        width: 90%; 
+        display: block; 
+    }
+    .team-box {
+        min-width: 45%;
+    }
 }
