@@ -1,16 +1,14 @@
 let fullData = {}, currentQ = [], index = 0, mode = 'solo', startTime, score = 0;
 let maxPossibleScore = 0;
-let gameStartTime = 0; // overall game start timestamp
-let correctCount = 0; // track number of correct answers
+let gameStartTime = 0;
+let correctCount = 0;
 let currentModule = '';
 let currentTest = '';
 
-// Exclusões específicas de testes por módulo (ex: oculta Quiz 1/2/3 no T5)
 const moduleTestExclusions = {
     "T5": ["Quiz 1", "Quiz 2", "Quiz 3"]
 };
 
-// Inicialização das opções de tela
 async function initSetup() {
     try {
         let res = await fetch('./questions.json?t=' + new Date().getTime());
@@ -127,11 +125,15 @@ async function loadAndStart() {
     document.getElementById('setup-screen').classList.add('hidden');
     document.getElementById('game-screen').classList.remove('hidden');
 
+    const sb = document.getElementById('scoreboard');
+
     if (mode === 'teams') {
         setupTeams();
-        // Event listener para atalhos do professor (Espaço e números 1-4)
         window.removeEventListener('keydown', handleTeacherKeyboard);
         window.addEventListener('keydown', handleTeacherKeyboard);
+    } else {
+        // Garante que o placar de times FICA OCULTO no modo Solo
+        if (sb) sb.classList.add('hidden');
     }
 
     let scoreDisplay = document.getElementById('score-display');
@@ -192,9 +194,9 @@ function showQuestion() {
                     mediaArea.innerHTML = `<audio controls src="assets/${q.media}"></audio>`;
                 }
                 
-                // Exibe a pergunta e também a resposta correta para consulta do professor
+                // Exibe APENAS a pergunta (a resposta fica escondida até a ativação dos botões)
                 if (qArea) {
-                    qArea.innerHTML = `<div>${q.q}</div><div style="font-size: 16px; color: #27ae60; margin-top: 10px; font-weight: normal;">(Answer: <strong>${q.answer}</strong>)</div>`;
+                    qArea.innerText = q.q;
                 }
 
                 // Habilita os botões de controle para o professor
@@ -277,7 +279,7 @@ function setupTeams() {
 
     const teamCount = parseInt(document.getElementById('teamCountSelect')?.value) || 2;
 
-    // 1. Botão "Ninguém Pontuou" (Com indicação do atalho [Espaço])
+    // 1. Botão "Ninguém Pontuou"
     const teacherControl = document.createElement('div');
     teacherControl.className = 'teacher-controls';
     teacherControl.style.width = '100%';
@@ -299,7 +301,7 @@ function setupTeams() {
     teacherControl.appendChild(btnNoPoints);
     sb.appendChild(teacherControl);
 
-    // 2. Placar dos Times (2 a 4 times)
+    // 2. Placar dos Times
     const teamsWrapper = document.createElement('div');
     teamsWrapper.style.display = 'flex';
     teamsWrapper.style.justifyContent = 'center';
@@ -352,7 +354,6 @@ function setupTeams() {
     sb.appendChild(teamsWrapper);
 }
 
-// Habilita/Desabilita botões do professor
 function setTeamButtonsState(disabled) {
     const noPointsBtn = document.getElementById('btn-no-points');
     if (noPointsBtn) noPointsBtn.disabled = disabled;
@@ -364,16 +365,31 @@ function setTeamButtonsState(disabled) {
     }
 }
 
-// Atribui ponto para um time e passa direto para a próxima pergunta
+// Atribui ponto para um time, revela a resposta e aguarda 2s
 function awardTeamPoint(teamId) {
+    const q = currentQ[index];
+    const qArea = document.getElementById('q-text');
+
+    // Desabilita botões para evitar múltiplos cliques
+    setTeamButtonsState(true);
+
     const scoreSpan = document.getElementById(`team-score-${teamId}`);
     if (scoreSpan) {
         const current = parseInt(scoreSpan.innerText) || 0;
         scoreSpan.innerText = current + 10;
     }
 
-    index++;
-    showQuestion();
+    // Exibe qual time pontuou e revela a resposta correta
+    if (qArea && q) {
+        qArea.innerHTML = `<div style="color: #27ae60; font-size: 22px; font-weight: bold;">🎉 Team ${teamId} +10 Pts!</div>
+                           <div style="font-size: 20px; margin-top: 10px;">Correct Answer: <strong>${q.answer}</strong></div>`;
+    }
+
+    // Exibe por 2 segundos antes de avançar
+    setTimeout(() => {
+        index++;
+        showQuestion();
+    }, 2000);
 }
 
 // Ação de "Ninguém Pontuou"
@@ -381,28 +397,24 @@ function handleNoPoints() {
     const q = currentQ[index];
     const qArea = document.getElementById('q-text');
 
-    // Desabilita botões para evitar duplo clique durante a transição
     setTeamButtonsState(true);
 
     if (qArea && q) {
-        qArea.innerHTML = `<div style="color: #e74c3c; font-size: 22px; font-weight: bold;">No team scored!</div>
+        qArea.innerHTML = `<div style="color: #e74c3c; font-size: 22px; font-weight: bold;">⚠️ No team scored!</div>
                            <div style="font-size: 20px; margin-top: 10px;">Correct Answer: <strong>${q.answer}</strong></div>`;
     }
 
-    // Aguarda 2 segundos mostrando a resposta na tela e avança
     setTimeout(() => {
         index++;
         showQuestion();
     }, 2000);
 }
 
-// Atalhos do teclado para o professor
 function handleTeacherKeyboard(e) {
     if (mode !== 'teams') return;
 
-    // Atalho: ESPAÇO -> Ninguém pontuou
     if (e.code === 'Space' || e.key === ' ') {
-        e.preventDefault(); // Impede a página de rolar para baixo
+        e.preventDefault();
         const noPointsBtn = document.getElementById('btn-no-points');
         if (noPointsBtn && !noPointsBtn.disabled) {
             handleNoPoints();
@@ -410,7 +422,6 @@ function handleTeacherKeyboard(e) {
         return;
     }
 
-    // Atalhos: 1, 2, 3, 4 -> Dar ponto para o Time X
     const key = parseInt(e.key);
     const teamCount = parseInt(document.getElementById('teamCountSelect')?.value) || 2;
     if (key >= 1 && key <= teamCount) {
@@ -427,16 +438,13 @@ function showFinalResults() {
     const final = document.getElementById('final-results');
     const resultsText = document.getElementById('results-text');
     const badgeArea = document.getElementById('badge-display-area');
+    const spControls = document.getElementById('single-player-controls');
 
     if (!final || !resultsText) return;
-    // Dentro da função showFinalResults() no game.js:
 
-const spControls = document.getElementById('single-player-controls');
-
-if (mode === 'solo') {
-    if (spControls) spControls.style.display = 'block'; // Mostra no modo solo
-    
     if (mode === 'solo') {
+        if (spControls) spControls.style.display = 'block';
+
         const pct = maxPossibleScore > 0 ? Math.round((score / maxPossibleScore) * 100) : 0;
         const correctPct = maxPossibleScore > 0 ? Math.round((correctCount / currentQ.length) * 100) : 0;
         const timeSec = Math.round((Date.now() - gameStartTime) / 1000);
@@ -556,7 +564,8 @@ if (mode === 'solo') {
         emblemImg.src = emblemSrc;
 
     } else {
-        // Exibição dos resultados finais para os times
+        if (spControls) spControls.style.display = 'none';
+
         const teams = Array.from(document.querySelectorAll('#scoreboard .team-box'));
         let text = '🏆 Final Standings:\n\n';
         teams.forEach(tb => {
@@ -580,9 +589,6 @@ if (mode === 'solo') {
 
     const finalResults = document.getElementById('final-results');
     if (finalResults) finalResults.classList.remove('hidden');
-} else {
-    if (spControls) spControls.style.display = 'none';  // Esconde no modo times
-}
 }
 
 function roundRect(ctx, x, y, w, h, r, fill, stroke) {
