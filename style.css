@@ -82,15 +82,17 @@ button:disabled {
 
 /* Respostas Solo (Correta / Incorreta) */
 .correct {
-    background-color: #90EE90 !important;
-    border-color: #4CAF50;
-    color: #1b5e20;
+    background-color: #2ecc71 !important; /* Fundo Verde destacado */
+    border-color: #27ae60 !important;
+    color: #000000 !important;            /* Texto Preto */
+    font-weight: bold;
 }
 
 .wrong {
-    background-color: #FF7F7F !important;
-    border-color: #F44336;
-    color: #7f0000;
+    background-color: #ff6b6b !important; /* Fundo Vermelho/Rosa destacado */
+    border-color: #ee5253 !important;
+    color: #000000 !important;            /* Texto Preto */
+    font-weight: bold;
 }
 
 #timer-display {
