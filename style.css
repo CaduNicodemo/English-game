@@ -76,8 +76,8 @@ button:hover:not(:disabled) {
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed !important;
-    background-color: #eaeaea !important;
-    border-color: #ddd !important;
+    background-color: #eaeaea;
+    border-color: #ddd;
 }
 
 /* Respostas Solo (Correta / Incorreta) */
