@@ -429,7 +429,13 @@ function showFinalResults() {
     const badgeArea = document.getElementById('badge-display-area');
 
     if (!final || !resultsText) return;
+    // Dentro da função showFinalResults() no game.js:
 
+const spControls = document.getElementById('single-player-controls');
+
+if (mode === 'solo') {
+    if (spControls) spControls.style.display = 'block'; // Mostra no modo solo
+    
     if (mode === 'solo') {
         const pct = maxPossibleScore > 0 ? Math.round((score / maxPossibleScore) * 100) : 0;
         const correctPct = maxPossibleScore > 0 ? Math.round((correctCount / currentQ.length) * 100) : 0;
@@ -574,6 +580,9 @@ function showFinalResults() {
 
     const finalResults = document.getElementById('final-results');
     if (finalResults) finalResults.classList.remove('hidden');
+} else {
+    if (spControls) spControls.style.display = 'none';  // Esconde no modo times
+}
 }
 
 function roundRect(ctx, x, y, w, h, r, fill, stroke) {
