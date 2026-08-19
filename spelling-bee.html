@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spelling Bee Practice</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* small page-specific tweaks */
+        #container{max-width:900px;margin:30px auto;padding:20px}
+        label{display:block;margin:10px 0 6px}
+        select,input[type="text"]{width:100%;padding:10px;font-size:16px}
+        #play-btn{margin-top:8px;padding:10px 16px}
+        #answer-area{margin-top:18px}
+        #progress{margin-top:10px;color:#555}
+        #message{margin-top:16px;font-weight:bold}
+        .hidden{display:none}
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>Spelling Bee Practice</h1>
+
+    <div id="setup">
+        <label for="levelSelect">Level</label>
+        <select id="levelSelect">
+            <option>J1</option>
+            <option>J2</option>
+            <option>TA</option>
+            <option>T1</option>
+            <option>T2</option>
+        </select>
+
+        <label for="listSelect">Word set</label>
+        <select id="listSelect">
+            <option>List 1</option>
+            <option>List 2</option>
+            <option>List 3</option>
+            <option>List 4</option>
+        </select>
+
+        <label for="studySelect">Study type</label>
+        <select id="studySelect">
+            <option>Practice 1</option>
+            <option>Practice 2</option>
+            <option>Championship</option>
+        </select>
+
+        <button id="startBtn">Start Practice</button>
+    </div>
+
+    <div id="game" class="hidden">
+        <div id="progress">Question <span id="qIndex">0</span> / <span id="qTotal">0</span></div>
+
+        <div id="prompt" style="margin-top:14px;font-size:18px;color:#222"></div>
+
+        <div id="audio-area" style="margin-top:12px">
+            <button id="play-btn">Play Audio (or press Space)</button>
+            <audio id="audio" class="hidden"></audio>
+        </div>
+
+        <div id="answer-area">
+            <label for="answerInput">Type the exact spelling (case-sensitive, punctuation matters)</label>
+            <input id="answerInput" type="text" autocomplete="off" />
+            <div style="margin-top:8px">
+                <button id="submitBtn">Submit (Enter)</button>
+                <button id="skipBtn">Skip</button>
+            </div>
+        </div>
+
+        <div id="message"></div>
+    </div>
+
+    <div id="final" class="hidden" style="margin-top:18px">
+        <h2>Results</h2>
+        <div id="final-summary"></div>
+        <button id="backBtn">Back to Menu</button>
+    </div>
+</div>
+
+<script src="spelling-bee.js" defer></script>
+</body>
+</html>
