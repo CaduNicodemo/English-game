@@ -1,0 +1,21 @@
+{
+  "J1": {
+    "List 1": {
+      "Practice 1": [
+        { "media": "sample1.mp3", "answer": "Apple", "prompt": "Spell the fruit you hear" },
+        { "media": "sample2.mp3", "answer": "Banana", "prompt": "Spell the fruit you hear" }
+      ],
+      "Practice 2": [
+        { "media": "sample3.mp3", "answer": "Hello, world!", "prompt": "Type exactly what you hear (including punctuation)" }
+      ],
+      "Championship": []
+    },
+    "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] },
+    "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] },
+    "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] }
+  },
+  "J2": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } },
+  "TA": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } },
+  "T1": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } },
+  "T2": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } }
+}
