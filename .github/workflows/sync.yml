@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install pandas
           python convert.py
-          pyton convert-spelling-bee.py
+          python convert-spelling-bee.py
       - name: Commit and Push
         run: |
           git config --global user.name 'GitHub Action'
