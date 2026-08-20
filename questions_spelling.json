@@ -2,20 +2,1021 @@
   "J1": {
     "List 1": {
       "Practice 1": [
-        { "media": "sample1.mp3", "answer": "Apple", "prompt": "Spell the fruit you hear" },
-        { "media": "sample2.mp3", "answer": "Banana", "prompt": "Spell the fruit you hear" }
+        {
+          "media": "",
+          "answer": "one",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "two",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "three",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "four",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "five",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "eight",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "eleven",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "twelve",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "thirteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "fourteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "fifteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "sixteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "seventeen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "nineteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "twenty",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "brother",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "sister",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "grandfather",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "grandmother",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "dad",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "mum",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "pencil",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "desk",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "book",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "table",
+          "prompt": "Can you spell this?"
+        }
       ],
       "Practice 2": [
-        { "media": "sample3.mp3", "answer": "Hello, world!", "prompt": "Type exactly what you hear (including punctuation)" }
+        {
+          "media": "",
+          "answer": "black",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "orange",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "brown",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "white",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "yellow",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "green T-shirt",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "purple crayon",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "red bike",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "blue bag",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "grey chair",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "pink sofa",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "watch",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "eraser",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "elephant",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "ice cream",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "umbrella",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "horse",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "cow",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "apple",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "sitting room",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "dining room",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "bathroom",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "bedroom",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "kitchen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "garage",
+          "prompt": "Can you spell this?"
+        }
       ],
-      "Championship": []
-    },
-    "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] },
-    "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] },
-    "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] }
+      "Championship": [
+        {
+          "media": "",
+          "answer": "one",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "two",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "three",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "four",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "five",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "eight",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "eleven",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "twelve",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "thirteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "fourteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "fifteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "sixteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "seventeen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "nineteen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "twenty",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "brother",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "sister",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "grandfather",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "grandmother",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "dad",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "mum",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "pencil",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "desk",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "book",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "table",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "black",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "orange",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "brown",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "white",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "yellow",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "green T-shirt",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "purple crayon",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "red bike",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "blue bag",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "grey chair",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "pink sofa",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "watch",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "eraser",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "elephant",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "ice cream",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "umbrella",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "horse",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "cow",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "apple",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "sitting room",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "dining room",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "bathroom",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "bedroom",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "kitchen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "garage",
+          "prompt": "Can you spell this?"
+        }
+      ]
+    }
   },
-  "J2": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } },
-  "TA": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } },
-  "T1": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } },
-  "T2": { "List 1": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 2": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 3": { "Practice 1": [], "Practice 2": [], "Championship": [] }, "List 4": { "Practice 1": [], "Practice 2": [], "Championship": [] } }
+  "T2": {
+    "List 3": {
+      "Practice 1": [
+        {
+          "media": "",
+          "answer": "professions",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "instruments",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "songwriter",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "producer",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "conductor",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "keyboard",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "bass",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "electric guitar",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "live performance",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "audience",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "has seen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "haven't streamed",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "have bought",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "hasn't eaten",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "have heard",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "haven't released",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "has tried",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "has won",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "downloaded",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "done",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "forgotten",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "written",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "spoken",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "lived",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "That's right.",
+          "prompt": "Can you spell this?"
+        }
+      ],
+      "Practice 2": [
+        {
+          "media": "",
+          "answer": "What do you mean?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Are you serious?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Exactly.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "aeroplane",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "underground",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "tram",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "spaceship",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "lorry",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "ferry",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "will be very expensive",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "probably won't cause",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "definitely won't buy",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "might lose",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "might not sell",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "takes off",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "getting into",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "pick you up",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "turn off the radio",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "turn on the camera",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "looked for my passport",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "broke down",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "count on you",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "/assets/spelling-bee/luvvoice.com-20260820-AriisM.mp3",
+          "answer": "put on your shoes",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "/assets/spelling-bee/luvvoice.com-20260820-OXEdYF.mp3",
+          "answer": "wake up",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "/assets/spelling-bee/luvvoice.com-20260820-IZl6V3.mp3",
+          "answer": "No way!",
+          "prompt": "Can you spell this?"
+        }
+      ],
+      "Championship": [
+        {
+          "media": "",
+          "answer": "professions",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "instruments",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "songwriter",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "producer",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "conductor",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "keyboard",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "bass",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "electric guitar",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "live performance",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "audience",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "has seen",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "haven't streamed",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "have bought",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "hasn't eaten",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "have heard",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "haven't released",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "has tried",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "has won",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "downloaded",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "done",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "forgotten",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "written",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "spoken",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "lived",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "That's right.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "What do you mean?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Are you serious?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Exactly.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "aeroplane",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "underground",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "tram",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "spaceship",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "lorry",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "ferry",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "will be very expensive",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "probably won't cause",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "definitely won't buy",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "might lose",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "might not sell",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "takes off",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "getting into",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "pick you up",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "turn off the radio",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "turn on the camera",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "looked for my passport",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "broke down",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "count on you",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "/assets/spelling-bee/luvvoice.com-20260820-AriisM.mp3",
+          "answer": "put on your shoes",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "/assets/spelling-bee/luvvoice.com-20260820-OXEdYF.mp3",
+          "answer": "wake up",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "/assets/spelling-bee/luvvoice.com-20260820-IZl6V3.mp3",
+          "answer": "No way!",
+          "prompt": "Can you spell this?"
+        }
+      ]
+    }
+  }
 }
