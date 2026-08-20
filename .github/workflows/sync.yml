@@ -2,6 +2,7 @@ name: Sync Questions
 on:
   push:
     paths:
+      - 'spelling-bee.csv'
       - 'questions.csv'
 permissions:
   contents: write
@@ -15,14 +16,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with: { python-version: '3.x' }
-      - name: Run Converter
+      - name: Run Converters
         run: |
           pip install pandas
           python convert.py
+          pyton convert-spelling-bee.py
       - name: Commit and Push
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add questions.json
-          git commit -m "Auto-update questions.json from CSV" || exit 0
+          git add questions_spelling.json
+          git commit -m "Auto-update JSON files from CSVs" || exit 0
           git push
