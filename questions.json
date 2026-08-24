@@ -96,6 +96,186 @@
           "Conductor"
         ],
         "answer": "DJ"
+      },
+      {
+        "q": "What is the past participle form of the verb DO?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "did",
+          "does",
+          "done",
+          "doing"
+        ],
+        "answer": "done"
+      },
+      {
+        "q": "Complete the sentence in Past Simple: Last summer, my family _____ to France.",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "visit",
+          "visited",
+          "visiting",
+          "has visited"
+        ],
+        "answer": "visited"
+      },
+      {
+        "q": "Complete the sentence in Past Simple: The concert _____ fantastic yesterday!",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "is",
+          "was",
+          "were",
+          "been"
+        ],
+        "answer": "was"
+      },
+      {
+        "q": "What is the base form of the past participle BEEN?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "be",
+          "was",
+          "were",
+          "being"
+        ],
+        "answer": "be"
+      },
+      {
+        "q": "Complete in Present Perfect: Sarah _____ at this company since 2018.",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "has worked",
+          "worked",
+          "is working",
+          "have worked"
+        ],
+        "answer": "has worked"
+      },
+      {
+        "q": "Complete in Present Perfect: We _____ for the exam yet.",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "haven't studied",
+          "didn't studied",
+          "hasn't studied",
+          "don't study"
+        ],
+        "answer": "haven't studied"
+      },
+      {
+        "q": "Vocabulary: What do we call the people who watch a theater performance or concert?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "band",
+          "conductor",
+          "lyrics",
+          "audience"
+        ],
+        "answer": "audience"
+      },
+      {
+        "q": "Choose the correct Present Perfect question:",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "Has Jane bought a new car?",
+          "Did Jane bought a new car?",
+          "Have Jane bought a new car?",
+          "Is Jane buying a new car?"
+        ],
+        "answer": "Has Jane bought a new car?"
+      },
+      {
+        "q": "Choose the correct word: They have lived in Canada _____ ten years.",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "since",
+          "for",
+          "ago",
+          "during"
+        ],
+        "answer": "for"
+      },
+      {
+        "q": "Choose the correct word: I haven't seen my best friend _____ last Monday.",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "for",
+          "from",
+          "since",
+          "during"
+        ],
+        "answer": "since"
+      },
+      {
+        "q": "Vocabulary: What is a trophy or distinction given to an artist for an achievement?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "an award",
+          "an audience",
+          "a lyric",
+          "a live performance"
+        ],
+        "answer": "an award"
+      },
+      {
+        "q": "Choose the correct word: Mark has owned this guitar _____ a long time.",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "for",
+          "since",
+          "ago",
+          "until"
+        ],
+        "answer": "for"
+      },
+      {
+        "q": "Vocabulary: Which of these is a percussion instrument played with sticks?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "violin",
+          "piano",
+          "drums",
+          "flute"
+        ],
+        "answer": "drums"
+      },
+      {
+        "q": "Vocabulary: What do we call the written text and words that make up a song?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "awards",
+          "lyrics",
+          "instruments",
+          "scripts"
+        ],
+        "answer": "lyrics"
+      },
+      {
+        "q": "Choose the correct question in Past Simple: _____ Lucas clean his bedroom yesterday?",
+        "type": NaN,
+        "media": "'''",
+        "options": [
+          "Did",
+          "Does",
+          "Has",
+          "Have"
+        ],
+        "answer": "Did"
       }
     ],
     "Past Participle": [
