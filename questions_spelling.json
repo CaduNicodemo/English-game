@@ -507,6 +507,514 @@
           "prompt": "Can you spell this?"
         }
       ]
+    },
+    "List 3": {
+      "Practice 1": [
+        {
+          "media": "luvvoice.com-20260824-8wvTgO.mp3",
+          "answer": "Portuguese",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-JXjjri.mp3",
+          "answer": "English",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-m5A6Ot.mp3",
+          "answer": "Maths",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-JDAik5.mp3",
+          "answer": "Science",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-4C0iYN.mp3",
+          "answer": "Arts",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-d2f52z.mp3",
+          "answer": "Physical Education",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-Ta0eaj.mp3",
+          "answer": "alligator",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-I9PKxl.mp3",
+          "answer": "giraffe",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-ncOOFG.mp3",
+          "answer": "hippo",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-GglRza.mp3",
+          "answer": "iguana",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-cBd6vJ.mp3",
+          "answer": "leopard",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-bD0FM4.mp3",
+          "answer": "lion",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-hezKsb.mp3",
+          "answer": "monkey",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-gQc6V6.mp3",
+          "answer": "panda",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-7x1m4J.mp3",
+          "answer": "snake",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-rQM5WC.mp3",
+          "answer": "head",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-E3uFcT.mp3",
+          "answer": "eye",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-fyO987.mp3",
+          "answer": "ear",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-ZbXeNc.mp3",
+          "answer": "small nose",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-za0fgi.mp3",
+          "answer": "big mouth",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-BELlQG.mp3",
+          "answer": "tooth",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-xyHYqj.mp3",
+          "answer": "sharp teeth",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-hMP9yS.mp3",
+          "answer": "long neck",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-FX11xt.mp3",
+          "answer": "tail",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-S5DYE9.mp3",
+          "answer": "short leg",
+          "prompt": "Can you spell this?"
+        }
+      ],
+      "Practice 2": [
+        {
+          "media": "",
+          "answer": "tall",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Brazil",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Canada",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Italy",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Japan",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Mexico",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "The United States",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "The United Kingdom",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "computer",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "headphones",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "handbag",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "trousers",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "roller skates",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "towel",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Mike's jacket",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Calvin's glasses",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "What have you got?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I've got stickers.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I love animals!",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I like cats!",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I don't like monsters!",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Where are you from?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I'm from Brazil.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "She's a teacher.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "He's my friend.",
+          "prompt": "Can you spell this?"
+        }
+      ],
+      "Championship": [
+        {
+          "media": "luvvoice.com-20260824-8wvTgO.mp3",
+          "answer": "Portuguese",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-JXjjri.mp3",
+          "answer": "English",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-m5A6Ot.mp3",
+          "answer": "Maths",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-JDAik5.mp3",
+          "answer": "Science",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-4C0iYN.mp3",
+          "answer": "Arts",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-d2f52z.mp3",
+          "answer": "Physical Education",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-Ta0eaj.mp3",
+          "answer": "alligator",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-I9PKxl.mp3",
+          "answer": "giraffe",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-ncOOFG.mp3",
+          "answer": "hippo",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-GglRza.mp3",
+          "answer": "iguana",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-cBd6vJ.mp3",
+          "answer": "leopard",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-bD0FM4.mp3",
+          "answer": "lion",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-hezKsb.mp3",
+          "answer": "monkey",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-gQc6V6.mp3",
+          "answer": "panda",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-7x1m4J.mp3",
+          "answer": "snake",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-rQM5WC.mp3",
+          "answer": "head",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-E3uFcT.mp3",
+          "answer": "eye",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-fyO987.mp3",
+          "answer": "ear",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-ZbXeNc.mp3",
+          "answer": "small nose",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-za0fgi.mp3",
+          "answer": "big mouth",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-BELlQG.mp3",
+          "answer": "tooth",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-xyHYqj.mp3",
+          "answer": "sharp teeth",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-hMP9yS.mp3",
+          "answer": "long neck",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-FX11xt.mp3",
+          "answer": "tail",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "luvvoice.com-20260824-S5DYE9.mp3",
+          "answer": "short leg",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "tall",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Brazil",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Canada",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Italy",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Japan",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Mexico",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "The United States",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "The United Kingdom",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "computer",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "headphones",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "handbag",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "trousers",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "roller skates",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "towel",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Mike's jacket",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Calvin's glasses",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "What have you got?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I've got stickers.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I love animals!",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I like cats!",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I don't like monsters!",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "Where are you from?",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "I'm from Brazil.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "She's a teacher.",
+          "prompt": "Can you spell this?"
+        },
+        {
+          "media": "",
+          "answer": "He's my friend.",
+          "prompt": "Can you spell this?"
+        }
+      ]
     }
   },
   "T2": {
