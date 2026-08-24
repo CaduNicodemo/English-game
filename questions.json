@@ -99,7 +99,7 @@
       },
       {
         "q": "What is the past participle form of the verb DO?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "did",
@@ -111,7 +111,7 @@
       },
       {
         "q": "Complete the sentence in Past Simple: Last summer, my family _____ to France.",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "visit",
@@ -123,7 +123,7 @@
       },
       {
         "q": "Complete the sentence in Past Simple: The concert _____ fantastic yesterday!",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "is",
@@ -135,7 +135,7 @@
       },
       {
         "q": "What is the base form of the past participle BEEN?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "be",
@@ -147,7 +147,7 @@
       },
       {
         "q": "Complete in Present Perfect: Sarah _____ at this company since 2018.",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "has worked",
@@ -159,7 +159,7 @@
       },
       {
         "q": "Complete in Present Perfect: We _____ for the exam yet.",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "haven't studied",
@@ -171,7 +171,7 @@
       },
       {
         "q": "Vocabulary: What do we call the people who watch a theater performance or concert?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "band",
@@ -183,7 +183,7 @@
       },
       {
         "q": "Choose the correct Present Perfect question:",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "Has Jane bought a new car?",
@@ -195,7 +195,7 @@
       },
       {
         "q": "Choose the correct word: They have lived in Canada _____ ten years.",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "since",
@@ -207,7 +207,7 @@
       },
       {
         "q": "Choose the correct word: I haven't seen my best friend _____ last Monday.",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "for",
@@ -219,7 +219,7 @@
       },
       {
         "q": "Vocabulary: What is a trophy or distinction given to an artist for an achievement?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "an award",
@@ -231,7 +231,7 @@
       },
       {
         "q": "Choose the correct word: Mark has owned this guitar _____ a long time.",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "for",
@@ -243,7 +243,7 @@
       },
       {
         "q": "Vocabulary: Which of these is a percussion instrument played with sticks?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "violin",
@@ -255,7 +255,7 @@
       },
       {
         "q": "Vocabulary: What do we call the written text and words that make up a song?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "awards",
@@ -267,7 +267,7 @@
       },
       {
         "q": "Choose the correct question in Past Simple: _____ Lucas clean his bedroom yesterday?",
-        "type": NaN,
+        "type": "\"\"",
         "media": "'''",
         "options": [
           "Did",
