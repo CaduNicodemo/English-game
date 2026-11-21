@@ -2,6 +2,7 @@ name: Sync Questions
 on:
   push:
     paths:
+      - 'convert-spelling-bee.py'
       - 'spelling-bee.csv'
       - 'questions.csv'
 permissions:
