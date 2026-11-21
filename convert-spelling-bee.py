@@ -20,27 +20,24 @@ def update_championship_from_json(data):
 
 # First, try to load existing JSON and update it
 data = load_json_data()
-
-if data is None:
-    # If no JSON exists, build from CSV (original behavior)
-    with open('spelling-bee.csv', newline='', encoding='utf-8-sig') as f:
-        reader = csv.DictReader(f)
-        data = {}
+with open('spelling-bee.csv', newline='', encoding='utf-8-sig') as f:
+    reader = csv.DictReader(f)
+    data = {}
         
-        for row in reader:
-            level = row['Level']
-            list_name = row['List']
-            study = row['Study']
+    for row in reader:
+        level = row['Level']
+        list_name = row['List']
+        study = row['Study']
             
-            if level not in data: data[level] = {}
-            if list_name not in data[level]: data[level][list_name] = {}
-            if study not in data[level][list_name]: data[level][list_name][study] = []
+        if level not in data: data[level] = {}
+        if list_name not in data[level]: data[level][list_name] = {}
+        if study not in data[level][list_name]: data[level][list_name][study] = []
             
-            data[level][list_name][study].append({
-                "media": row['Media'],
-                "answer": row['Answer'],
-                "prompt": row['Prompt']
-            })
+        data[level][list_name][study].append({
+            "media": row['Media'],
+            "answer": row['Answer'],
+            "prompt": row['Prompt']
+        })
 
 # Always regenerate Championship from current Practice 1 and 2
 data = update_championship_from_json(data)
