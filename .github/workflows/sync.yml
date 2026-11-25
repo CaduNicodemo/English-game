@@ -2,11 +2,14 @@ name: Sync Questions
 on:
   push:
     paths:
-      - 'convert-spelling-bee.py'
-      - 'spelling-bee.csv'
-      - 'questions.csv'
+      - 'scripts/convert.py'
+      - 'scripts/convert-spelling-bee.py'
+      - 'data/spelling-bee.csv'
+      - 'data/questions.csv'
+
 permissions:
   contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,19 +17,22 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Set up Python
         uses: actions/setup-python@v5
-        with: { python-version: '3.x' }
+        with:
+          python-version: '3.x'
+
       - name: Run Converters
         run: |
           pip install pandas
-          python convert.py
-          python convert-spelling-bee.py
+          python scripts/convert.py
+          python scripts/convert-spelling-bee.py
+
       - name: Commit and Push
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add questions.json
-          git add questions_spelling.json
+          git add data/questions.json data/questions_spelling.json
           git commit -m "Auto-update JSON files from CSVs" || exit 0
           git push
