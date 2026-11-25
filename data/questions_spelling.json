@@ -1269,11 +1269,6 @@
           "media": "",
           "answer": "I don't like milk.",
           "prompt": ""
-        },
-        {
-          "media": "",
-          "answer": "",
-          "prompt": ""
         }
       ],
       "Championship": [
@@ -1525,11 +1520,6 @@
         {
           "media": "",
           "answer": "I don't like milk.",
-          "prompt": ""
-        },
-        {
-          "media": "",
-          "answer": "",
           "prompt": ""
         }
       ]
