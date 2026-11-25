@@ -90,14 +90,24 @@ function playAudio() {
   audioEl.play().catch(e => console.warn('Audio play blocked', e));
 }
 
+function normalizeText(str) {
+  return String(str)
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'") // Converte qualquer apóstrofo curvo para '
+    .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"'); // Converte aspas curvas para "
+}
+
 function submitAnswer() {
   if (idx >= currentSet.length) return;
   const q = currentSet[idx];
   const input = document.getElementById('answerInput');
-  const given = input.value === null ? '' : String(input.value).trim();
+  
+  const given = input.value === null ? '' : normalizeText(input.value);
+  const expected = normalizeText(q.answer);
 
-  // Exact-match: case and punctuation matter. We trim only leading/trailing whitespace.
-  const ok = given === q.answer;
+  // Compara mantendo maiúsculas/minúsculas e pontuação, mas aceitando qualquer tipo de apóstrofo
+  const ok = given === expected;
 
   const msg = document.getElementById('message');
   if (ok) {
@@ -116,7 +126,6 @@ function submitAnswer() {
     else finishPractice();
   }, 1000);
 }
-
 function skipQuestion() {
   idx += 1;
   if (idx < currentSet.length) showQuestion();
